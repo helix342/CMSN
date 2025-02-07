@@ -44,7 +44,7 @@ $result3 = mysqli_query($db, $sql3);
 $rejected = mysqli_num_rows($result3);
 
 $sql11 = "SELECT * FROM complaints_detail WHERE status IN (11,18,14) AND faculty_id = '$hod_id'";
-$result11 = mysqli_query($db, $sql11);
+$result11 = mysqli_query($db, $sql11); 
 $row_count11 = mysqli_num_rows($result11);
 
 
