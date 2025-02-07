@@ -312,6 +312,7 @@
                         </a>
                     </li>                   
                 </ul>
+                
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="publication" role="tabpanel">                        
                         <ul class="nav navs-tabs justify-content-center ">
@@ -327,6 +328,8 @@
                                 </a>
                             </li>
                         </ul>
+
+
                         <div class="tab-content">
                             <div class="tab-pane p-20 active" id="journal" role="tabpanel">
                                 <div class="row">
