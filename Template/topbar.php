@@ -1,3 +1,4 @@
+
 <style>
      /* Topbar Styles */
      .topbar {
@@ -175,31 +176,26 @@
         }
 </style>
 
+
 <div class="topbar">
             <div class="hamburger" id="hamburger">
                 <i class="fas fa-bars"></i>
             </div>
-            <!-- <div class="brand-logo">
-                <i class="fas fa-chart-line"></i>
-                MIC
-            </div> -->
+           
             <div class="user-profile">
-                <div class="user-menu" id="userMenu">
-                    <div class="user-avatar">
-                        <img src="/api/placeholder/35/35" alt="User">
-                        <div class="online-indicator"></div>
-                    </div>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item">
-                            <i class="fas fa-key"></i>
-                            Change Password
-                        </a>
-                        <a class="dropdown-item">
-                            <i class="fas fa-sign-out-alt"></i>
-                            Logout
-                        </a>
-                    </div>
-                </div>
-                <span>John Doe</span>
-            </div>
+    <div class="user-menu" id="userMenu">
+        <div class="user-avatar">
+            <img src="" alt="User">
+            <div class="online-indicator"></div>
+        </div>
+        <div class="dropdown-menu">  
+            <a class="dropdown-item" href="logout.php">
+                <i class="fas fa-sign-out-alt"></i>
+                Logout
+            </a>
+        </div>
+    </div>
+    <span>mkce</span>
+</div>
+
         </div>

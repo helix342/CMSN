@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MIC</title>
     <link rel="icon" type="image/png" sizes="32x32" href="image/icons/mkce_s.png">
+    <link rel="stylesheet" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bootstrap-5/bootstrap-5.css" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
     <style>
         :root {
             --sidebar-width: 250px;
@@ -24,15 +32,6 @@
         }
 
         /* General Styles with Enhanced Typography */
-        body {
-            min-height: 100vh;
-            margin: 0;
-            background: var(--light-bg);
-            overflow-x: hidden;
-            padding-bottom: var(--footer-height);
-            position: relative;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-        }
 
         /* Content Area Styles */
         .content {
@@ -98,31 +97,32 @@
 
 
         /* Table Styles */
-        .custom-table {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+
+
+
+        .gradient-header {
+            --bs-table-bg: transparent;
+            --bs-table-color: white;
+            background: linear-gradient(135deg, #4CAF50, #2196F3) !important;
+
+            text-align: center;
+            font-size: 0.9em;
+
+
         }
 
-        .custom-table thead {
-            background: var(--primary-color);
-            color: white;
+
+        td {
+            text-align: left;
+            font-size: 0.9em;
+            vertical-align: middle;
+            /* For vertical alignment */
         }
 
-        .custom-table th {
-            font-weight: 500;
-            padding: 15px;
-        }
 
-        .custom-table td {
-            padding: 15px;
-            border-bottom: 1px solid #eee;
-        }
 
-       
 
-       
+
 
         /* Responsive Styles */
         @media (max-width: 768px) {
@@ -258,22 +258,29 @@
             }
         }
 
-        /* Hide content initially */
-        .content-wrapper {
-            opacity: 0;
-            transition: opacity 0.3s ease;
+        .breadcrumb-area {
+            background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            margin: 20px;
+            padding: 15px 20px;
         }
 
-        /* Show content when loaded */
-        .content-wrapper.show {
-            opacity: 1;
+        .breadcrumb-item a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .breadcrumb-item a:hover {
+            color: #224abe;
         }
     </style>
 </head>
 
 <body>
     <!-- Sidebar -->
-   <?php include 'sidebar.php';?>
+    <?php include 'sidebar.php'; ?>
 
     <!-- Main Content -->
     <div class="content">
@@ -283,64 +290,124 @@
         </div>
 
         <!-- Topbar -->
-        <?php include 'topbar.php';?>
+        <?php include 'topbar.php'; ?>
 
         <!-- Breadcrumb -->
-        <div class="breadcrumb-area">
+        <div class="breadcrumb-area custom-gradient">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                    <li class="breadcrumb-item active" aria-current="page">Research</li>
                 </ol>
             </nav>
-        </div>
+        </div>        
 
         <!-- Content Area -->
         <div class="container-fluid">
-            <!-- Sample Table -->
+            <div class="custom-tabs">
+                <ul class="nav nav-tabs" role="tablist"> <!-- Center the main tabs -->
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" data-bs-toggle="tab" id="edit-bus-tab" href="#publication" role="tab" aria-selected="true">
+                            <span class="hidden-xs-down" style="font-size: 0.9em;"><i class="fas fa-book tab-icon"></i> Publication</span>
+                        </a>
+                    </li>                   
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="publication" role="tabpanel">                        
+                        <ul class="nav navs-tabs justify-content-center ">
+                            <li class="nav-item" style="margin-right: 10px;"> <!-- Add margin between tabs -->
+                                <a class="nav-link active" style="font-size: 0.9em;" id="add-bus-tab" data-bs-toggle="tab" href="#journal" role="tab" aria-selected="true">
+                                    Journal
+                                </a>
+                            </li>
+                            <li class="nav-item "> <!-- Add margin between tabs -->
+                                <a class="nav-link" id="add-bus-tab" data-bs-toggle="tab" style="font-size: 0.9em;"
+                                    href="#conference" role="tab" aria-selected="false">
+                                    Conference
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane p-20 active" id="journal" role="tabpanel">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="card-header mb-3 " style="text-align: right;">
+                                            <button id="open_journal" class="btn btn-sm btn btn-primary" data-bs-toggle="modal" data-bs-target="#journalModal">
+                                                <b> Open Journal Form</b>
+                                            </button>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table id="journal_table" class="table table-striped table-bordered">
+                                                    <thead class="gradient-header">
+                                                        <tr>
+                                                            <th>S.No</th>
+                                                            <th>Paper Title</th>
+                                                            <th>Journal Name</th>
+                                                            <th>J.Detail</th>
+                                                            <th>Document</th>
+                                                            <th style="width: 200px;">Action</th>
 
-            <div class="custom-table">
-                <table class="table table-hover mb-0">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>#001</td>
-                            <td>John Doe</td>
-                            <td><span class="badge bg-success">Active</span></td>
-                            <td>
-                                <button class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></button>
-                                <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#002</td>
-                            <td>Jane Smith</td>
-                            <td><span class="badge bg-warning">Pending</span></td>
-                            <td>
-                                <button class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></button>
-                                <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                                                        </tr>
+                                                    </thead>
+                                                   
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <!-- </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane p-20" id="conference" role="tabpanel">
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                        <div class="card-header mb-3" style="text-align: right;">
+                                            <!-- <h4 class="mb-0">Conference Information</h4> -->
+                                            <button id="open_conference" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#conferenceModal">
+                                                <b>Open Conference Form</b></button>
+
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table id="conference_table" class="table table-striped table-bordered">
+                                                    <thead class="gradient-header">
+                                                        <tr>
+                                                            <th>S.No</th>
+                                                            <th>Paper Title</th>
+                                                            <th>Conference Name</th>
+                                                            <th>Conference Details</th>
+                                                            <th>Document</th>
+                                                            <th style="width: 200px;">Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    
+                                                </table>
+
+
+                                            </div>
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                   
+
+
+
+                </div>
             </div>
         </div>
 
-
         <!-- Footer -->
-        <?php include 'footer.php';?>
+        <?php include 'footer.php'; ?>
     </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
     <script>
-
         const loaderContainer = document.getElementById('loaderContainer');
 
         function showLoader() {
@@ -352,7 +419,7 @@
         }
 
         //    automatic loader
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const loaderContainer = document.getElementById('loaderContainer');
             const contentWrapper = document.getElementById('contentWrapper');
             let loadingTimeout;
@@ -371,7 +438,7 @@
             loadingTimeout = setTimeout(showError, 10000);
 
             // Hide loader when everything is loaded
-            window.onload = function () {
+            window.onload = function() {
                 clearTimeout(loadingTimeout);
 
                 // Add a small delay to ensure smooth transition
@@ -379,7 +446,7 @@
             };
 
             // Error handling
-            window.onerror = function (msg, url, lineNo, columnNo, error) {
+            window.onerror = function(msg, url, lineNo, columnNo, error) {
                 clearTimeout(loadingTimeout);
                 showError();
                 return false;
@@ -441,6 +508,7 @@
             }
         });
     </script>
+   
 </body>
 
 </html>
