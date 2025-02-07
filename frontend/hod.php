@@ -1,6 +1,6 @@
 <?php
 require 'config.php';
-include("session.php");
+// include("session.php");
 
 $hod_id =  $fac_id;
 
@@ -390,21 +390,14 @@ $row_count11 = mysqli_num_rows($result11);
         <!-- Page wrapper  -->
         <!-- ============================================================== -->
         <div class="page-wrapper">
-            <div class="page-breadcrumb">
-                <div class="row">
-                    <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">Feedback Approval</h4>
-                        <div class="ml-auto text-right">
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="hod.php">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Feedback Corner</li>
-                                </ol>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="breadcrumb-area custom-gradient">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Research</li>
+                </ol>
+            </nav>
+        </div> 
             <!-- ============================================================== -->
             <!-- End Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
