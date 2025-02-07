@@ -178,11 +178,6 @@ $row_count11 = mysqli_num_rows($result11);
             /* For vertical alignment */
         }
 
-
-
-
-
-
         /* Responsive Styles */
         @media (max-width: 768px) {
             .sidebar {
@@ -373,48 +368,31 @@ $row_count11 = mysqli_num_rows($result11);
 </head>
 
 <body>
-    <!-- ============================================================== -->
-    <!-- Preloader - style you can find in spinners.css -->
-    <!-- ============================================================== -->
-    
-    <div id="main-wrapper">
+    <!-- Sidebar -->
+    <?php include 'sidebar.php'; ?>
+
+    <!-- Main Content -->
+    <div class="content">
+
+        <div class="loader-container" id="loaderContainer">
+            <div class="loader"></div>
+        </div>
+
         <!-- Topbar -->
-         <?php
-         include('topbar.php'); ?>
+        <?php include 'topbar.php'; ?>
 
-        <!-- Sidebar -->
-        <?php 
-        include('sidebar.php'); ?>  
+        <!-- Breadcrumb -->
+        <div class="breadcrumb-area custom-gradient">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Research</li>
+                </ol>
+            </nav>
+        </div> 
 
-        <!-- ============================================================== -->
-        <!-- Page wrapper  -->
-        <!-- ============================================================== -->
-        <div class="page-wrapper">
-            <div class="page-breadcrumb">
-                <div class="row">
-                    <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">Feedback Approval</h4>
-                        <div class="ml-auto text-right">
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="hod.php">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Feedback Corner</li>
-                                </ol>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- ============================================================== -->
-            <!-- End Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- Container fluid  -->
-            <!-- ============================================================== -->
-            <div class="container-fluid">
-                <!-- ============================================================== -->
-                <!-- Start Page Content -->
-                <!-- ============================================================== -->
+        <!-- Content Area -->
+            
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
