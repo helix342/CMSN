@@ -138,43 +138,37 @@
 /* Gradient Colors */
 .icon-basic {
     background: linear-gradient(45deg, #4facfe, #00f2fe);
-    -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     display: inline-block;
 }
 
 .icon-academic {
     background: linear-gradient(45deg,rgb(66, 245, 221), #00d948);
-    -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     display: inline-block;
 }
 
 .icon-exam {
     background: linear-gradient(45deg,rgb(255, 145, 0),rgb(245, 59, 2));
-    -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     display: inline-block;
 }
 
 .icon-bus {
 
-background: #9C27B0; 
--webkit-background-clip: text;
+background: #9C27B0;
 -webkit-text-fill-color: transparent;
 display: inline-block; 
 }
 
 .icon-feedback {
 background: #E91E63;  
--webkit-background-clip: text;
 -webkit-text-fill-color: transparent;
 display: inline-block; 
 }
 
 .icon-password {
 background: #607D8B;  
--webkit-background-clip: text;
 -webkit-text-fill-color: transparent;
 display: inline-block; 
 }
