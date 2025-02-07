@@ -5,7 +5,6 @@ require 'config.php';
 $hod_id =  $fac_id;
 
 $role = $frole;
-
 $hdept = "SELECT * FROM faculty WHERE id='$hod_id'";
 $hdept_run = mysqli_query($db, $hdept);
 $hdept_data = mysqli_fetch_array($hdept_run);
