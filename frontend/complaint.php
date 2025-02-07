@@ -1797,7 +1797,6 @@ $result11 = mysqli_query($db, $sql11);
                 }
             });
             });
-            });
 
             //Star Rating Coding
             const stars = document.querySelectorAll("#star-rating span");

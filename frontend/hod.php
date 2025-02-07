@@ -44,7 +44,7 @@ $approved = mysqli_num_rows($result1);
 $result2 = mysqli_query($db, $sql2);
 $completed = mysqli_num_rows($result2);
 $result3 = mysqli_query($db, $sql3);
-$rejected = mysqli_num_rows($result3);
+$rejected = mysqli_num_r ows($result3);
 
 $sql11 ="SELECT * FROM complaints_detail WHERE status IN (11,18,14) AND faculty_id = '$hod_id'";
 $result11 = mysqli_query($db, $sql11);
@@ -63,13 +63,13 @@ $row_count11 = mysqli_num_rows($result11);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
-    <title>MIC-MKCE</title>
+    <title>MIC</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="image/icons/mkce_s.png">
     <!-- Custom CSS -->
     <link href="assets/libs/flot/css/float-chart.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
     <!-- Custom CSS -->
-    <link href="dist/css/style.min.css" rel="stylesheet">
+    <link href="dist/css/style.min.css" rel="stylesheet"> 
     <link href="css/dboardstyles.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" rel="stylesheet" crossorigin="anonymous">
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
