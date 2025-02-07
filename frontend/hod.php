@@ -1,6 +1,6 @@
 <?php
 require 'config.php';
-include("session.php");
+// include("session.php");
 
 $hod_id =  $fac_id;
 
