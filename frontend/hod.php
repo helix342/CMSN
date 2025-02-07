@@ -5,10 +5,7 @@ include("session.php");
 $hod_id =  $fac_id;
 
 $role = $frole;
-if($role!=="HOD"){
-    header("Location:index.php");
 
-}
 $hdept = "SELECT * FROM faculty WHERE id='$hod_id'";
 $hdept_run = mysqli_query($db, $hdept);
 $hdept_data = mysqli_fetch_array($hdept_run);
@@ -44,9 +41,9 @@ $approved = mysqli_num_rows($result1);
 $result2 = mysqli_query($db, $sql2);
 $completed = mysqli_num_rows($result2);
 $result3 = mysqli_query($db, $sql3);
-$rejected = mysqli_num_r ows($result3);
+$rejected = mysqli_num_rows($result3);
 
-$sql11 ="SELECT * FROM complaints_detail WHERE status IN (11,18,14) AND faculty_id = '$hod_id'";
+$sql11 = "SELECT * FROM complaints_detail WHERE status IN (11,18,14) AND faculty_id = '$hod_id'";
 $result11 = mysqli_query($db, $sql11);
 $row_count11 = mysqli_num_rows($result11);
 
@@ -65,46 +62,277 @@ $row_count11 = mysqli_num_rows($result11);
     <meta name="author" content="">
     <title>MIC</title>
     <link rel="icon" type="image/png" sizes="32x32" href="image/icons/mkce_s.png">
-    <!-- Custom CSS -->
-    <link href="assets/libs/flot/css/float-chart.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <!-- Custom CSS -->
-    <link href="dist/css/style.min.css" rel="stylesheet"> 
-    <link href="css/dboardstyles.css" rel="stylesheet">
-    <link href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" rel="stylesheet" crossorigin="anonymous">
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/stylescms.css">
+    <link href="../css/dboardstyles.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bootstrap-5/bootstrap-5.css" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
 
     <style>
-        .table-container {
-            -ms-overflow-style: none;
+        :root {
+            --sidebar-width: 250px;
+            --sidebar-collapsed-width: 70px;
+            --topbar-height: 60px;
+            --footer-height: 60px;
+            --primary-color: #4e73df;
+            --secondary-color: #858796;
+            --success-color: #1cc88a;
+            --dark-bg: #1a1c23;
+            --light-bg: #f8f9fc;
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .table-container {
-            overflow: auto;
-            width: 100%;
-            height: 100%;
+        /* General Styles with Enhanced Typography */
 
+        /* Content Area Styles */
+        .content {
+            margin-left: var(--sidebar-width);
+            padding-top: var(--topbar-height);
+            transition: all 0.3s ease;
+            min-height: 100vh;
         }
 
-        .fixed-size-table {
-            width: 100%;
-            table-layout: fixed;
+        /* Content Navigation */
+        .content-nav {
+            background: linear-gradient(45deg, #4e73df, #1cc88a);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
         }
 
-        .fixed-size-table th,
-        .fixed-size-table td {
-            width: 120px;
-            overflow: hidden;
-            text-overflow: ellipsis;
+        .content-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
         }
 
-        .nav-tabs .nav-link {
-            color: #0033cc;
-        }
-
-        .nav-tabs .nav-link.active {
-            background: linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%);
+        .content-nav li a {
             color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .content-nav li a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .sidebar.collapsed+.content {
+            margin-left: var(--sidebar-collapsed-width);
+        }
+
+        .breadcrumb-area {
+            background: white;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            margin: 20px;
+            padding: 15px 20px;
+        }
+
+        .breadcrumb-item a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .breadcrumb-item a:hover {
+            color: #224abe;
+        }
+
+
+
+        /* Table Styles */
+
+
+
+        .gradient-header {
+            --bs-table-bg: transparent;
+            --bs-table-color: white;
+            background: linear-gradient(135deg, #4CAF50, #2196F3) !important;
+
+            text-align: center;
+            font-size: 0.9em;
+
+
+        }
+
+
+        td {
+            text-align: left;
+            font-size: 0.9em;
+            vertical-align: middle;
+            /* For vertical alignment */
+        }
+
+
+
+
+
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                width: var(--sidebar-width) !important;
+            }
+
+            .sidebar.mobile-show {
+                transform: translateX(0);
+            }
+
+            .topbar {
+                left: 0 !important;
+            }
+
+            .mobile-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+                display: none;
+            }
+
+            .mobile-overlay.show {
+                display: block;
+            }
+
+            .content {
+                margin-left: 0 !important;
+            }
+
+            .brand-logo {
+                display: block;
+            }
+
+            .user-profile {
+                margin-left: 0;
+            }
+
+            .sidebar .logo {
+                justify-content: center;
+            }
+
+            .sidebar .menu-item span,
+            .sidebar .has-submenu::after {
+                display: block !important;
+            }
+
+            body.sidebar-open {
+                overflow: hidden;
+            }
+
+            .footer {
+                left: 0 !important;
+            }
+
+            .content-nav ul {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                padding-bottom: 5px;
+            }
+
+            .content-nav ul::-webkit-scrollbar {
+                height: 4px;
+            }
+
+            .content-nav ul::-webkit-scrollbar-thumb {
+                background: rgba(255, 255, 255, 0.3);
+                border-radius: 2px;
+            }
+        }
+
+        .container-fluid {
+            padding: 20px;
+        }
+
+
+        /* loader */
+        .loader-container {
+            position: fixed;
+            left: var(--sidebar-width);
+            right: 0;
+            top: var(--topbar-height);
+            bottom: var(--footer-height);
+            background: rgba(255, 255, 255, 0.95);
+            display: flex;
+            /* Changed from 'none' to show by default */
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: left 0.3s ease;
+        }
+
+        .sidebar.collapsed+.content .loader-container {
+            left: var(--sidebar-collapsed-width);
+        }
+
+        @media (max-width: 768px) {
+            .loader-container {
+                left: 0;
+            }
+        }
+
+        /* Hide loader when done */
+        .loader-container.hide {
+            display: none;
+        }
+
+        /* Loader Animation */
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 5px solid var(--primary-color);
+            border-right: 5px solid var(--success-color);
+            border-bottom: 5px solid var(--primary-color);
+            border-left: 5px solid var(--success-color);
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .breadcrumb-area {
+            background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            margin: 20px;
+            padding: 15px 20px;
+        }
+
+        .breadcrumb-item a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .breadcrumb-item a:hover {
+            color: #224abe;
         }
 
         .modal-content {
@@ -127,6 +355,7 @@ $row_count11 = mysqli_num_rows($result11);
             transform: rotate(90deg);
             color: #ff8080;
         }
+
         /*star rating*/
         .stars span {
             font-size: 2rem;
@@ -138,7 +367,6 @@ $row_count11 = mysqli_num_rows($result11);
 
         .stars span.highlighted {
             color: gold;
-            /* Color for lit stars */
         }
     </style>
 
@@ -148,94 +376,16 @@ $row_count11 = mysqli_num_rows($result11);
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
-    <div class="preloader">
-        <div class="lds-ripple">
-            <div class="lds-pos"></div>
-            <div class="lds-pos"></div>
-        </div>
-    </div>
+    
     <div id="main-wrapper">
-        <header class="topbar" data-navbarbg="skin5">
-            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
-                <div class="navbar-header" data-logobg="skin5">
-                    <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
-                    <!-- ============================================================== -->
-                    <!-- Logo -->
-                    <!-- ============================================================== -->
-                    <a class="navbar-brand" href="smain">
-                        <!-- Logo icon -->
+        <!-- Topbar -->
+         <?php
+         include('topbar.php'); ?>
 
-                        <!--End Logo icon -->
-                        <!-- Logo text -->
-                        <span class="logo-text">
-                            <!-- dark Logo text -->
-                            <img src="assets/images/srms33333.png" alt="homepage" class="light-logo" />
+        <!-- Sidebar -->
+        <?php 
+        include('sidebar.php'); ?>  
 
-                        </span>
-                        <!-- Logo icon -->
-                        <!-- <b class="logo-icon"> -->
-                        <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-                        <!-- Dark Logo icon -->
-                        <!-- <img src="assets/images/logo-text.png" alt="homepage" class="light-logo" /> -->
-
-                        <!-- </b> -->
-                        <!--End Logo icon -->
-                    </a>
-                    <!-- ============================================================== -->
-                    <!-- End Logo -->
-                    <!-- ============================================================== -->
-                    <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)"
-                        data-toggle="collapse" data-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i
-                            class="ti-more"></i></a>
-                </div>
-                <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
-                    <!-- ============================================================== -->
-                    <!-- toggle and nav items -->
-                    <!-- ============================================================== -->
-                    <ul class="navbar-nav float-left mr-auto">
-                        <li class="nav-item d-none d-md-block"><a
-                                class="nav-link sidebartoggler waves-effect waves-light" href="javascript:void(0)"
-                                data-sidebartype="mini-sidebar"><i class="mdi mdi-menu font-24"></i></a></li>
-                    </ul>
-                    <!-- ============================================================== -->
-                    <!-- Right side toggle and nav items -->
-                    <!-- ============================================================== -->
-                    <ul class="navbar-nav float-right">
-                        <!-- ============================================================== -->
-                        <!-- User profile and search -->
-                        <!-- ============================================================== -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href=""
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-                                    src="assets/images/users/1.jpg" alt="user" class="rounded-circle" width="31"></a>
-                            <div class="dropdown-menu dropdown-menu-right user-dd animated">
-                                <a class="dropdown-item" href="Logout"><i
-                                        class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
-                                <div class="dropdown-divider"></div>
-                            </div>
-                        </li>
-                        <!-- ============================================================== -->
-                        <!-- User profile and search -->
-                        <!-- ============================================================== -->
-                    </ul>
-                </div>
-            </nav>
-        </header>
-        <!-- ============================================================== -->
-        <!-- End Topbar header -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-        <?php
-
-        include("side.php");
-
-        ?>
-        <!-- ============================================================== -->
-        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
         <!-- ============================================================== -->
         <!-- Page wrapper  -->
         <!-- ============================================================== -->
@@ -274,13 +424,13 @@ $row_count11 = mysqli_num_rows($result11);
                                     <div class="card">
                                         <ul class="nav nav-tabs mb-3" role="tablist">
                                             <li class="nav-item">
-                                                <a class="nav-link active show" data-toggle="tab" href="#dashboard"
+                                                <a class="nav-link active show" data-bs-toggle="tab" href="#dashboard"
                                                     role="tab" aria-selected="true"><span class="hidden-sm-up"></span>
                                                     <span class="hidden-xs-down"><i
                                                             class="mdi mdi-view-grid"></i><b>&nbsp Dashboard</b></span></a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" data-toggle="tab" href="#pending"
+                                                <a class="nav-link" data-bs-toggle="tab" href="#pending"
                                                     role="tab" aria-selected="false"><span class="hidden-sm-up"></span>
                                                     <div id="navref1">
                                                         <span class="hidden-xs-down">
@@ -291,7 +441,7 @@ $row_count11 = mysqli_num_rows($result11);
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" data-toggle="tab" href="#approved" role="tab"
+                                                <a class="nav-link" data-bs-toggle="tab" href="#approved" role="tab"
                                                     aria-selected="false"><span class="hidden-sm-up"></span>
                                                     <div id="navref2">
                                                         <span class="hidden-xs-down">
@@ -302,7 +452,7 @@ $row_count11 = mysqli_num_rows($result11);
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" data-toggle="tab" href="#completed" role="tab"
+                                                <a class="nav-link" data-bs-toggle="tab" href="#completed" role="tab"
                                                     aria-selected="false"><span class="hidden-sm-up"></span>
                                                     <div id="navref3">
                                                         <span class="hidden-xs-down">
@@ -313,7 +463,7 @@ $row_count11 = mysqli_num_rows($result11);
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" data-toggle="tab" href="#rejected" role="tab"
+                                                <a class="nav-link" data-bs-toggle="tab" href="#rejected" role="tab"
                                                     aria-selected="false"><span class="hidden-sm-up"></span>
                                                     <div id="navref4">
                                                         <span class="hidden-xs-down">
@@ -325,18 +475,18 @@ $row_count11 = mysqli_num_rows($result11);
                                             </li>
                                             <li class="nav-item">
 
-                                        <a class="nav-link" data-toggle="tab" href="#waitfeed" role="tab" aria-selected="false">
-                                            <span class="hidden-sm-up"></span>
-                                            <div id="navref33">
-                                                <span class="hidden-xs-down">
-                                                    <i class="bi bi-people-fill"></i>
-                                                    <i class="fas fa-clock"></i>
-                                                    <b>&nbsp Feedback (<?php echo $row_count11; ?>)</b>
-                                                </span>
-                                            </div>
-                                        </a>
+                                                <a class="nav-link" data-bs-toggle="tab" href="#waitfeed" role="tab" aria-selected="false">
+                                                    <span class="hidden-sm-up"></span>
+                                                    <div id="navref33">
+                                                        <span class="hidden-xs-down">
+                                                            <i class="bi bi-people-fill"></i>
+                                                            <i class="fas fa-clock"></i>
+                                                            <b>&nbsp Feedback (<?php echo $row_count11; ?>)</b>
+                                                        </span>
+                                                    </div>
+                                                </a>
 
-                                    </li>
+                                            </li>
                                         </ul>
                                         <!-------------------------dashboard------------------------------>
                                         <div class="tab-content tabcontent-border">
@@ -435,46 +585,35 @@ $row_count11 = mysqli_num_rows($result11);
                                                             <div class="card-header">
                                                                 <h4>
                                                                     Raise Complaint
-                                                                    <button type="button" class="btn btn-info float-right fac" data-toggle="modal" data-target="#raisemodal">Raise Compliant</button>
+                                                                    <button type="button" class="btn btn-info float-right fac" data-bs-toggle="modal" data-bs-target="#raisemodal">Raise Compliant</button>
                                                                     <br>
                                                                 </h4>
                                                             </div>
 
-
-
                                                             <div class="card-body">
                                                                 <div class="table-container">
                                                                     <table id="myTable1" class="table table-bordered table-striped fixed-size-table">
-                                                                        <thead>
+                                                                        <thead class="gradient-header>
                                                                             <tr>
-                                                                                <th class="pending status text-center"
-                                                                                    style="background-color: #7460ee; background: linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); color: white; width: 40px;">
+                                                                                <th class="pending status text-center">
                                                                                     <b>S.No</b>
                                                                                 </th>
-                                                                                <th class="text-center"
-                                                                                    style="background-color: #7460ee; background: linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); color: white; width: 80px;">
+                                                                                <th class="text-center">
                                                                                     <b>Date Registered</b>
                                                                                 </th>
-                                                                                <th class="text-center"
-                                                                                    style="background-color: #7460ee; background: linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); color: white; width: 70px;">
+                                                                                <th class="text-center">
                                                                                     <b>Faculty Name</b>
                                                                                 </th>
-                                                                                <th class="text-center"
-                                                                                    style="background-color: #7460ee; background: linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); color: white;">
+                                                                                <th class="text-center">
                                                                                     <b>Problem Description</b>
                                                                                 </th>
-                                                                                <th class="text-center"
-                                                                                    style="background-color: #7460ee; background: linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); color: white;">
+                                                                                <th class="text-center">
                                                                                     <b>Image</b>
                                                                                 </th>
-
-                                                                                <th class="text-center"
-                                                                                    style="background-color: #7460ee; background: linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); color: white;">
+                                                                                <th class="text-center">
                                                                                     <b>Forwarded Reason</b>
                                                                                 </th>
-
-                                                                                <th class="text-center"
-                                                                                    style="background-color: #7460ee; background: linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); color: white;">
+                                                                                <th class="text-center">
                                                                                     <b>Action</b>
                                                                                 </th>
                                                                             </tr>
@@ -497,19 +636,19 @@ $row_count11 = mysqli_num_rows($result11);
                                                                                         <center>
                                                                                             <button type="button"
                                                                                                 class="btn btn-link faculty" id="facultyinfo"
-                                                                                                data-value="<?php echo $row['fac_id']; ?>"
-                                                                                                data-toggle="modal" value="<?php echo $row['id']; ?>"
-                                                                                                data-target="#facultymodal" style="text-decoration:none;"><?php echo $row['name']; ?>
+                                                                                                data-bs-value="<?php echo $row['fac_id']; ?>"
+                                                                                                data-bs-toggle="modal" value="<?php echo $row['id']; ?>"
+                                                                                                data-bs-target="#facultymodal" style="text-decoration:none;"><?php echo $row['name']; ?>
                                                                                             </button>
                                                                                         </center>
                                                                                     </td>
                                                                                     <td>
                                                                                         <center>
                                                                                             <button type="button"
-                                                                                                data-problemid
+                                                                                                data-bs-problemid
                                                                                                 class="btn btndesc" id="seeproblem"
-                                                                                                data-toggle="modal" value='<?php echo $row['id']; ?>'
-                                                                                                data-target="#probdesc">
+                                                                                                data-bs-toggle="modal" value='<?php echo $row['id']; ?>'
+                                                                                                data-bs-target="#probdesc">
                                                                                                 <i class="fas fa-solid fa-eye" style="font-size: 20px;"></i>
                                                                                             </button>
                                                                                         </center>
@@ -519,9 +658,9 @@ $row_count11 = mysqli_num_rows($result11);
                                                                                             <button type="button"
                                                                                                 class="btn showImage"
                                                                                                 value="<?php echo $row['id']; ?>"
-                                                                                                data-toggle="modal"
-                                                                                                data-target="#imageModal1"
-                                                                                                data-task-id='<?php echo htmlspecialchars($row['id']); ?>'>
+                                                                                                data-bs-toggle="modal"
+                                                                                                data-bs-target="#imageModal1"
+                                                                                                data-bs-task-id='<?php echo htmlspecialchars($row['id']); ?>'>
                                                                                                 <i class="fas fa-image" style="font-size: 20px;"></i>
                                                                                             </button>
                                                                                         </center>
@@ -544,8 +683,8 @@ $row_count11 = mysqli_num_rows($result11);
                                                                                             <button type="button"
                                                                                                 value="<?php echo $row['id']; ?>"
                                                                                                 class="btn btn-danger btnreject"
-                                                                                                data-toggle="modal"
-                                                                                                data-target="#rejectmodal">
+                                                                                                data-bs-toggle="modal"
+                                                                                                data-bs-target="#rejectmodal">
                                                                                                 <i class="fas fa-times"></i>
                                                                                             </button>
                                                                                         </center>
@@ -619,9 +758,9 @@ $row_count11 = mysqli_num_rows($result11);
                                                                                         <center>
                                                                                             <button type="button"
                                                                                                 class="btn btn-link faculty" id="facultyinfo"
-                                                                                                data-value="<?php echo $row['fac_id']; ?>"
-                                                                                                data-toggle="modal" value="<?php echo $row['id']; ?>"
-                                                                                                data-target="#facultymodal" style="text-decoration:none;"><?php echo $row['name']; ?></button>
+                                                                                                data-bs-value="<?php echo $row['fac_id']; ?>"
+                                                                                                data-bs-toggle="modal" value="<?php echo $row['id']; ?>"
+                                                                                                data-bs-target="#facultymodal" style="text-decoration:none;"><?php echo $row['name']; ?></button>
                                                                                         </center>
                                                                                     </td>
                                                                                     <td>
@@ -629,8 +768,8 @@ $row_count11 = mysqli_num_rows($result11);
                                                                                             <button type="button"
                                                                                                 value='<?php echo $row['id']; ?>'
                                                                                                 class="btn btndesc"
-                                                                                                data-toggle="modal" id="seeproblem"
-                                                                                                data-target="#probdesc">
+                                                                                                data-bs-toggle="modal" id="seeproblem"
+                                                                                                data-bs-target="#probdesc">
                                                                                                 <i class="fas fa-solid fa-eye" style="font-size: 20px;"></i>
                                                                                             </button>
                                                                                         </center>
@@ -640,9 +779,9 @@ $row_count11 = mysqli_num_rows($result11);
                                                                                             <button type="button"
                                                                                                 class="btn showImage"
                                                                                                 value="<?php echo $row['id']; ?>"
-                                                                                                data-toggle="modal"
-                                                                                                data-target="#imageModal1"
-                                                                                                data-task-id='<?php echo htmlspecialchars($row['id']); ?>'>
+                                                                                                data-bs-toggle="modal"
+                                                                                                data-bs-target="#imageModal1"
+                                                                                                data-bs-task-id='<?php echo htmlspecialchars($row['id']); ?>'>
                                                                                                 <i class="fas fa-image" style="font-size: 20px;"></i>
                                                                                             </button>
                                                                                         </center>
@@ -692,105 +831,104 @@ $row_count11 = mysqli_num_rows($result11);
                                                 </div>
                                             </div>
                                             <!------------------FeedBack Table----------------->
-                                 <div class="tab-pane p-20" id="waitfeed" role="tabpanel">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="table-responsive">
-                                                <table id="feedbackTable" class="table table-bordered table-striped">
-                                                    <thead style="background-color: #7460ee; background: linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); color: white; width: 40px;">
-                                                        <tr>
-                                                            <th class="text-center"><b>S.No</b></th>
-                                                            <th class="text-center"><b>Problem_id</th>
-                                                            <th class="text-center"><b>Venue</b></th>
-                                                            <th class="text-center"><b>Problem description</b></th>
-                                                            <th class="text-center"><b>Date Of submission</b></th>
-                                                            <th class="text-center"><b>Deadline</b></th>
-                                                            <th class="text-center"><b>After Image</b></th>
-                                                            <th class="text-center"><b>Worker Details</b></th>
-                                                            <th class="text-center"><b>Feedback</b></th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <?php
-                                                        $s = 1;
-                                                        while ($row = mysqli_fetch_assoc($result11)) {
-                                                        ?>
-                                                            <tr>
-                                                                <td class="text-center"><?php echo $s; ?></td>
-                                                                <td class="text-center"><?php echo $row['id']; ?></td>
-                                                                <td class="text-center"><?php echo $row['block_venue']; ?></td>
-                                                                <td class="text-center"><?php echo $row['problem_description']; ?></td>
-                                                                <td class="text-center"><?php echo $row['date_of_reg']; ?></td>
-                                                                <td class="text-center">
-                                                                    <?php if ($row['extend_date'] == 1) { ?>
-                                                                        <button type="button" class="btn btn-danger extenddeadline"
-                                                                            id="extendbutton" value="<?php echo $row['id']; ?>"
-                                                                            data-toggle="modal"
-                                                                            data-target="#extendModal"
-                                                                            data-reason="<?php echo $row['extend_reason']; ?>">
-                                                                            <?php echo $row['days_to_complete']; ?>
-                                                                        </button>
-                                                                    <?php } else { ?>
-                                                                        <?php echo $row['days_to_complete']; ?>
-                                                                    <?php } ?>
-                                                                </td>
-                                                                <td class="text-center">
-                                                                <button type="button"
-                                                                                                value="<?php echo htmlspecialchars($row['id']); ?>"
-                                                                                                class="btn viewafterimgcomp"
-                                                                                                data-toggle="modal"
-                                                                                                data-target="#aftercomp"
-                                                                                                data-imgs-id='<?php echo htmlspecialchars($row['id']); ?>'>
-                                                                                                <i class="fas fa-image" style="font-size: 20px;"></i>
-                                                                                            </button>
-                                                                </td>
-
-
-                                                                <td class="text-center">
-                                                                    <button type="button" class="btn btn-light showWorkerDetails" value="<?php echo $row['id']; ?>">
-                                                                        <?php
-                                                                        $prblm_id = $row['id'];
-                                                                        $querry = "SELECT worker_first_name FROM worker_details WHERE worker_id = ( SELECT worker_dept FROM manager WHERE problem_id = '$prblm_id')";
-                                                                        $querry_run = mysqli_query($db, $querry);
-                                                                        $worker_name = mysqli_fetch_array($querry_run);
-                                                                        if ($worker_name['worker_first_name'] != null) {
-                                                                            echo $worker_name['worker_first_name'];
-                                                                        } else {
-                                                                            echo "NA";
-                                                                        }
-                                                                        ?>
-                                                                    </button>
-                                                                </td>
-                                                                <td class="text-center">
-
-                                                                <?php
-                                                                 if($row['status'] == 14){
-                                                                    ?>
-                                                                    <button class="btn btn-success" >Submitted</button>
-
+                                            <div class="tab-pane p-20" id="waitfeed" role="tabpanel">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="table-responsive">
+                                                            <table id="feedbackTable" class="table table-bordered table-striped">
+                                                                <thead style="background-color: #7460ee; background: linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); color: white; width: 40px;">
+                                                                    <tr>
+                                                                        <th class="text-center"><b>S.No</b></th>
+                                                                        <th class="text-center"><b>Problem_id</th>
+                                                                        <th class="text-center"><b>Venue</b></th>
+                                                                        <th class="text-center"><b>Problem description</b></th>
+                                                                        <th class="text-center"><b>Date Of submission</b></th>
+                                                                        <th class="text-center"><b>Deadline</b></th>
+                                                                        <th class="text-center"><b>After Image</b></th>
+                                                                        <th class="text-center"><b>Worker Details</b></th>
+                                                                        <th class="text-center"><b>Feedback</b></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
                                                                     <?php
-                                                                 }
-                                                                 else{
-                                                                ?>
-                                                                        <!-- Button to open the feedback modal -->
-                                                                        <button type="button" class="btn btn-info feedbackBtn" data-problem-id="<?php echo $row['id']; ?>" data-toggle="modal" data-target="#feedback_modal">Feedback</button>
+                                                                    $s = 1;
+                                                                    while ($row = mysqli_fetch_assoc($result11)) {
+                                                                    ?>
+                                                                        <tr>
+                                                                            <td class="text-center"><?php echo $s; ?></td>
+                                                                            <td class="text-center"><?php echo $row['id']; ?></td>
+                                                                            <td class="text-center"><?php echo $row['block_venue']; ?></td>
+                                                                            <td class="text-center"><?php echo $row['problem_description']; ?></td>
+                                                                            <td class="text-center"><?php echo $row['date_of_reg']; ?></td>
+                                                                            <td class="text-center">
+                                                                                <?php if ($row['extend_date'] == 1) { ?>
+                                                                                    <button type="button" class="btn btn-danger extenddeadline"
+                                                                                        id="extendbutton" value="<?php echo $row['id']; ?>"
+                                                                                        data-bs-toggle="modal"
+                                                                                        data-bs-target="#extendModal"
+                                                                                        data-bs-reason="<?php echo $row['extend_reason']; ?>">
+                                                                                        <?php echo $row['days_to_complete']; ?>
+                                                                                    </button>
+                                                                                <?php } else { ?>
+                                                                                    <?php echo $row['days_to_complete']; ?>
+                                                                                <?php } ?>
+                                                                            </td>
+                                                                            <td class="text-center">
+                                                                                <button type="button"
+                                                                                    value="<?php echo htmlspecialchars($row['id']); ?>"
+                                                                                    class="btn viewafterimgcomp"
+                                                                                    data-bs-toggle="modal"
+                                                                                    data-bs-target="#aftercomp"
+                                                                                    data-bs-imgs-id='<?php echo htmlspecialchars($row['id']); ?>'>
+                                                                                    <i class="fas fa-image" style="font-size: 20px;"></i>
+                                                                                </button>
+                                                                            </td>
 
-                                                                        <?php
-                                                                        }
-                                                                        ?>
-                                                                    
-                                                                </td>
-                                                            </tr>
-                                                        <?php
-                                                            $s++;
-                                                        }
-                                                        ?>
-                                                    </tbody>
-                                                </table>
+
+                                                                            <td class="text-center">
+                                                                                <button type="button" class="btn btn-light showWorkerDetails" value="<?php echo $row['id']; ?>">
+                                                                                    <?php
+                                                                                    $prblm_id = $row['id'];
+                                                                                    $querry = "SELECT worker_first_name FROM worker_details WHERE worker_id = ( SELECT worker_dept FROM manager WHERE problem_id = '$prblm_id')";
+                                                                                    $querry_run = mysqli_query($db, $querry);
+                                                                                    $worker_name = mysqli_fetch_array($querry_run);
+                                                                                    if ($worker_name['worker_first_name'] != null) {
+                                                                                        echo $worker_name['worker_first_name'];
+                                                                                    } else {
+                                                                                        echo "NA";
+                                                                                    }
+                                                                                    ?>
+                                                                                </button>
+                                                                            </td>
+                                                                            <td class="text-center">
+
+                                                                                <?php
+                                                                                if ($row['status'] == 14) {
+                                                                                ?>
+                                                                                    <button class="btn btn-success">Submitted</button>
+
+                                                                                <?php
+                                                                                } else {
+                                                                                ?>
+                                                                                    <!-- Button to open the feedback modal -->
+                                                                                    <button type="button" class="btn btn-info feedbackBtn" data-bs-problem-id="<?php echo $row['id']; ?>" data-bs-toggle="modal" data-bs-target="#feedback_modal">Feedback</button>
+
+                                                                                <?php
+                                                                                }
+                                                                                ?>
+
+                                                                            </td>
+                                                                        </tr>
+                                                                    <?php
+                                                                        $s++;
+                                                                    }
+                                                                    ?>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
 
 
 
@@ -849,9 +987,9 @@ $row_count11 = mysqli_num_rows($result11);
                                                                                         <center>
                                                                                             <button type="button"
                                                                                                 class="btn btn-link faculty" id="facultyinfo"
-                                                                                                data-value="<?php echo $row['fac_id']; ?>"
-                                                                                                data-toggle="modal" value="<?php echo $row['id']; ?>"
-                                                                                                data-target="#facultymodal" style="text-decoration:none;"><?php echo $row['name']; ?></button>
+                                                                                                data-bs-value="<?php echo $row['fac_id']; ?>"
+                                                                                                data-bs-toggle="modal" value="<?php echo $row['id']; ?>"
+                                                                                                data-bs-target="#facultymodal" style="text-decoration:none;"><?php echo $row['name']; ?></button>
                                                                                         </center>
                                                                                     </td>
                                                                                     <td>
@@ -859,8 +997,8 @@ $row_count11 = mysqli_num_rows($result11);
                                                                                             <button type="button"
                                                                                                 value="<?php echo $row['id']; ?>"
                                                                                                 class="btn btndesc"
-                                                                                                data-toggle="modal" id="seeproblem"
-                                                                                                data-target="#probdesc">
+                                                                                                data-bs-toggle="modal" id="seeproblem"
+                                                                                                data-bs-target="#probdesc">
                                                                                                 <i class="fas fa-solid fa-eye" style="font-size: 20px;"></i>
                                                                                             </button>
                                                                                         </center>
@@ -870,9 +1008,9 @@ $row_count11 = mysqli_num_rows($result11);
                                                                                             <button type="button"
                                                                                                 class="btn showImage"
                                                                                                 value="<?php echo $row['id']; ?>"
-                                                                                                data-toggle="modal"
-                                                                                                data-target="#imageModal1"
-                                                                                                data-task-id='<?php echo htmlspecialchars($row['id']); ?>'>
+                                                                                                data-bs-toggle="modal"
+                                                                                                data-bs-target="#imageModal1"
+                                                                                                data-bs-task-id='<?php echo htmlspecialchars($row['id']); ?>'>
                                                                                                 <i class="fas fa-image" style="font-size: 20px;"></i>
                                                                                             </button>
                                                                                         </center>
@@ -882,9 +1020,9 @@ $row_count11 = mysqli_num_rows($result11);
                                                                                             <button type="button"
                                                                                                 value="<?php echo htmlspecialchars($row['id']); ?>"
                                                                                                 class="btn viewafterimgcomp"
-                                                                                                data-toggle="modal"
-                                                                                                data-target="#aftercomp"
-                                                                                                data-imgs-id='<?php echo htmlspecialchars($row['id']); ?>'>
+                                                                                                data-bs-toggle="modal"
+                                                                                                data-bs-target="#aftercomp"
+                                                                                                data-bs-imgs-id='<?php echo htmlspecialchars($row['id']); ?>'>
                                                                                                 <i class="fas fa-image" style="font-size: 20px;"></i>
                                                                                             </button>
                                                                                         </center>
@@ -959,9 +1097,9 @@ $row_count11 = mysqli_num_rows($result11);
                                                                                         <center>
                                                                                             <button type="button"
                                                                                                 class="btn btn-link faculty" id="facultyinfo"
-                                                                                                data-value="<?php echo $row['fac_id']; ?>"
-                                                                                                data-toggle="modal" value="<?php echo $row['id']; ?>"
-                                                                                                data-target="#facultymodal" style="text-decoration:none;"><?php echo $row['name']; ?></button>
+                                                                                                data-bs-value="<?php echo $row['fac_id']; ?>"
+                                                                                                data-bs-toggle="modal" value="<?php echo $row['id']; ?>"
+                                                                                                data-bs-target="#facultymodal" style="text-decoration:none;"><?php echo $row['name']; ?></button>
                                                                                         </center>
                                                                                     </td>
                                                                                     <td>
@@ -969,8 +1107,8 @@ $row_count11 = mysqli_num_rows($result11);
                                                                                             <button type="button"
                                                                                                 value="<?php echo $row['id']; ?>"
                                                                                                 class="btn btndesc"
-                                                                                                data-toggle="modal" id="seeproblem"
-                                                                                                data-target="#probdesc">
+                                                                                                data-bs-toggle="modal" id="seeproblem"
+                                                                                                data-bs-target="#probdesc">
                                                                                                 <i class="fas fa-solid fa-eye" style="font-size: 20px;"></i>
                                                                                             </button>
                                                                                         </center>
@@ -980,17 +1118,17 @@ $row_count11 = mysqli_num_rows($result11);
                                                                                             <button type="button"
                                                                                                 value="<?php echo $row['id']; ?>"
                                                                                                 class="btn showImage"
-                                                                                                data-toggle="modal"
-                                                                                                data-target="#imageModal1"
-                                                                                                data-task-id='<?php echo htmlspecialchars($row['id']); ?>'>
+                                                                                                data-bs-toggle="modal"
+                                                                                                data-bs-target="#imageModal1"
+                                                                                                data-bs-task-id='<?php echo htmlspecialchars($row['id']); ?>'>
                                                                                                 <i class="fas fa-image" style="font-size: 20px;"></i>
                                                                                             </button>
                                                                                         </center>
                                                                                     </td>
                                                                                     <td>
                                                                                         <center>
-                                                                                            <button type="button" value="<?php echo $row['id']; ?>" class="btn btn-danger btnrejfeed" data-toggle="modal"
-                                                                                                data-target="#problemrejected" id="rejectedfeedback">
+                                                                                            <button type="button" value="<?php echo $row['id']; ?>" class="btn btn-danger btnrejfeed" data-bs-toggle="modal"
+                                                                                                data-bs-target="#problemrejected" id="rejectedfeedback">
                                                                                                 <i class="fas fa-solid fa-comment" style="font-size: 20px; width:40px;"></i>
                                                                                             </button>
                                                                                         </center>
@@ -1011,18 +1149,15 @@ $row_count11 = mysqli_num_rows($result11);
                                         </div>
                                     </div>
                                 </div>
-                        </div>
+                            </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-        <footer class="footer text-center">
-            <b>
-                2024 © M.Kumarasamy College of Engineering All Rights Reserved.<br>
-                Developed and Maintained by Technology Innovation Hub.
-            </b>
-        </footer>
+        <?php
+        include('footer.php')
+        ?>
     </div>
 
     <!------------Rejected Feedback modal----->
@@ -1034,7 +1169,7 @@ $row_count11 = mysqli_num_rows($result11);
                     style="background: linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); color: white;">
                     <h5 class="modal-title" id="exampleModalLabel">
                         Reason for rejection</h5>
-                    <button type="button" class="close" data-dismiss="modal"
+                    <button type="button" class="close" data-bs-dismiss="modal"
                         aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -1048,7 +1183,7 @@ $row_count11 = mysqli_num_rows($result11);
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary"
-                            data-dismiss="modal">Close</button>
+                            data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                 </form>
@@ -1056,70 +1191,70 @@ $row_count11 = mysqli_num_rows($result11);
         </div>
     </div>
 
-     <!-- Worker Details Modal -->
-     <div class="modal fade" id="workerModal" tabindex="-1" aria-labelledby="workerModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header" style="background:linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%);background-color:#7460ee;">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Worker Phone</h5>
-                                                    <button class="spbutton" type="button" class="btn-close" data-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                                </div>
-                                            <div class="modal-body">
-                                                <div class="box" style="background-color: #f7f7f7; border: 1px solid #ccc; padding: 15px; margin-bottom: 10px; border-radius: 5px;">
-                                                    <p><strong>Contact:</strong> <span id="workerContact"></span></p>
-                                                </div>
-                                                <div class="d-flex justify-content-end">
-                                                    <a href="#" id="callWorkerBtn" class="btn btn-success">Call Worker</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+    <!-- Worker Details Modal -->
+    <div class="modal fade" id="workerModal" tabindex="-1" aria-labelledby="workerModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background:linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%);background-color:#7460ee;">
+                    <h5 class="modal-title" id="exampleModalLabel">Worker Phone</h5>
+                    <button class="spbutton" type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="box" style="background-color: #f7f7f7; border: 1px solid #ccc; padding: 15px; margin-bottom: 10px; border-radius: 5px;">
+                        <p><strong>Contact:</strong> <span id="workerContact"></span></p>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <a href="#" id="callWorkerBtn" class="btn btn-success">Call Worker</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-     <!-- Feedback Modal -->
-     <div class="modal fade" id="feedback_modal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header" style="background:linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%);background-color:#7460ee;">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Feedback Form</h5>
-                                                    <button class="spbutton" type="button" class="btn-close" data-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                                </div>
-                                            <div class="modal-body">
-                                                <form id="add_feedback">
-                                                    <input type="hidden" name="id" id="feedback_id"> <!-- Hidden input for id -->
-                                                    <div class="mb-3">
-                                                        <label for="satisfaction" class="form-label">Satisfaction</label>
-                                                        <select name="satisfaction" id="satisfaction" class="form-control" required>
-                                                            <option value="" disabled selected>Select an option</option>
-                                                            <option value="Satisfied">Satisfied</option>
-                                                            <option value="Not Satisfied">Reassign</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="stars" id="star-rating">
-                                                        <h5>Give Rating:</h5>
-                                                        <span data-value="1">&#9733;</span>
-                                                        <span data-value="2">&#9733;</span>
-                                                        <span data-value="3">&#9733;</span>
-                                                        <span data-value="4">&#9733;</span>
-                                                        <span data-value="5">&#9733;</span>
-                                                    </div>
-                                                    <p id="rating-value">Rating: <span id="ratevalue">0</span></p>
+    <!-- Feedback Modal -->
+    <div class="modal fade" id="feedback_modal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background:linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%);background-color:#7460ee;">
+                    <h5 class="modal-title" id="exampleModalLabel">Feedback Form</h5>
+                    <button class="spbutton" type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="add_feedback">
+                        <input type="hidden" name="id" id="feedback_id"> <!-- Hidden input for id -->
+                        <div class="mb-3">
+                            <label for="satisfaction" class="form-label">Satisfaction</label>
+                            <select name="satisfaction" id="satisfaction" class="form-control" required>
+                                <option value="" disabled selected>Select an option</option>
+                                <option value="Satisfied">Satisfied</option>
+                                <option value="Not Satisfied">Reassign</option>
+                            </select>
+                        </div>
+                        <div class="stars" id="star-rating">
+                            <h5>Give Rating:</h5>
+                            <span data-bs-value="1">&#9733;</span>
+                            <span data-bs-value="2">&#9733;</span>
+                            <span data-bs-value="3">&#9733;</span>
+                            <span data-bs-value="4">&#9733;</span>
+                            <span data-bs-value="5">&#9733;</span>
+                        </div>
+                        <p id="rating-value">Rating: <span id="ratevalue">0</span></p>
 
-                                                    <div class="mb-3">
-                                                        <label for="feedback" class="form-label">Feedback</label>
-                                                        <textarea name="feedback" id="feedback" class="form-control" placeholder="Enter Feedback" style="width: 100%; height: 150px;"></textarea>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div class="mb-3">
+                            <label for="feedback" class="form-label">Feedback</label>
+                            <textarea name="feedback" id="feedback" class="form-control" placeholder="Enter Feedback" style="width: 100%; height: 150px;"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!--faculty info modal-->
     <div class="modal fade" id="facultymodal" tabindex="-1"
@@ -1129,7 +1264,7 @@ $row_count11 = mysqli_num_rows($result11);
                 <div class="modal-header"
                     style="background: linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); color: white;">
                     <h5 class="modal-title" id="exampleModalLabel">Faculty Information</h5>
-                    <button type="button" class="close" data-dismiss="modal"
+                    <button type="button" class="close" data-bs-dismiss="modal"
                         aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -1159,7 +1294,7 @@ $row_count11 = mysqli_num_rows($result11);
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary"
-                        data-dismiss="modal">Close</button>
+                        data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -1173,7 +1308,7 @@ $row_count11 = mysqli_num_rows($result11);
                 <div class="modal-header" style="background: linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); color: white;">
                     <h5 class="modal-title" id="exampleModalLabel">
                         Problem Description</h5>
-                    <button type="button" class="close" data-dismiss="modal"
+                    <button type="button" class="close" data-bs-dismiss="modal"
                         aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -1216,7 +1351,7 @@ $row_count11 = mysqli_num_rows($result11);
                 </form>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary"
-                        data-dismiss="modal">Close</button>
+                        data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -1229,7 +1364,7 @@ $row_count11 = mysqli_num_rows($result11);
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="afterImageModalLabel">After Picture</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -1238,7 +1373,7 @@ $row_count11 = mysqli_num_rows($result11);
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary"
-                        data-dismiss="modal">Close</button>
+                        data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -1251,7 +1386,7 @@ $row_count11 = mysqli_num_rows($result11);
                 <div class="modal-header" style="background: linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); color: white;">
                     <h5 class="modal-title" id="exampleModalLabel">
                         Before Image</h5>
-                    <button type="button" class="close" data-dismiss="modal"
+                    <button type="button" class="close" data-bs-dismiss="modal"
                         aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -1260,7 +1395,7 @@ $row_count11 = mysqli_num_rows($result11);
                     <img id="bimg" src="" alt="Image Preview" style="max-width: 100%;" />
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -1274,7 +1409,7 @@ $row_count11 = mysqli_num_rows($result11);
                     <div class="modal-header" style="background: linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); color: white;">
                         <h5 class="modal-title" id="exampleModalLabel">
                             Raise Complaint</h5>
-                        <button type="button" class="close" data-dismiss="modal"
+                        <button type="button" class="close" data-bs-dismiss="modal"
                             aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -1329,7 +1464,7 @@ $row_count11 = mysqli_num_rows($result11);
                             </div>
                             <input type="hidden" name="status" value="2">
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-secondary" data-bs-bs-dismiss="modal">Close</button>
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
                         </form>
@@ -1344,7 +1479,7 @@ $row_count11 = mysqli_num_rows($result11);
                 <div class="modal-content">
                     <div class="modal-header" style="background: linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); color: white;">
                         <h5 class="modal-title" id="exampleModalLabel">Reason for Rejection</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -1366,7 +1501,7 @@ $row_count11 = mysqli_num_rows($result11);
                             </ol>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary"
-                                    data-dismiss="modal">Close</button>
+                                    data-bs-dismiss="modal">Close</button>
                             </div>
                     </form>
                 </div>
@@ -1376,23 +1511,6 @@ $row_count11 = mysqli_num_rows($result11);
         <!-- ============================================================== -->
         <!-- All Jquery -->
         <!-- ============================================================== -->
-        <script src="assets/libs/jquery/dist/jquery.min.js"></script>
-        <script src="assets/libs/popper.js/dist/umd/popper.min.js"></script>
-        <script src="assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script src="assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
-        <script src="assets/extra-libs/sparkline/sparkline.js"></script>
-        <script src="dist/js/waves.js"></script>
-        <script src="dist/js/sidebarmenu.js"></script>
-        <script src="dist/js/custom.min.js"></script>
-        <script src="assets/extra-libs/multicheck/datatable-checkbox-init.js"></script>
-        <script src="assets/extra-libs/multicheck/jquery.multicheck.js"></script>
-        <script src="assets/extra-libs/DataTables/datatables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs/build/css/alertify.min.css" />
-        <script src="https://cdn.jsdelivr.net/npm/alertifyjs/build/alertify.min.js"></script>
-        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
 
         <!-- Set Today date in Raise Complaint-->
         <script>
@@ -1455,7 +1573,7 @@ $row_count11 = mysqli_num_rows($result11);
             //Tool Tip
             $(function() {
                 // Initialize the tooltip
-                $('[data-toggle="tooltip"]').tooltip();
+                $('[data-bs-toggle="tooltip"]').tooltip();
 
                 // You can also set options manually if needed
                 $('.btnreject').tooltip({
@@ -1466,7 +1584,7 @@ $row_count11 = mysqli_num_rows($result11);
 
             $(function() {
                 // Initialize the tooltip
-                $('[data-toggle="tooltip"]').tooltip();
+                $('[data-bs-toggle="tooltip"]').tooltip();
 
                 // You can also set options manually if needed
                 $('.btnrejfeed').tooltip({
@@ -1477,7 +1595,7 @@ $row_count11 = mysqli_num_rows($result11);
 
             $(function() {
                 // Initialize the tooltip
-                $('[data-toggle="tooltip"]').tooltip();
+                $('[data-bs-toggle="tooltip"]').tooltip();
 
                 // You can also set options manually if needed
                 $('.btndesc').tooltip({
@@ -1488,7 +1606,7 @@ $row_count11 = mysqli_num_rows($result11);
 
             $(function() {
                 // Initialize the tooltip
-                $('[data-toggle="tooltip"]').tooltip();
+                $('[data-bs-toggle="tooltip"]').tooltip();
 
                 // You can also set options manually if needed
                 $('.viewafterimgcomp').tooltip({
@@ -1499,7 +1617,7 @@ $row_count11 = mysqli_num_rows($result11);
 
             $(function() {
                 // Initialize the tooltip
-                $('[data-toggle="tooltip"]').tooltip();
+                $('[data-bs-toggle="tooltip"]').tooltip();
 
                 // You can also set options manually if needed
                 $('.btnraisecomp').tooltip({
@@ -1510,7 +1628,7 @@ $row_count11 = mysqli_num_rows($result11);
 
             $(function() {
                 // Initialize the tooltip
-                $('[data-toggle="tooltip"]').tooltip();
+                $('[data-bs-toggle="tooltip"]').tooltip();
 
                 // You can also set options manually if needed
                 $('.btnapprove').tooltip({
@@ -1521,7 +1639,7 @@ $row_count11 = mysqli_num_rows($result11);
 
             $(function() {
                 // Initialize the tooltip
-                $('[data-toggle="tooltip"]').tooltip();
+                $('[data-bs-toggle="tooltip"]').tooltip();
 
                 // You can also set options manually if needed
                 $('.showImage').tooltip({
@@ -1540,12 +1658,12 @@ $row_count11 = mysqli_num_rows($result11);
 
             });
 
-            $(document).on("click", ".btnreject", function (e) {
-    e.preventDefault();
-    var u_id = $(this).val();
-    console.log("User ID stored:", u_id);
-    $(document).data("user_id_reject", u_id);
-});
+            $(document).on("click", ".btnreject", function(e) {
+                e.preventDefault();
+                var u_id = $(this).val();
+                console.log("User ID stored:", u_id);
+                $(document).data("user_id_reject", u_id);
+            });
 
             //Reject Button with Feedback
             $('#rejectdetails').on('submit', function(e) {
@@ -1602,26 +1720,26 @@ $row_count11 = mysqli_num_rows($result11);
             //sending mail for complaint reject
 
             function sendRejectionMail(id) {
-    var user_type = "Head of the Department";
-    $.ajax({
-        type: "POST",
-        url: "cms_mail.php",
-        data: {
-            'reject_mail': true,
-            'id': id,
-            'user_type': user_type,
-        },
-        success: function (response) {
-            var res = jQuery.parseJSON(response);
-            if (res.status == 200) {
-                console.log("Mail sent successfully!!");
+                var user_type = "Head of the Department";
+                $.ajax({
+                    type: "POST",
+                    url: "cms_mail.php",
+                    data: {
+                        'reject_mail': true,
+                        'id': id,
+                        'user_type': user_type,
+                    },
+                    success: function(response) {
+                        var res = jQuery.parseJSON(response);
+                        if (res.status == 200) {
+                            console.log("Mail sent successfully!!");
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Mail AJAX error:", error);
+                    }
+                });
             }
-        },
-        error: function (xhr, status, error) {
-            console.error("Mail AJAX error:", error);
-        }
-    });
-}
 
             //approve button
             $(document).on('click', '.btnapprove', function(e) {
@@ -1906,145 +2024,247 @@ $row_count11 = mysqli_num_rows($result11);
                 });
             });
 
-             //Star Rating Coding
-        const stars = document.querySelectorAll("#star-rating span");
-        const ratingValue = document.getElementById("rating-value");
-        const ratevalue = document.getElementById("ratevalue");
+            //Star Rating Coding
+            const stars = document.querySelectorAll("#star-rating span");
+            const ratingValue = document.getElementById("rating-value");
+            const ratevalue = document.getElementById("ratevalue");
 
 
 
-        stars.forEach((star, index) => {
-            star.addEventListener("click", () => {
-                // Remove the "highlighted" class from all stars hidhlited is used in Style
-                stars.forEach(s => s.classList.remove("highlighted"));
+            stars.forEach((star, index) => {
+                star.addEventListener("click", () => {
+                    // Remove the "highlighted" class from all stars hidhlited is used in Style
+                    stars.forEach(s => s.classList.remove("highlighted"));
 
-                // Add the "highlighted" class to all stars up to the clicked one
-                for (let i = 0; i <= index; i++) {
-                    stars[i].classList.add("highlighted");
-                }
-
-                // Update the rating value
-                ratingValue.textContent = `Rating: ${index + 1}`;
-                ratevalue.textContent = `${index + 1}`;
-                var rating = ratevalue.textContent;
-                $(document).data("ratings", rating);
-            });
-        });
-        // Open feedback modal and set id
-        $(document).on('click', '.feedbackBtn', function() {
-            var id = $(this).data('problem-id');
-            // Clear the feedback field and dropdown before opening the modal
-            $('#feedback').val('');
-            $('#satisfaction').val('');
-            $('#feedback_id').val(id);
-            $('#feedback_modal').modal('show');
-        });
-
-
-        // Handle feedback form submission
-        $('#add_feedback').on('submit', function(e) {
-            e.preventDefault(); // Prevent default form submission
-            var formData = new FormData(this);
-            console.log(formData);
-
-            // Get the values of satisfaction and feedback
-            var satisfactionValue = $('#satisfaction').val();
-            var feedbackValue = $('#feedback').val();
-            console.log(satisfactionValue);
-            console.log(feedbackValue);
-
-            // Combine satisfaction and feedback into a single value
-            var combinedFeedback = satisfactionValue + ": " + feedbackValue;
-            formData.append("satisfaction_feedback", combinedFeedback);
-
-            var store_rating = $(document).data("ratings");
-            console.log(store_rating);
-
-            formData.append("ratings", store_rating);
-            $.ajax({
-                type: "POST",
-                url: 'cms_backend.php?action=facdetfeedback',
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function(response) {
-                    console.log(response);
-                    var res = jQuery.parseJSON(response);
-                    if (res.status == 200) {
-                        swal("Done!", "Feedback Submitted!", "success");
-                        $("#add_feedback")[0].reset();
-                        $('#feedback_modal').modal('hide');
-                        $('.modal-backdrop').remove(); // Remove lingering backdrop
-
-
-                        $('#navref1').load(location.href + " #navref1");
-                        $('#navref3').load(location.href + " #navref3");
-                        $('#navref4').load(location.href + " #navref4");
-                        $('#navref33').load(location.href + " #navref33");
-
-                        $('#dashref').load(location.href + " #dashref");
-
-                        $('#myTable1').DataTable().destroy();
-                        $("#myTable1").load(location.href + " #myTable1 > *", function() {
-                            $('#myTable1').DataTable();
-                        });
-
-                        $('#myTable2').DataTable().destroy();
-                        $("#myTable2").load(location.href + " #myTable2 > *", function() {
-                            $('#myTable2').DataTable();
-                        });
-
-                        $('#feedbackTable').DataTable().destroy();
-                        $("#feedbackTable").load(location.href + " #feedbackTable > *", function() {
-                            $('#feedbackTable').DataTable();
-                        });
-
-                        $('#myTable3').DataTable().destroy();
-                        $("#myTable3").load(location.href + " #myTable3 > *", function() {
-                            $('#myTable3').DataTable();
-                        });
-                        $('#myTable4').DataTable().destroy();
-                        $("#myTable4").load(location.href + " #myTable4 > *", function() {
-                            $('#myTable4').DataTable();
-                        });
-                    } else {
-                        alert(response.message || 'An error occurred while submitting feedback.');
+                    // Add the "highlighted" class to all stars up to the clicked one
+                    for (let i = 0; i <= index; i++) {
+                        stars[i].classList.add("highlighted");
                     }
-                },
-                error: function(xhr, status, error) {
-                    console.error("AJAX Error: ", xhr.responseText);
-                    alert('An error occurred while submitting feedback: ' + error);
-                }
+
+                    // Update the rating value
+                    ratingValue.textContent = `Rating: ${index + 1}`;
+                    ratevalue.textContent = `${index + 1}`;
+                    var rating = ratevalue.textContent;
+                    $(document).data("ratings", rating);
+                });
             });
-        }); 
-         // Display worker details in work in progress
-         $(document).on('click', '.showWorkerDetails', function() {
-            var id = $(this).val(); // Get the id from the button value
-            console.log("Fetching worker details for id: " + id); // Debug log
-            $.ajax({
-                type: "POST",
-                url: 'cms_backend.php?action=facworkerdet',
-                data: {
-                    'id': id
-                },
-                dataType: "json",
-                success: function(response) {
-                    if (response.status == 200) {
-                        $('#workerName').text(response.worker_first_name);
-                        $('#workerContact').text(response.worker_mobile);
-                        $('#callWorkerBtn').attr('href', 'tel:' + response.worker_mobile);
-                        $('#workerModal').modal('show');
-                    } else {
-                        alert(response.message || 'No worker details found.');
+            // Open feedback modal and set id
+            $(document).on('click', '.feedbackBtn', function() {
+                var id = $(this).data('problem-id');
+                // Clear the feedback field and dropdown before opening the modal
+                $('#feedback').val('');
+                $('#satisfaction').val('');
+                $('#feedback_id').val(id);
+                $('#feedback_modal').modal('show');
+            });
+
+
+            // Handle feedback form submission
+            $('#add_feedback').on('submit', function(e) {
+                e.preventDefault(); // Prevent default form submission
+                var formData = new FormData(this);
+                console.log(formData);
+
+                // Get the values of satisfaction and feedback
+                var satisfactionValue = $('#satisfaction').val();
+                var feedbackValue = $('#feedback').val();
+                console.log(satisfactionValue);
+                console.log(feedbackValue);
+
+                // Combine satisfaction and feedback into a single value
+                var combinedFeedback = satisfactionValue + ": " + feedbackValue;
+                formData.append("satisfaction_feedback", combinedFeedback);
+
+                var store_rating = $(document).data("ratings");
+                console.log(store_rating);
+
+                formData.append("ratings", store_rating);
+                $.ajax({
+                    type: "POST",
+                    url: 'cms_backend.php?action=facdetfeedback',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        console.log(response);
+                        var res = jQuery.parseJSON(response);
+                        if (res.status == 200) {
+                            swal("Done!", "Feedback Submitted!", "success");
+                            $("#add_feedback")[0].reset();
+                            $('#feedback_modal').modal('hide');
+                            $('.modal-backdrop').remove(); // Remove lingering backdrop
+
+
+                            $('#navref1').load(location.href + " #navref1");
+                            $('#navref3').load(location.href + " #navref3");
+                            $('#navref4').load(location.href + " #navref4");
+                            $('#navref33').load(location.href + " #navref33");
+
+                            $('#dashref').load(location.href + " #dashref");
+
+                            $('#myTable1').DataTable().destroy();
+                            $("#myTable1").load(location.href + " #myTable1 > *", function() {
+                                $('#myTable1').DataTable();
+                            });
+
+                            $('#myTable2').DataTable().destroy();
+                            $("#myTable2").load(location.href + " #myTable2 > *", function() {
+                                $('#myTable2').DataTable();
+                            });
+
+                            $('#feedbackTable').DataTable().destroy();
+                            $("#feedbackTable").load(location.href + " #feedbackTable > *", function() {
+                                $('#feedbackTable').DataTable();
+                            });
+
+                            $('#myTable3').DataTable().destroy();
+                            $("#myTable3").load(location.href + " #myTable3 > *", function() {
+                                $('#myTable3').DataTable();
+                            });
+                            $('#myTable4').DataTable().destroy();
+                            $("#myTable4").load(location.href + " #myTable4 > *", function() {
+                                $('#myTable4').DataTable();
+                            });
+                        } else {
+                            alert(response.message || 'An error occurred while submitting feedback.');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("AJAX Error: ", xhr.responseText);
+                        alert('An error occurred while submitting feedback: ' + error);
                     }
-                },
-                error: function(xhr, status, error) {
-                    console.error("AJAX Error: ", xhr.responseText);
-                    alert('An error occurred while fetching the worker details: ' + error);
-                }
+                });
             });
-        });
+            // Display worker details in work in progress
+            $(document).on('click', '.showWorkerDetails', function() {
+                var id = $(this).val(); // Get the id from the button value
+                console.log("Fetching worker details for id: " + id); // Debug log
+                $.ajax({
+                    type: "POST",
+                    url: 'cms_backend.php?action=facworkerdet',
+                    data: {
+                        'id': id
+                    },
+                    dataType: "json",
+                    success: function(response) {
+                        if (response.status == 200) {
+                            $('#workerName').text(response.worker_first_name);
+                            $('#workerContact').text(response.worker_mobile);
+                            $('#callWorkerBtn').attr('href', 'tel:' + response.worker_mobile);
+                            $('#workerModal').modal('show');
+                        } else {
+                            alert(response.message || 'No worker details found.');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("AJAX Error: ", xhr.responseText);
+                        alert('An error occurred while fetching the worker details: ' + error);
+                    }
+                });
+            });
         </script>
+        <script>
+        const loaderContainer = document.getElementById('loaderContainer');
+
+        function showLoader() {
+            loaderContainer.classList.add('show');
+        }
+
+        function hideLoader() {
+            loaderContainer.classList.remove('show');
+        }
+
+        //    automatic loader
+        document.addEventListener('DOMContentLoaded', function() {
+            const loaderContainer = document.getElementById('loaderContainer');
+            const contentWrapper = document.getElementById('contentWrapper');
+            let loadingTimeout;
+
+            function hideLoader() {
+                loaderContainer.classList.add('hide');
+                contentWrapper.classList.add('show');
+            }
+
+            function showError() {
+                console.error('Page load took too long or encountered an error');
+                // You can add custom error handling here
+            }
+
+            // Set a maximum loading time (10 seconds)
+            loadingTimeout = setTimeout(showError, 10000);
+
+            // Hide loader when everything is loaded
+            window.onload = function() {
+                clearTimeout(loadingTimeout);
+
+                // Add a small delay to ensure smooth transition
+                setTimeout(hideLoader, 500);
+            };
+
+            // Error handling
+            window.onerror = function(msg, url, lineNo, columnNo, error) {
+                clearTimeout(loadingTimeout);
+                showError();
+                return false;
+            };
+        });
+
+        // Toggle Sidebar
+        const hamburger = document.getElementById('hamburger');
+        const sidebar = document.getElementById('sidebar');
+        const body = document.body;
+        const mobileOverlay = document.getElementById('mobileOverlay');
+
+        function toggleSidebar() {
+            if (window.innerWidth <= 768) {
+                sidebar.classList.toggle('mobile-show');
+                mobileOverlay.classList.toggle('show');
+                body.classList.toggle('sidebar-open');
+            } else {
+                sidebar.classList.toggle('collapsed');
+            }
+        }
+        hamburger.addEventListener('click', toggleSidebar);
+        mobileOverlay.addEventListener('click', toggleSidebar);
+        // Toggle User Menu
+        const userMenu = document.getElementById('userMenu');
+        const dropdownMenu = userMenu.querySelector('.dropdown-menu');
+
+        userMenu.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdownMenu.classList.toggle('show');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', () => {
+            dropdownMenu.classList.remove('show');
+        });
+
+        // Toggle Submenu
+        const menuItems = document.querySelectorAll('.has-submenu');
+        menuItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const submenu = item.nextElementSibling;
+                item.classList.toggle('active');
+                submenu.classList.toggle('active');
+            });
+        });
+
+        // Handle responsive behavior
+        window.addEventListener('resize', () => {
+            if (window.innerWidth <= 768) {
+                sidebar.classList.remove('collapsed');
+                sidebar.classList.remove('mobile-show');
+                mobileOverlay.classList.remove('show');
+                body.classList.remove('sidebar-open');
+            } else {
+                sidebar.style.transform = '';
+                mobileOverlay.classList.remove('show');
+                body.classList.remove('sidebar-open');
+            }
+        });
+    </script>
+
 </body>
 
 </html>
