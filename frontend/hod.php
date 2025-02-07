@@ -1,6 +1,6 @@
 <?php
 require 'config.php';
-// include("session.php");
+include("session.php");
 
 $hod_id =  $fac_id;
 
@@ -66,14 +66,14 @@ $row_count11 = mysqli_num_rows($result11);
     <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bootstrap-5/bootstrap-5.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Rubik:wght@300;400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
-    
+
 
     <style>
         :root {
@@ -357,6 +357,165 @@ $row_count11 = mysqli_num_rows($result11);
         .stars span.highlighted {
             color: gold;
         }
+
+        body {
+            background: #f0f2f5;
+        }
+
+        .custom-tabs {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+        }
+
+        .nav-tabs {
+            border: none;
+            gap: 10px;
+            padding: 6px;
+            background: #f8f9fd;
+            border-radius: 12px;
+        }
+
+        .nav-link {
+            border: none !important;
+            border-radius: 10px !important;
+            padding: 10px 20px !important;
+            font-weight: 600 !important;
+            font-size: 0.95rem;
+            letter-spacing: 0.3px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            z-index: 1;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: inherit;
+            z-index: -1;
+            transform: translateY(100%);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-link:hover::before {
+            transform: translateY(0);
+        }
+
+        .nav-link.active {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Add Bus Tab Styling */
+        #add-bus-tab {
+            background: linear-gradient(135deg, #FF6B6B, #FFE66D);
+            color: #fff;
+        }
+
+        #add-bus-tab:not(.active) {
+            background: #fff;
+            color: #FF6B6B;
+        }
+
+        #add-bus-tab:hover:not(.active) {
+            background: linear-gradient(135deg, #FF6B6B, #FFE66D);
+            color: #fff;
+        }
+
+        /* Edit Bus Tab Styling */
+        #edit-bus-tab {
+            background: linear-gradient(135deg, #4E65FF, #92EFFD);
+            color: #fff;
+        }
+
+        #edit-bus-tab:not(.active) {
+            background: #fff;
+            color: #4E65FF;
+        }
+
+        #edit-bus-tab:hover:not(.active) {
+            background: linear-gradient(135deg, #4E65FF, #92EFFD);
+            color: #fff;
+        }
+
+        .tab-icon {
+            margin-right: 8px;
+            font-size: 1.1em;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-link:hover .tab-icon {
+            transform: rotate(15deg) scale(1.1);
+        }
+
+        .nav-link.active .tab-icon {
+            animation: bounce 0.5s ease infinite alternate;
+        }
+
+        @keyframes bounce {
+            from {
+                transform: translateY(0);
+            }
+
+            to {
+                transform: translateY(-2px);
+            }
+        }
+
+        .tab-content {
+            padding: 20px;
+            margin-top: 15px;
+            background: #fff;
+            border-radius: 12px;
+            min-height: 200px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+
+        .tab-pane {
+            opacity: 0;
+            transform: translateY(15px);
+            transition: all 0.4s ease-out;
+        }
+
+        .tab-pane.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Glowing effect on active tab */
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40%;
+            height: 3px;
+            background: inherit;
+            border-radius: 6px;
+            filter: blur(2px);
+            animation: glow 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                opacity: 0.6;
+                width: 40%;
+            }
+
+            to {
+                opacity: 1;
+                width: 55%;
+            }
+        }
     </style>
 
 </head>
@@ -445,7 +604,7 @@ $row_count11 = mysqli_num_rows($result11);
                                             </a>
                                         </li>
                                         <li class="nav-item" role="presentation">
-                                            <a class="nav-link" data-bs-toggle="tab" id="edit-bus-tab" href="#waitfeed" role="tab" aria-selected="true">
+                                            <a class="nav-link" data-bs-toggle="tab" id="edit-bus-tab" href="#feedback" role="tab" aria-selected="true">
                                                 <span class="hidden-xs-down" style="font-size: 0.9em;"></span>
                                                 <div id="navref33">
                                                     <span class="hidden-xs-down">
@@ -561,27 +720,27 @@ $row_count11 = mysqli_num_rows($result11);
                                                                 <table id="myTable1" class="table table-bordered table-striped fixed-size-table">
                                                                     <thead class="gradient-header">
                                                                         <tr>
-                                                                        <th class="pending status text-center">
-                                                                        <b>S.No</b>
-                                                                        </th>
-                                                                        <th class="text-center">
-                                                                            <b>Date Registered</b>
-                                                                        </th>
-                                                                        <th class="text-center">
-                                                                            <b>Faculty Name</b>
-                                                                        </th>
-                                                                        <th class="text-center">
-                                                                            <b>Problem Description</b>
-                                                                        </th>
-                                                                        <th class="text-center">
-                                                                            <b>Image</b>
-                                                                        </th>
-                                                                        <th class="text-center">
-                                                                            <b>Forwarded Reason</b>
-                                                                        </th>
-                                                                        <th class="text-center">
-                                                                            <b>Action</b>
-                                                                        </th>
+                                                                            <th class="pending status text-center">
+                                                                                <b>S.No</b>
+                                                                            </th>
+                                                                            <th class="text-center">
+                                                                                <b>Date Registered</b>
+                                                                            </th>
+                                                                            <th class="text-center">
+                                                                                <b>Faculty Name</b>
+                                                                            </th>
+                                                                            <th class="text-center">
+                                                                                <b>Problem Description</b>
+                                                                            </th>
+                                                                            <th class="text-center">
+                                                                                <b>Image</b>
+                                                                            </th>
+                                                                            <th class="text-center">
+                                                                                <b>Forwarded Reason</b>
+                                                                            </th>
+                                                                            <th class="text-center">
+                                                                                <b>Action</b>
+                                                                            </th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
@@ -790,101 +949,105 @@ $row_count11 = mysqli_num_rows($result11);
                                                 </div>
                                             </div>
                                         </div>
-                                        <!------------------FeedBack Table----------------->
-                                        <div class="tab-pane p-20" id="waitfeed" role="tabpanel">
+                                        <!------------------Feedback Table----------------->
+                                        <div class="tab-pane p-20" id="feedback" role="tabpanel">
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <div class="table-responsive">
-                                                        <table id="feedbackTable" class="table table-bordered table-striped">
-                                                            <thead class="gradient-header">
-                                                                <tr>
-                                                                    <th class="text-center"><b>S.No</b></th>
-                                                                    <th class="text-center"><b>Problem_id</th>
-                                                                    <th class="text-center"><b>Venue</b></th>
-                                                                    <th class="text-center"><b>Problem description</b></th>
-                                                                    <th class="text-center"><b>Date Of submission</b></th>
-                                                                    <th class="text-center"><b>Deadline</b></th>
-                                                                    <th class="text-center"><b>After Image</b></th>
-                                                                    <th class="text-center"><b>Worker Details</b></th>
-                                                                    <th class="text-center"><b>Feedback</b></th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <?php
-                                                                $s = 1;
-                                                                while ($row = mysqli_fetch_assoc($result11)) {
-                                                                ?>
-                                                                    <tr>
-                                                                        <td class="text-center"><?php echo $s; ?></td>
-                                                                        <td class="text-center"><?php echo $row['id']; ?></td>
-                                                                        <td class="text-center"><?php echo $row['block_venue']; ?></td>
-                                                                        <td class="text-center"><?php echo $row['problem_description']; ?></td>
-                                                                        <td class="text-center"><?php echo $row['date_of_reg']; ?></td>
-                                                                        <td class="text-center">
-                                                                            <?php if ($row['extend_date'] == 1) { ?>
-                                                                                <button type="button" class="btn btn-danger extenddeadline"
-                                                                                    id="extendbutton" value="<?php echo $row['id']; ?>"
-                                                                                    data-bs-toggle="modal"
-                                                                                    data-bs-target="#extendModal"
-                                                                                    data-bs-reason="<?php echo $row['extend_reason']; ?>">
-                                                                                    <?php echo $row['days_to_complete']; ?>
-                                                                                </button>
-                                                                            <?php } else { ?>
-                                                                                <?php echo $row['days_to_complete']; ?>
-                                                                            <?php } ?>
-                                                                        </td>
-                                                                        <td class="text-center">
-                                                                            <button type="button"
-                                                                                value="<?php echo htmlspecialchars($row['id']); ?>"
-                                                                                class="btn viewafterimgcomp"
-                                                                                data-bs-toggle="modal"
-                                                                                data-bs-target="#aftercomp"
-                                                                                data-bs-imgs-id='<?php echo htmlspecialchars($row['id']); ?>'>
-                                                                                <i class="fas fa-image" style="font-size: 20px;"></i>
-                                                                            </button>
-                                                                        </td>
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <div class="table-responsive">
+                                                                <table id="feedbackTable" class="table table-bordered table-striped">
+                                                                    <thead class="gradient-header">
+                                                                        <tr>
+                                                                            <th class="text-center"><b>S.No</b></th>
+                                                                            <th class="text-center"><b>Problem_id</th>
+                                                                            <th class="text-center"><b>Venue</b></th>
+                                                                            <th class="text-center"><b>Problem description</b></th>
+                                                                            <th class="text-center"><b>Date Of submission</b></th>
+                                                                            <th class="text-center"><b>Deadline</b></th>
+                                                                            <th class="text-center"><b>After Image</b></th>
+                                                                            <th class="text-center"><b>Worker Details</b></th>
+                                                                            <th class="text-center"><b>Feedback</b></th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <?php
+                                                                        $s = 1;
+                                                                        while ($row = mysqli_fetch_assoc($result11)) {
+                                                                        ?>
+                                                                            <tr>
+                                                                                <td class="text-center"><?php echo $s; ?></td>
+                                                                                <td class="text-center"><?php echo $row['id']; ?></td>
+                                                                                <td class="text-center"><?php echo $row['block_venue']; ?></td>
+                                                                                <td class="text-center"><?php echo $row['problem_description']; ?></td>
+                                                                                <td class="text-center"><?php echo $row['date_of_reg']; ?></td>
+                                                                                <td class="text-center">
+                                                                                    <?php if ($row['extend_date'] == 1) { ?>
+                                                                                        <button type="button" class="btn btn-danger extenddeadline"
+                                                                                            id="extendbutton" value="<?php echo $row['id']; ?>"
+                                                                                            data-bs-toggle="modal"
+                                                                                            data-bs-target="#extendModal"
+                                                                                            data-bs-reason="<?php echo $row['extend_reason']; ?>">
+                                                                                            <?php echo $row['days_to_complete']; ?>
+                                                                                        </button>
+                                                                                    <?php } else { ?>
+                                                                                        <?php echo $row['days_to_complete']; ?>
+                                                                                    <?php } ?>
+                                                                                </td>
+                                                                                <td class="text-center">
+                                                                                    <button type="button"
+                                                                                        value="<?php echo htmlspecialchars($row['id']); ?>"
+                                                                                        class="btn viewafterimgcomp"
+                                                                                        data-bs-toggle="modal"
+                                                                                        data-bs-target="#aftercomp"
+                                                                                        data-bs-imgs-id='<?php echo htmlspecialchars($row['id']); ?>'>
+                                                                                        <i class="fas fa-image" style="font-size: 20px;"></i>
+                                                                                    </button>
+                                                                                </td>
 
 
-                                                                        <td class="text-center">
-                                                                            <button type="button" class="btn btn-light showWorkerDetails" value="<?php echo $row['id']; ?>">
-                                                                                <?php
-                                                                                $prblm_id = $row['id'];
-                                                                                $querry = "SELECT worker_first_name FROM worker_details WHERE worker_id = ( SELECT worker_dept FROM manager WHERE problem_id = '$prblm_id')";
-                                                                                $querry_run = mysqli_query($db, $querry);
-                                                                                $worker_name = mysqli_fetch_array($querry_run);
-                                                                                if ($worker_name['worker_first_name'] != null) {
-                                                                                    echo $worker_name['worker_first_name'];
-                                                                                } else {
-                                                                                    echo "NA";
-                                                                                }
-                                                                                ?>
-                                                                            </button>
-                                                                        </td>
-                                                                        <td class="text-center">
+                                                                                <td class="text-center">
+                                                                                    <button type="button" class="btn btn-light showWorkerDetails" value="<?php echo $row['id']; ?>">
+                                                                                        <?php
+                                                                                        $prblm_id = $row['id'];
+                                                                                        $querry = "SELECT worker_first_name FROM worker_details WHERE worker_id = ( SELECT worker_dept FROM manager WHERE problem_id = '$prblm_id')";
+                                                                                        $querry_run = mysqli_query($db, $querry);
+                                                                                        $worker_name = mysqli_fetch_array($querry_run);
+                                                                                        if ($worker_name['worker_first_name'] != null) {
+                                                                                            echo $worker_name['worker_first_name'];
+                                                                                        } else {
+                                                                                            echo "NA";
+                                                                                        }
+                                                                                        ?>
+                                                                                    </button>
+                                                                                </td>
+                                                                                <td class="text-center">
 
-                                                                            <?php
-                                                                            if ($row['status'] == 14) {
-                                                                            ?>
-                                                                                <button class="btn btn-success">Submitted</button>
+                                                                                    <?php
+                                                                                    if ($row['status'] == 14) {
+                                                                                    ?>
+                                                                                        <button class="btn btn-success">Submitted</button>
 
-                                                                            <?php
-                                                                            } else {
-                                                                            ?>
-                                                                                <!-- Button to open the feedback modal -->
-                                                                                <button type="button" class="btn btn-info feedbackBtn" data-bs-problem-id="<?php echo $row['id']; ?>" data-bs-toggle="modal" data-bs-target="#feedback_modal">Feedback</button>
+                                                                                    <?php
+                                                                                    } else {
+                                                                                    ?>
+                                                                                        <!-- Button to open the feedback modal -->
+                                                                                        <button type="button" class="btn btn-info feedbackBtn" data-bs-problem-id="<?php echo $row['id']; ?>" data-bs-toggle="modal" data-bs-target="#feedback_modal">Feedback</button>
 
-                                                                            <?php
-                                                                            }
-                                                                            ?>
+                                                                                    <?php
+                                                                                    }
+                                                                                    ?>
 
-                                                                        </td>
-                                                                    </tr>
-                                                                <?php
-                                                                    $s++;
-                                                                }
-                                                                ?>
-                                                            </tbody>
-                                                        </table>
+                                                                                </td>
+                                                                            </tr>
+                                                                        <?php
+                                                                            $s++;
+                                                                        }
+                                                                        ?>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
