@@ -54,7 +54,6 @@ $row_count11 = mysqli_num_rows($result11);
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -66,12 +65,15 @@ $row_count11 = mysqli_num_rows($result11);
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bootstrap-5/bootstrap-5.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Rubik:wght@300;400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+    
 
     <style>
         :root {
@@ -395,7 +397,7 @@ $row_count11 = mysqli_num_rows($result11);
                                     <ul class="nav nav-tabs" role="tablist">
                                         <li class="nav-item" role="presentation">
                                             <a class="nav-link active" data-bs-toggle="tab" id="edit-bus-tab" href="#dashboard" role="tab" aria-selected="true">
-                                                <span class="hidden-xs-down" style="font-size: 0.9em;"><i class="fas fa-book tab-icon"></i> Dashboard</span>
+                                                <span class="hidden-xs-down" style="font-size: 0.9em;"><i class="fas fa-book tab-icon"></i><b>&nbsp Dashboard</b></span>
                                             </a>
                                         </li>
                                         <li class="nav-item" role="presentation">
@@ -518,7 +520,6 @@ $row_count11 = mysqli_num_rows($result11);
                                                             </div>
                                                         </div>
 
-
                                                         <!-- Rejected -->
                                                         <div class="col-12 col-md-3">
                                                             <div class="cir">
@@ -536,7 +537,6 @@ $row_count11 = mysqli_num_rows($result11);
                                                                 </div>
                                                             </div>
                                                         </div>
-
                                                     </div>
                                                 </div>
                                             </div>
@@ -551,7 +551,7 @@ $row_count11 = mysqli_num_rows($result11);
                                                         <div class="card-header">
                                                             <h4>
                                                                 Raise Complaint
-                                                                <button type="button" class="btn btn-info float-right fac" data-bs-toggle="modal" data-bs-target="#raisemodal">Raise Compliant</button>
+                                                                <button type="button" class="btn btn-info float-end fac" data-bs-toggle="modal" data-bs-target="#raisemodal">Raise Compliant</button>
                                                                 <br>
                                                             </h4>
                                                         </div>
