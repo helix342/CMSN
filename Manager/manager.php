@@ -73,6 +73,7 @@ if (isset($_POST['fdept'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -116,7 +117,7 @@ if (isset($_POST['fdept'])) {
                     <li class="breadcrumb-item active" aria-current="page">Research</li>
                 </ol>
             </nav>
-        </div>        
+        </div>
 
         <!-- Content Area -->
         <div class="container-fluid" id="container">
@@ -217,7 +218,7 @@ if (isset($_POST['fdept'])) {
                                                                     style="background-color:orange;">
                                                                     <i class="fas fa-clock"></i>
                                                                     <h1 class="font-light text-white">
-                                                                    <?php echo $row_count1; ?>
+                                                                        <?php echo $row_count1; ?>
                                                                     </h1>
                                                                     <small class="font-light">New Issues</small>
                                                                 </div>
@@ -234,7 +235,7 @@ if (isset($_POST['fdept'])) {
                                                                     style="background-color:rgb(14, 86, 239);">
                                                                     <i class="fas fa-check"></i>
                                                                     <h1 class="font-light text-white">
-                                                                    <?php echo $row_count3; ?>
+                                                                        <?php echo $row_count3; ?>
                                                                     </h1>
                                                                     <small class="font-light">Pending</small>
                                                                 </div>
@@ -251,7 +252,7 @@ if (isset($_POST['fdept'])) {
                                                                     style="background-color:rgb(70, 160, 70);">
                                                                     <i class="fas fa-check-circle"></i>
                                                                     <h1 class="font-light text-white">
-                                                                    <?php echo $row_count2; ?>
+                                                                        <?php echo $row_count2; ?>
                                                                     </h1>
                                                                     <small class="font-light">Completed</small>
                                                                 </div>
@@ -268,7 +269,7 @@ if (isset($_POST['fdept'])) {
                                                                     style="background-color:red;">
                                                                     <i class="fas fa-exclamation"></i>
                                                                     <h1 class="font-light text-white">
-                                                                    <?php echo $row_count7; ?>
+                                                                        <?php echo $row_count7; ?>
                                                                     </h1>
                                                                     <small class="font-light">Reassigned</small>
                                                                 </div>
@@ -335,36 +336,57 @@ if (isset($_POST['fdept'])) {
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        @foreach ($raised as $index => $r)
+                                                        <?php
+                                                    $s = 1;
+                                                    while ($row = mysqli_fetch_assoc($result1)) {
+                                                    ?>
+                                                        <?php
+                                                        if ($row['faculty_id'] == "principal") {
+
+
+                                                        ?>
+                                                        <tr style="background-color:#f3f57a ">
+                                                            <?php
+                                                        }
+                                                            ?>
+                                                            <?php
+                                                            if ($row['faculty_id'] != "principal") {
+
+
+                                                            ?>
                                                         <tr>
-                                                            <td class="text-center">{{ $index + 1 }}</td>
-                                                            <td class="text-center">{{ $r->date_of_reg }}</td>
-                                                            <td class="text-center">{{ $r->department }} /
-                                                                {{ $r->block_venue }}
+                                                            <?php
+                                                            }
+                                                            ?>
+                                                        <tr>
+                                                            <td class="text-center"><?php echo $s ?></td>
+                                                            <td class="text-center"><?php echo $row['date_of_reg'] ?></td>
+                                                            <td class="text-center"><?php echo $row['dept'] ?> /
+                                                            <?php echo $row['block_venue'] ?>
                                                             </td>
                                                             <td class="text-center">
                                                                 <button type="button" class="btn btn-info viewcomplaint"
                                                                     title="Complaint Detail" data-bs-toggle="modal"
                                                                     data-bs-target="#complaintDetailsModal"
-                                                                    value="{{ $r->id }}" data-value="{{ $r->fac_id }}">
+                                                                    value="<?php echo $row['id']; ?>" data-value="<?php echo $row['fac_id']; ?>">
                                                                     <i class="fas fa-eye"></i>
                                                                 </button>
                                                             </td>
                                                             <td class="text-center">
                                                                 <button type="button" class="btn btn-info  showImage"
                                                                     title="Complaint Image" data-bs-toggle="modal"
-                                                                    data-bs-target="#imageModal" value="{{ $r->id }}">
+                                                                    data-bs-target="#imageModal" value="<?php echo $row['id']; ?>">
                                                                     <i class="fas fa-image"></i>
                                                                 </button>
                                                             </td>
                                                             <td class="text-center">
                                                                 <div class="d-flex gap-2 justify-content-center">
-                                                                    @if ($r->status == 9)
+                                                                <?php if ($row['status'] == 9) { ?>
                                                                     <div class="dropdown">
                                                                         <button type="button"
                                                                             class="btn btn-warning reassign dropdown-toggle"
                                                                             title="Reassign" id="reassignDropdown"
-                                                                            value="{{ $r->id }}"
+                                                                            value="<?php echo $row['id']; ?>"
                                                                             data-bs-toggle="dropdown"
                                                                             aria-expanded="false">
                                                                             Reassign
@@ -386,11 +408,11 @@ if (isset($_POST['fdept'])) {
                                                                             </li>
                                                                         </ul>
                                                                     </div>
-                                                                    @else
+                                                                    <?php } else { ?>
                                                                     <button type="button"
                                                                         class="btn btn-success managerapprove"
                                                                         title="Approve" data-bs-toggle="dropdown"
-                                                                        value="{{ $r->id }}">
+                                                                        value="<?php echo $row['id']; ?>">
                                                                         <i class="fas fa-check"></i>
                                                                     </button>
                                                                     <ul class="dropdown-menu">
@@ -424,22 +446,43 @@ if (isset($_POST['fdept'])) {
                                                                         class="btn btn-danger  rejectcomplaint"
                                                                         id="rejectbutton" data-bs-toggle="modal"
                                                                         data-bs-target="#rejectModal"
-                                                                        value="{{ $r->id }}">
+                                                                        value="<?php echo $row['id']; ?>">
                                                                         <i class="fas fa-times"></i>
                                                                     </button>
+                                                                    <?php
+                                                                    if ($row['faculty_id'] == "principal") {
+                                                                    ?>
                                                                     <button type="button"
                                                                         class="btn btn-primary  principalcomplaint"
                                                                         title="Principal Approval" id="principalbutton"
                                                                         data-bs-toggle="modal"
                                                                         data-bs-target="#principalModal"
-                                                                        value="{{ $r->id }}">
+                                                                        value="<?php echo $row['id']; ?>">
                                                                         <i class="fas fa-paper-plane"></i>
                                                                     </button>
-                                                                    @endif
+                                                                    <?php
+                                                                    }
+                                                                    ?>
+                                                                    <?php
+                                                                    if ($row['faculty_id'] != "principal") {
+                                                                    ?>
+                                                                    <button type="button"
+                                                                            class="btn btn-primary principalcomplaint"
+                                                                            id="principalbutton" value="<?php echo $row['id']; ?>"
+                                                                            data-toggle="modal" data-target="#principalModal"><i
+                                                                                class="fas fa-paper-plane"></i>
+                                                                        </button>
+                                                                    <?php
+                                                                    }
+                                                                    ?>
+                                                                <?php } ?>
                                                                 </div>
                                                             </td>
                                                         </tr>
-                                                        @endforeach
+                                                        <?php
+                                                        $s++;
+                                                    }
+                                                        ?>
                                                     </tbody>
                                                 </table>
                                                 <!--complaintTable starts  -->

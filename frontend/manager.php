@@ -806,8 +806,6 @@ if (isset($_POST['fdept'])) {
                                                                 </button>
                                                             </td>
                                                             <td class="text-center">
-
-
                                                                 <?php if ($row['status'] == 9) { ?>
                                                                     <button type="button" class="btn btn-warning reassign"
                                                                         id="reassignbutton" value="<?php echo $row['id']; ?>"
@@ -881,9 +879,6 @@ if (isset($_POST['fdept'])) {
                                                                     ?>
                                                                     <?php
                                                                     if ($row['faculty_id'] != "principal") {
-
-
-
                                                                     ?>
                                                                         <button type="button"
                                                                             class="btn btn-primary principalcomplaint"
