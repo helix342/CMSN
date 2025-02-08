@@ -69,7 +69,6 @@ if (isset($_POST['fdept'])) {
     echo $options;
     exit;
 }
-
 ?>
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
