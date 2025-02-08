@@ -133,8 +133,6 @@
     .submenu.active {
         display: block;
     }
-
-
 /* Gradient Colors */
 .icon-basic {
     background: linear-gradient(45deg, #4facfe, #00f2fe);
