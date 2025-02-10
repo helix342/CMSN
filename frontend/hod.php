@@ -5,6 +5,7 @@ include("session.php");
 $hod_id =  $fac_id;
 
 $role = $frole;
+
 $hdept = "SELECT * FROM faculty WHERE id='$hod_id'";
 $hdept_run = mysqli_query($db, $hdept);
 $hdept_data = mysqli_fetch_array($hdept_run);
@@ -538,7 +539,7 @@ $row_count11 = mysqli_num_rows($result11);
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Research</li>
+                    <li class="breadcrumb-item active" aria-current="page">Complaints</li>
                 </ol>
             </nav>
         </div>
@@ -585,7 +586,7 @@ $row_count11 = mysqli_num_rows($result11);
                                                 <span class="hidden-xs-down" style="font-size: 0.9em;"></span>
                                                 <div id="navref3">
                                                     <span class="hidden-xs-down">
-                                                        <i class="fas fa-check-all"></i>
+                                                        <i class="fa-solid fa-check-double"></i>
                                                         <b>&nbsp Completed (<?php echo $completed; ?>) </b>
                                                     </span>
                                                 </div>
@@ -596,7 +597,7 @@ $row_count11 = mysqli_num_rows($result11);
                                                 <span class="hidden-xs-down" style="font-size: 0.9em;"></span>
                                                 <div id="navref4">
                                                     <span class="hidden-xs-down">
-                                                        <i class="fas fa-check"></i>
+                                                        <i class="fa-solid fa-xmark"></i>
                                                         <b>&nbsp Rejected (<?php echo $rejected; ?>) </b>
                                                     </span>
                                                 </div>
@@ -607,7 +608,7 @@ $row_count11 = mysqli_num_rows($result11);
                                                 <span class="hidden-xs-down" style="font-size: 0.9em;"></span>
                                                 <div id="navref33">
                                                     <span class="hidden-xs-down">
-                                                        <i class="fas fa-clock"></i>
+                                                        <i class="fa-solid fa-clipboard"></i>
                                                         <b>&nbsp Feedback (<?php echo $row_count11; ?>) </b>
                                                     </span>
                                                 </div>
@@ -666,7 +667,7 @@ $row_count11 = mysqli_num_rows($result11);
                                                                 <div class="bo">
                                                                     <div class="content1">
                                                                         <div class="stats-box text-center p-3" style="background-color:rgb(70, 160, 70);">
-                                                                            <i class="mdi mdi-check-all"></i>
+                                                                            <i class="fa-solid fa-check-double"></i>
                                                                             <h1 class="font-light text-white">
                                                                                 <?php echo $completed;
                                                                                 ?>
@@ -684,7 +685,7 @@ $row_count11 = mysqli_num_rows($result11);
                                                                 <div class="bo">
                                                                     <div class="content1">
                                                                         <div class="stats-box text-center p-3" style="background-color:red;">
-                                                                            <i class="fas fa-exclamation"></i>
+                                                                            <i class="fa-solid fa-xmark"></i>
                                                                             <h1 class="font-light text-white">
                                                                                 <?php echo $rejected;
                                                                                 ?>
@@ -709,7 +710,7 @@ $row_count11 = mysqli_num_rows($result11);
                                                         <div class="card-header">
                                                             <h4>
                                                                 Raise Complaint
-                                                                <button type="button" class="btn btn-info float-end fac" data-bs-toggle="modal" data-bs-target="#raisemodal">Raise Compliant</button>
+                                                                <button type="button" class="btn btn-info float-end fac" data-bs-toggle="modal" data-bs-target="#raisemodal">Raise Complant</button>
                                                                 <br>
                                                             </h4>
                                                         </div>
@@ -1490,6 +1491,8 @@ $row_count11 = mysqli_num_rows($result11);
         </div>
     </div>
 
+    <!-- Before Image Modal -->
+
     <div class="modal fade" id="bmodalImage" tabindex="-1"
         aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -1512,869 +1515,863 @@ $row_count11 = mysqli_num_rows($result11);
         </div>
     </div>
 
+    <!-- Raise Complaint -->
     <div class="tab-pane p-20" id="home" role="tabpanel">
-        <div class="modal fade" id="raisemodal" tabindex="-1"
-            aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="raisemodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header" style="background: linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); color: white;">
-                        <h5 class="modal-title" id="exampleModalLabel">
-                            Raise Complaint</h5>
-                        <button type="button" class="close" data-bs-dismiss="modal"
-                            aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                        <h5 class="modal-title" id="exampleModalLabel">Raise Complaint</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div>
-                        <form id="addnewuser" enctype="multipart/form-data" onsubmit="handleSubmit(event)">
-                            <div class="modal-body">
-                                <div class="mb-3">
-                                    <label for="block" class="form-label">Block <span style="color: red;">*</span></label>
-                                    <input type="text" class="form-control" name="block_venue" placeholder="Eg:RK-206" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="venue" class="form-label">Venue <span style="color: red;">*</span></label>
-                                    <select id="dropdown" class="form-control" name="venue_name" onchange="checkIfOthers()"
-                                        style="width: 100%; height:36px;">
-                                        <option>Select</option>
-                                        <option value="class">Class Room</option>
-                                        <option value="department">Department</option>
-                                        <option value="lab">Lab</option>
-                                        <option value="staff_room">Staff Room</option>
-                                        <option id="oth" value="Other">Others</option>
-                                    </select>
-                                </div>
-
-                                <div id="othersInput" style="display: none;">
-                                    <label class="form-label" for="otherValue">Please specify: <span style="color: red;">*</span></label>
-                                    <input class="form-control" type="text" id="otherValue" name="otherValue"> <br>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="type_of_problem" class="form-label">Type of Problem <span style="color: red;">*</span></label>
-                                    <select class="form-control" name="type_of_problem" style="width: 100%; height:36px;">
-                                        <option>Select</option>
-                                        <option value="elecrtical">ELECTRICAL</option>
-                                        <option value="civil">CIVIL</option>
-                                        <option value="itkm">ITKM </option>
-                                        <option value="transport">TRANSPORT</option>
-                                        <option value="house">HOUSE KEEPING </option>
-                                    </select>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="description" class="form-label">Problem Description <span style="color: red;">*</span></label>
-                                    <input type="text" class="form-control" name="problem_description" placeholder="Enter Description" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="images" class="form-label">Image <span style="color: red;">*</span> </label>
-                                    <input type="file" class="form-control" name="images" id="images" onchange="validateSize(this)" required>
-                                </div>
-                                <div class="mb-3">
-                                    <input type="hidden" class="form-control" name="date_of_reg" id="date_of_reg" required>
-                                </div>
+                    <form id="addnewuser" enctype="multipart/form-data" onsubmit="handleSubmit(event)">
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="block" class="form-label">Block <span style="color: red;">*</span></label>
+                                <input type="text" class="form-control" name="block_venue" placeholder="Eg:RK-206" required>
                             </div>
-                            <input type="hidden" name="status" value="2">
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                            <div class="mb-3">
+                                <label for="venue" class="form-label">Venue <span style="color: red;">*</span></label>
+                                <select id="dropdown" class="form-control" name="venue_name" onchange="checkIfOthers()" required>
+                                    <option value="">Select</option>
+                                    <option value="class">Class Room</option>
+                                    <option value="department">Department</option>
+                                    <option value="lab">Lab</option>
+                                    <option value="staff_room">Staff Room</option>
+                                    <option id="oth" value="Other">Others</option>
+                                </select>
                             </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <!------------Rejected Reason modal-------------->
-        <div class="modal fade" id="problemrejected" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header" style="background: linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); color: white;">
-                        <h5 class="modal-title" id="exampleModalLabel">Reason for Rejection</h5>
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form id="addnewdetails">
-                        <div class="modal-body" style="padding: 15px; font-size: 1.1em; color: #333; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-                            <ol class="list-group list-group-numbered" style="margin-bottom: 0;">
-                                <li class="list-group-item d-flex justify-content-between align-items-start" style="padding: 10px; background-color: #fff;">
-                                    <div class="ms-2 me-auto">
-                                        <div class="fw-bold" style="font-size: 1.2em; font-weight: 600; color: #007bff;">Rejected By</div>
-                                        <b><span id="pdrej2" style="color: #555;"></span></b>
-                                    </div>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-start" style="padding: 10px; background-color: #fff;">
-                                    <div class="ms-2 me-auto">
-                                        <div class="fw-bold" style="font-size: 1.2em; font-weight: 600; color: #007bff;">Reason</div>
-                                        <b><span id="rejby" style="color: #555;"></span></b>
-                                    </div>
-                                </li>
-                            </ol>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary"
-                                    data-bs-dismiss="modal">Close</button>
+                            <div id="othersInput" style="display: none;">
+                                <label class="form-label" for="otherValue">Please specify: <span style="color: red;">*</span></label>
+                                <input class="form-control" type="text" id="otherValue" name="otherValue"> <br>
                             </div>
+
+                            <div class="mb-3">
+                                <label for="type_of_problem" class="form-label">Type of Problem <span style="color: red;">*</span></label>
+                                <select class="form-control" name="type_of_problem" required>
+                                    <option value="">Select</option>
+                                    <option value="electrical">ELECTRICAL</option>
+                                    <option value="civil">CIVIL</option>
+                                    <option value="itkm">ITKM</option>
+                                    <option value="transport">TRANSPORT</option>
+                                    <option value="house">HOUSE KEEPING</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="description" class="form-label">Problem Description <span style="color: red;">*</span></label>
+                                <input type="text" class="form-control" name="problem_description" placeholder="Enter Description" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="images" class="form-label">Image <span style="color: red;">*</span></label>
+                                <input type="file" class="form-control" name="images" id="images" onchange="validateSize(this)" required>
+                            </div>
+                            <div class="mb-3">
+                                <input type="hidden" class="form-control" name="date_of_reg" id="date_of_reg">
+                            </div>
+                        </div>
+                        <input type="hidden" name="status" value="2">
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- ============================================================== -->
-        <!-- All Jquery -->
-        <!-- ============================================================== -->
+    <!------------Rejected Reason modal-------------->
+    <div class="modal fade" id="problemrejected" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background: linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); color: white;">
+                    <h5 class="modal-title" id="exampleModalLabel">Reason for Rejection</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="addnewdetails">
+                    <div class="modal-body" style="padding: 15px; font-size: 1.1em; color: #333; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+                        <ol class="list-group list-group-numbered" style="margin-bottom: 0;">
+                            <li class="list-group-item d-flex justify-content-between align-items-start" style="padding: 10px; background-color: #fff;">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold" style="font-size: 1.2em; font-weight: 600; color: #007bff;">Rejected By</div>
+                                    <b><span id="pdrej2" style="color: #555;"></span></b>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-start" style="padding: 10px; background-color: #fff;">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold" style="font-size: 1.2em; font-weight: 600; color: #007bff;">Reason</div>
+                                    <b><span id="rejby" style="color: #555;"></span></b>
+                                </div>
+                            </li>
+                        </ol>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary"
+                                data-bs-dismiss="modal">Close</button>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
-        <!-- Set Today date in Raise Complaint-->
-        <script>
-            var today = new Date().toISOString().split('T')[0];
-            var dateInput = document.getElementById('date_of_reg');
-            dateInput.setAttribute('min', today);
-            dateInput.setAttribute('max', today);
-            dateInput.value = today;
-        </script>
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
 
-        <!--file size and type -->
-        <script>
-            function validateSize(input) {
-                const filesize = input.files[0].size / 1024; // Size in KB
-                var ext = input.value.split(".");
-                ext = ext[ext.length - 1].toLowerCase();
-                var arrayExtensions = ["jpg", "jpeg", "png"];
-                if (arrayExtensions.lastIndexOf(ext) == -1) {
-                    swal("Invalid Image Format, Only .jpeg, .jpg, .png format allowed", "", "error");
-                    $(input).val('');
-                } else if (filesize > 2048) {
-                    swal("File is too large, Maximum 2 MB is allowed", "", "error");
-                    $(input).val('');
-                }
+    <!-- Set Today date in Raise Complaint-->
+    <script>
+        var today = new Date().toISOString().split('T')[0];
+        var dateInput = document.getElementById('date_of_reg');
+        dateInput.setAttribute('min', today);
+        dateInput.setAttribute('max', today);
+        dateInput.value = today;
+    </script>
+
+    <!--file size and type -->
+    <script>
+        function validateSize(input) {
+            const filesize = input.files[0].size / 1024; // Size in KB
+            var ext = input.value.split(".");
+            ext = ext[ext.length - 1].toLowerCase();
+            var arrayExtensions = ["jpg", "jpeg", "png"];
+            if (arrayExtensions.lastIndexOf(ext) == -1) {
+                swal("Invalid Image Format, Only .jpeg, .jpg, .png format allowed", "", "error");
+                $(input).val('');
+            } else if (filesize > 2048) {
+                swal("File is too large, Maximum 2 MB is allowed", "", "error");
+                $(input).val('');
+            }
+        }
+
+        //raise complaint others field
+        function checkIfOthers() {
+            const dropdown = document.getElementById('dropdown');
+            const othersInput = document.getElementById('othersInput');
+
+            // Show the input field if "Others" is selected
+            if (dropdown.value === 'Other') {
+                othersInput.style.display = 'block';
+            } else {
+                othersInput.style.display = 'none';
+            }
+        }
+
+        function handleSubmit(event) {
+            event.preventDefault(); // Prevent form submission for demo purposes
+            const dropdown = document.getElementById('dropdown');
+            const selectedValue = dropdown.value;
+            let finalValue;
+
+            // Get the appropriate value based on the dropdown selection
+            if (selectedValue === 'Other') {
+                finalValue = document.getElementById('otherValue').value;
+            } else {
+                finalValue = selectedValue;
             }
 
-            //raise complaint others field
-            function checkIfOthers() {
-                const dropdown = document.getElementById('dropdown');
-                const othersInput = document.getElementById('othersInput');
+            console.log("Selected Category:", finalValue);
+            // You can then send this data to the backend or process it further
+            $("#oth").val(finalValue);
+        }
+    </script>
 
-                // Show the input field if "Others" is selected
-                if (dropdown.value === 'Other') {
-                    othersInput.style.display = 'block';
-                } else {
-                    othersInput.style.display = 'none';
-                }
-            }
+    <script>
+        //Tool Tip
+        $(function() {
+            // Initialize the tooltip
+            $('[data-bs-toggle="tooltip"]').tooltip();
 
-            function handleSubmit(event) {
-                event.preventDefault(); // Prevent form submission for demo purposes
-                const dropdown = document.getElementById('dropdown');
-                const selectedValue = dropdown.value;
-                let finalValue;
-
-                // Get the appropriate value based on the dropdown selection
-                if (selectedValue === 'Other') {
-                    finalValue = document.getElementById('otherValue').value;
-                } else {
-                    finalValue = selectedValue;
-                }
-
-                console.log("Selected Category:", finalValue);
-                // You can then send this data to the backend or process it further
-                $("#oth").val(finalValue);
-            }
-        </script>
-
-        <script>
-            //Tool Tip
-            $(function() {
-                // Initialize the tooltip
-                $('[data-bs-toggle="tooltip"]').tooltip();
-
-                // You can also set options manually if needed
-                $('.btnreject').tooltip({
-                    placement: 'top',
-                    title: 'Reject'
-                });
+            // You can also set options manually if needed
+            $('.btnreject').tooltip({
+                placement: 'top',
+                title: 'Reject'
             });
+        });
 
-            $(function() {
-                // Initialize the tooltip
-                $('[data-bs-toggle="tooltip"]').tooltip();
+        $(function() {
+            // Initialize the tooltip
+            $('[data-bs-toggle="tooltip"]').tooltip();
 
-                // You can also set options manually if needed
-                $('.btnrejfeed').tooltip({
-                    placement: 'top',
-                    title: 'Rejected Reason'
-                });
+            // You can also set options manually if needed
+            $('.btnrejfeed').tooltip({
+                placement: 'top',
+                title: 'Rejected Reason'
             });
+        });
 
-            $(function() {
-                // Initialize the tooltip
-                $('[data-bs-toggle="tooltip"]').tooltip();
+        $(function() {
+            // Initialize the tooltip
+            $('[data-bs-toggle="tooltip"]').tooltip();
 
-                // You can also set options manually if needed
-                $('.btndesc').tooltip({
-                    placement: 'top',
-                    title: 'Problem Description'
-                });
+            // You can also set options manually if needed
+            $('.btndesc').tooltip({
+                placement: 'top',
+                title: 'Problem Description'
             });
+        });
 
-            $(function() {
-                // Initialize the tooltip
-                $('[data-bs-toggle="tooltip"]').tooltip();
+        $(function() {
+            // Initialize the tooltip
+            $('[data-bs-toggle="tooltip"]').tooltip();
 
-                // You can also set options manually if needed
-                $('.viewafterimgcomp').tooltip({
-                    placement: 'top',
-                    title: 'After Image'
-                });
+            // You can also set options manually if needed
+            $('.viewafterimgcomp').tooltip({
+                placement: 'top',
+                title: 'After Image'
             });
+        });
 
-            $(function() {
-                // Initialize the tooltip
-                $('[data-bs-toggle="tooltip"]').tooltip();
+        $(function() {
+            // Initialize the tooltip
+            $('[data-bs-toggle="tooltip"]').tooltip();
 
-                // You can also set options manually if needed
-                $('.btnraisecomp').tooltip({
-                    placement: 'top',
-                    title: 'Raise Complaint'
-                });
+            // You can also set options manually if needed
+            $('.btnraisecomp').tooltip({
+                placement: 'top',
+                title: 'Raise Complaint'
             });
+        });
 
-            $(function() {
-                // Initialize the tooltip
-                $('[data-bs-toggle="tooltip"]').tooltip();
+        $(function() {
+            // Initialize the tooltip
+            $('[data-bs-toggle="tooltip"]').tooltip();
 
-                // You can also set options manually if needed
-                $('.btnapprove').tooltip({
-                    placement: 'top',
-                    title: 'Accept'
-                });
+            // You can also set options manually if needed
+            $('.btnapprove').tooltip({
+                placement: 'top',
+                title: 'Accept'
             });
+        });
 
-            $(function() {
-                // Initialize the tooltip
-                $('[data-bs-toggle="tooltip"]').tooltip();
+        $(function() {
+            // Initialize the tooltip
+            $('[data-bs-toggle="tooltip"]').tooltip();
 
-                // You can also set options manually if needed
-                $('.showImage').tooltip({
-                    placement: 'top',
-                    title: 'Before Image'
-                });
+            // You can also set options manually if needed
+            $('.showImage').tooltip({
+                placement: 'top',
+                title: 'Before Image'
             });
+        });
 
-            alertify.set('notifier', 'position', 'top-right');
-            $(document).ready(function() {
-                $('#myTable1').DataTable();
-                $('#myTable2').DataTable();
-                $('#myTable3').DataTable();
-                $('#myTable4').DataTable();
-                $('#feedbackTable').DataTable();
+        alertify.set('notifier', 'position', 'top-right');
+        $(document).ready(function() {
+            $('#myTable1').DataTable();
+            $('#myTable2').DataTable();
+            $('#myTable3').DataTable();
+            $('#myTable4').DataTable();
+            $('#feedbackTable').DataTable();
 
-            });
+        });
 
-            $(document).on("click", ".btnreject", function(e) {
-                e.preventDefault();
-                var u_id = $(this).val();
-                console.log("User ID stored:", u_id);
-                $(document).data("user_id_reject", u_id);
-            });
+        $(document).on("click", ".btnreject", function(e) {
+            e.preventDefault();
+            var u_id = $(this).val();
+            console.log("User ID stored:", u_id);
+            $(document).data("user_id_reject", u_id);
+        });
 
-            //Reject Button with Feedback
-            $('#rejectdetails').on('submit', function(e) {
-                e.preventDefault();
+        //Reject Button with Feedback
+        $('#rejectdetails').on('submit', function(e) {
+            e.preventDefault();
 
-                if (confirm('Are you sure you want to reject this complaint?')) {
-                    var formdata1 = new FormData(this);
-                    var reject_id = $(document).data("user_id_reject");
+            if (confirm('Are you sure you want to reject this complaint?')) {
+                var formdata1 = new FormData(this);
+                var reject_id = $(document).data("user_id_reject");
 
-                    formdata1.append("reject_id", reject_id);
-                    $.ajax({
-                        type: "POST",
-                        url: 'cms_backend.php?action=rejectbtn',
-                        data: formdata1,
-                        processData: false,
-                        contentType: false,
-
-                        success: function(response) {
-                            var res = jQuery.parseJSON(response);
-                            if (res.status == 200) {
-                                $('#rejectmodal').modal('hide');
-                                $('#rejectdetails')[0].reset();
-                                $('#myTable1').load(location.href + " #myTable1");
-                                $('#myTable4').load(location.href + " #myTable4");
-                                $('#myTable1').DataTable().destroy();
-                                $('#myTable4').DataTable().destroy();
-                                $("#myTable1").load(location.href + " #myTable1 > *", function() {
-                                    $('#myTable1').DataTable();
-                                });
-                                $("#myTable4").load(location.href + " #myTable4 > *", function() {
-                                    $('#myTable4').DataTable();
-                                });
-                                $('#navref1').load(location.href + " #navref1");
-                                $('#navref4').load(location.href + " #navref4");
-
-                            } else if (res.status == 500) {
-                                alertify.error('Complaint Rejected!');
-                                $('#rejectmodal').modal('hide');
-                                $('#rejectdetails')[0].reset();
-                                console.error("Error:", res.message);
-                                alert("Something Went wrong.! try again")
-                            }
-                        },
-                        error: function(xhr, status, error) {
-                            console.error("AJAX error:", error);
-                            alert("An error occurred: " + error);
-                        }
-                    });
-
-                    sendRejectionMail(reject_id);
-                }
-            });
-
-            //sending mail for complaint reject
-
-            function sendRejectionMail(id) {
-                var user_type = "Head of the Department";
+                formdata1.append("reject_id", reject_id);
                 $.ajax({
                     type: "POST",
-                    url: "cms_mail.php",
-                    data: {
-                        'reject_mail': true,
-                        'id': id,
-                        'user_type': user_type,
-                    },
-                    success: function(response) {
-                        var res = jQuery.parseJSON(response);
-                        if (res.status == 200) {
-                            console.log("Mail sent successfully!!");
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        console.error("Mail AJAX error:", error);
-                    }
-                });
-            }
-
-            //approve button
-            $(document).on('click', '.btnapprove', function(e) {
-                e.preventDefault();
-
-                var approveid = $(this).val();
-
-                alertify.confirm('Confirmation', 'Are you sure you want to approve this complaint?',
-                    function() {
-                        $.ajax({
-                            type: "POST",
-                            url: 'cms_backend.php?action=approvebtn',
-                            data: {
-                                'approve': approveid
-                            },
-                            success: function(response) {
-                                var res = jQuery.parseJSON(response);
-                                if (res.status == 500) {
-                                    alertify.error(res.message);
-                                } else {
-                                    alertify.success('Complaint Approved successfully!');
-                                    $('#myTable1').DataTable().destroy();
-                                    $('#myTable2').DataTable().destroy();
-                                    $('#myTable3').DataTable().destroy();
-                                    $("#myTable1").load(location.href + " #myTable1 > *", function() {
-                                        $('#myTable1').DataTable();
-                                    });
-                                    $("#myTable2").load(location.href + " #myTable2 > *", function() {
-                                        $('#myTable2').DataTable();
-                                    });
-                                    $("#myTable3").load(location.href + " #myTable3 > *", function() {
-                                        $('#myTable3').DataTable();
-                                    });
-                                    $('#navref1').load(location.href + " #navref1");
-                                    $('#navref2').load(location.href + " #navref2");
-                                    $('#navref3').load(location.href + " #navref3");
-                                    $('#navref4').load(location.href + " #navref4");
-                                }
-                            }
-                        });
-                    },
-                    function() {
-                        alertify.error('Approval canceled');
-                    });
-            });
-
-            // Add Faculty complaints to database
-            $(document).on('submit', '#addnewuser', function(e) {
-                e.preventDefault(); // Prevent form from submitting normally
-                var formData = new FormData(this);
-                formData.append("hod", true);
-                $.ajax({
-                    type: "POST",
-                    url: 'cms_backend.php?action=addcomplaint',
-                    data: formData,
+                    url: 'cms_backend.php?action=rejectbtn',
+                    data: formdata1,
                     processData: false,
                     contentType: false,
+
                     success: function(response) {
-                        var res = typeof response === 'string' ? JSON.parse(response) : response;
-                        if (res.status === 200) {
-                            swal("Complaint Submitted!", "", "success");
-                            $('#raisemodal').modal('hide');
-                            $('#addnewuser')[0].reset(); // Reset the form
-                            $('#navref1').load(location.href + " #navref1");
-                            $('#navref2').load(location.href + " #navref2");
-                            $('#navref3').load(location.href + " #navref3");
-                            $('#dashref').load(location.href + " #dashref");
-
-                            $('#user').DataTable().destroy();
-                            $("#user").load(location.href + " #  > *", function() {
-                                $('#user').DataTable();
-                            });
-                        } else {
-                            console.error("Error:", res.message);
-                            alert("Something went wrong! Try again.");
-                        }
-                    },
-                    error: function(jqXHR, textStatus, errorThrown) {
-                        console.error("AJAX Error:", textStatus, errorThrown);
-                        alert("Failed to process response. Please try again.");
-                    }
-                });
-            });
-            // problem description
-            $(document).on('click', '#seeproblem', function(e) {
-                e.preventDefault();
-                var user_id = $(this).val();
-                console.log(user_id)
-                $.ajax({
-                    type: "POST",
-                    url: "cms_backend.php?action=seeproblem",
-                    data: {
-                        'seedetails': true,
-                        'user_id': user_id
-                    },
-                    success: function(response) {
-                        var res = jQuery.parseJSON(response);
-                        console.log(res)
-                        if (res.status == 500) {
-                            alert(res.message);
-                        } else {
-                            $("#id").text(res.data.id);
-                            $("#type_of_problem").text(res.data.type_of_problem);
-                            $("#block_venue").text(res.data.block_venue);
-                            $("#venue_name").text(res.data.venue_name);
-                            $('#pd').text(res.data.problem_description);
-                            $('#probdesc').modal('show');
-                        }
-                    }
-                });
-            });
-
-            // faculty info
-            $(document).on('click', '#facultyinfo', function(e) {
-                e.preventDefault();
-                var user_id = $(this).val();
-                var faculty_id = $(this).data("value");
-
-                console.log(user_id);
-                console.log(faculty_id);
-                $.ajax({
-                    type: "POST",
-                    url: 'cms_backend.php?action=facinfohod',
-                    data: {
-                        'facultydetails': true,
-                        'user_id': user_id,
-                        'fac_id': faculty_id
-                    },
-                    success: function(response) {
-                        var res = jQuery.parseJSON(response);
-                        console.log(res)
-                        if (res.status == 500) {
-                            alert(res.message);
-                        } else {
-                            $("#id").val(res.data.id);
-                            $("#faculty_name").text(res.data.fname);
-                            $("#faculty_email").text(res.data.email);
-                            $("#faculty_mobile").text(res.data.mobile);
-
-
-                            $('#facultymodal').modal('show');
-                        }
-                    }
-                });
-            });
-
-            //Image Modal Ajax
-            $(document).on('click', '.showImage', function() {
-                var task_id = $(this).val();
-                console.log(task_id);
-
-                $.ajax({
-                    type: "POST",
-                    url: 'cms_backend.php?action=bimgforhod',
-                    data: {
-                        'get_image': true,
-                        'task_id': task_id
-                    },
-                    success: function(response) {
-                        console.log(response);
                         var res = jQuery.parseJSON(response);
                         if (res.status == 200) {
-                            $('#bimg').attr('src', "uploads/" + res.data);
-                            $('#bmodalImage').modal('show');
-                        } else {
-                            $('#modalImage').hide();
-                            alert(response.message);
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        alert('An error occurred while retrieving the image.');
-                    }
-                });
-            });
-
-            //After Image Modal
-            $(document).on('click', '.viewafterimgcomp', function() {
-                var task_id = $(this).val();
-                console.log(task_id);
-
-                // Fetch the image from the server
-                $.ajax({
-                    type: "POST",
-                    url: 'cms_backend.php?action=get_aimage',
-                    data: {
-                        'after_image': true,
-                        'problem2_id': task_id
-                    },
-                    dataType: "json",
-                    success: function(response) {
-                        console.log(response); // Log the parsed JSON response
-                        if (response.status == 200) { // Use 'response' instead of 'res'
-                            // Dynamically set the image source
-                            $("#modalImage2").attr("src", response.data.after_photo);
-                            // Show the modal
-                            $("#afterImageModal").modal("show");
-                        } else {
-                            // Handle case where no image is found
-                            alert(response.message ||
-                                "An error occurred while retrieving the image.");
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        console.error("AJAX Error: ", status, error);
-                    }
-                });
-            });
-            $('#afterImageModal').on('hidden.bs.modal', function() {
-                // Reset the image source to a default or blank placeholder
-                $("#modalImage2").attr("src", "path/to/placeholder_image.jpg");
-            });
-
-            function checkIfOthers() {
-                const dropdown = document.getElementById('dropdown');
-                const othersInput = document.getElementById('othersInput');
-
-                // Show the input field if "Others" is selected
-                if (dropdown.value === 'Other') {
-                    othersInput.style.display = 'block';
-                } else {
-                    othersInput.style.display = 'none';
-                }
-            }
-
-            function handleSubmit(event) {
-                event.preventDefault(); // Prevent form submission for demo purposes
-                const dropdown = document.getElementById('dropdown');
-                const selectedValue = dropdown.value;
-                let finalValue;
-
-                // Get the appropriate value based on the dropdown selection
-                if (selectedValue === 'Other') {
-                    finalValue = document.getElementById('otherValue').value;
-                } else {
-                    finalValue = selectedValue;
-                }
-
-                console.log("Selected Category:", finalValue);
-                // You can then send this data to the backend or process it further
-                $("#oth").val(finalValue);
-            }
-
-            //Rejected Tab Feedback
-            $(document).on('click', '#rejectedfeedback', function(e) {
-                e.preventDefault();
-                var user_idrej = $(this).val();
-                console.log(user_idrej)
-                $.ajax({
-                    type: "POST",
-                    url: 'cms_backend.php?action=rejfeedback',
-                    data: {
-                        'seefeedback': true,
-                        'user_idrej': user_idrej
-
-                    },
-                    success: function(response) {
-                        var res = jQuery.parseJSON(response);
-                        console.log(res);
-                        if (res.status == 500) {
-                            alert(res.message);
-                        } else {
-                            let rejectionReason = "";
-                            switch (res.data2.status) {
-                                case '19':
-                                    rejectionReason = "Rejected by Manager";
-                                    break;
-                                case '20':
-                                    rejectionReason = "Rejected by Principal";
-                                    break;
-                                case '23':
-                                    rejectionReason = "Rejected by Estate Officer";
-                                    break;
-                                default:
-                                    rejectionReason = "Unknown rejection reason";
-                            }
-                            $('#pdrej2').text(rejectionReason);
-                            $('#rejby').text(res.data2.feedback);
-                            $('#problemrejected').modal('show');
-                        }
-                    }
-
-                });
-            });
-
-            //Star Rating Coding
-            const stars = document.querySelectorAll("#star-rating span");
-            const ratingValue = document.getElementById("rating-value");
-            const ratevalue = document.getElementById("ratevalue");
-
-
-
-            stars.forEach((star, index) => {
-                star.addEventListener("click", () => {
-                    // Remove the "highlighted" class from all stars hidhlited is used in Style
-                    stars.forEach(s => s.classList.remove("highlighted"));
-
-                    // Add the "highlighted" class to all stars up to the clicked one
-                    for (let i = 0; i <= index; i++) {
-                        stars[i].classList.add("highlighted");
-                    }
-
-                    // Update the rating value
-                    ratingValue.textContent = `Rating: ${index + 1}`;
-                    ratevalue.textContent = `${index + 1}`;
-                    var rating = ratevalue.textContent;
-                    $(document).data("ratings", rating);
-                });
-            });
-            // Open feedback modal and set id
-            $(document).on('click', '.feedbackBtn', function() {
-                var id = $(this).data('problem-id');
-                // Clear the feedback field and dropdown before opening the modal
-                $('#feedback').val('');
-                $('#satisfaction').val('');
-                $('#feedback_id').val(id);
-                $('#feedback_modal').modal('show');
-            });
-
-
-            // Handle feedback form submission
-            $('#add_feedback').on('submit', function(e) {
-                e.preventDefault(); // Prevent default form submission
-                var formData = new FormData(this);
-                console.log(formData);
-
-                // Get the values of satisfaction and feedback
-                var satisfactionValue = $('#satisfaction').val();
-                var feedbackValue = $('#feedback').val();
-                console.log(satisfactionValue);
-                console.log(feedbackValue);
-
-                // Combine satisfaction and feedback into a single value
-                var combinedFeedback = satisfactionValue + ": " + feedbackValue;
-                formData.append("satisfaction_feedback", combinedFeedback);
-
-                var store_rating = $(document).data("ratings");
-                console.log(store_rating);
-
-                formData.append("ratings", store_rating);
-                $.ajax({
-                    type: "POST",
-                    url: 'cms_backend.php?action=facdetfeedback',
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function(response) {
-                        console.log(response);
-                        var res = jQuery.parseJSON(response);
-                        if (res.status == 200) {
-                            swal("Done!", "Feedback Submitted!", "success");
-                            $("#add_feedback")[0].reset();
-                            $('#feedback_modal').modal('hide');
-                            $('.modal-backdrop').remove(); // Remove lingering backdrop
-
-
-                            $('#navref1').load(location.href + " #navref1");
-                            $('#navref3').load(location.href + " #navref3");
-                            $('#navref4').load(location.href + " #navref4");
-                            $('#navref33').load(location.href + " #navref33");
-
-                            $('#dashref').load(location.href + " #dashref");
-
+                            $('#rejectmodal').modal('hide');
+                            $('#rejectdetails')[0].reset();
+                            $('#myTable1').load(location.href + " #myTable1");
+                            $('#myTable4').load(location.href + " #myTable4");
                             $('#myTable1').DataTable().destroy();
+                            $('#myTable4').DataTable().destroy();
                             $("#myTable1").load(location.href + " #myTable1 > *", function() {
                                 $('#myTable1').DataTable();
                             });
-
-                            $('#myTable2').DataTable().destroy();
-                            $("#myTable2").load(location.href + " #myTable2 > *", function() {
-                                $('#myTable2').DataTable();
-                            });
-
-                            $('#feedbackTable').DataTable().destroy();
-                            $("#feedbackTable").load(location.href + " #feedbackTable > *", function() {
-                                $('#feedbackTable').DataTable();
-                            });
-
-                            $('#myTable3').DataTable().destroy();
-                            $("#myTable3").load(location.href + " #myTable3 > *", function() {
-                                $('#myTable3').DataTable();
-                            });
-                            $('#myTable4').DataTable().destroy();
                             $("#myTable4").load(location.href + " #myTable4 > *", function() {
                                 $('#myTable4').DataTable();
                             });
-                        } else {
-                            alert(response.message || 'An error occurred while submitting feedback.');
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        console.error("AJAX Error: ", xhr.responseText);
-                        alert('An error occurred while submitting feedback: ' + error);
-                    }
-                });
-            });
-            // Display worker details in work in progress
-            $(document).on('click', '.showWorkerDetails', function() {
-                var id = $(this).val(); // Get the id from the button value
-                console.log("Fetching worker details for id: " + id); // Debug log
-                $.ajax({
-                    type: "POST",
-                    url: 'cms_backend.php?action=facworkerdet',
-                    data: {
-                        'id': id
-                    },
-                    dataType: "json",
-                    success: function(response) {
-                        if (response.status == 200) {
-                            $('#workerName').text(response.worker_first_name);
-                            $('#workerContact').text(response.worker_mobile);
-                            $('#callWorkerBtn').attr('href', 'tel:' + response.worker_mobile);
-                            $('#workerModal').modal('show');
-                        } else {
-                            alert(response.message || 'No worker details found.');
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        console.error("AJAX Error: ", xhr.responseText);
-                        alert('An error occurred while fetching the worker details: ' + error);
-                    }
-                });
-            });
-        </script>
-        <script>
-            const loaderContainer = document.getElementById('loaderContainer');
+                            $('#navref1').load(location.href + " #navref1");
+                            $('#navref4').load(location.href + " #navref4");
 
-            function showLoader() {
-                loaderContainer.classList.add('show');
+                        } else if (res.status == 500) {
+                            alertify.error('Complaint Rejected!');
+                            $('#rejectmodal').modal('hide');
+                            $('#rejectdetails')[0].reset();
+                            console.error("Error:", res.message);
+                            alert("Something Went wrong.! try again")
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("AJAX error:", error);
+                        alert("An error occurred: " + error);
+                    }
+                });
+
+                sendRejectionMail(reject_id);
             }
+        });
+
+        //sending mail for complaint reject
+
+        function sendRejectionMail(id) {
+            var user_type = "Head of the Department";
+            $.ajax({
+                type: "POST",
+                url: "cms_mail.php",
+                data: {
+                    'reject_mail': true,
+                    'id': id,
+                    'user_type': user_type,
+                },
+                success: function(response) {
+                    var res = jQuery.parseJSON(response);
+                    if (res.status == 200) {
+                        console.log("Mail sent successfully!!");
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error("Mail AJAX error:", error);
+                }
+            });
+        }
+
+        //approve button
+        $(document).on('click', '.btnapprove', function(e) {
+            e.preventDefault();
+
+            var approveid = $(this).val();
+
+            alertify.confirm('Confirmation', 'Are you sure you want to approve this complaint?',
+                function() {
+                    $.ajax({
+                        type: "POST",
+                        url: 'cms_backend.php?action=approvebtn',
+                        data: {
+                            'approve': approveid
+                        },
+                        success: function(response) {
+                            var res = jQuery.parseJSON(response);
+                            if (res.status == 500) {
+                                alertify.error(res.message);
+                            } else {
+                                alertify.success('Complaint Approved successfully!');
+                                $('#myTable1').DataTable().destroy();
+                                $('#myTable2').DataTable().destroy();
+                                $('#myTable3').DataTable().destroy();
+                                $("#myTable1").load(location.href + " #myTable1 > *", function() {
+                                    $('#myTable1').DataTable();
+                                });
+                                $("#myTable2").load(location.href + " #myTable2 > *", function() {
+                                    $('#myTable2').DataTable();
+                                });
+                                $("#myTable3").load(location.href + " #myTable3 > *", function() {
+                                    $('#myTable3').DataTable();
+                                });
+                                $('#navref1').load(location.href + " #navref1");
+                                $('#navref2').load(location.href + " #navref2");
+                                $('#navref3').load(location.href + " #navref3");
+                                $('#navref4').load(location.href + " #navref4");
+                            }
+                        }
+                    });
+                },
+                function() {
+                    alertify.error('Approval canceled');
+                });
+        });
+
+        // Add Faculty complaints to database
+        $(document).on('submit', '#addnewuser', function(e) {
+            e.preventDefault(); // Prevent form from submitting normally
+            var formData = new FormData(this);
+            formData.append("hod", true);
+            $.ajax({
+                type: "POST",
+                url: 'cms_backend.php?action=addcomplaint',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    var res = typeof response === 'string' ? JSON.parse(response) : response;
+                    if (res.status === 200) {
+                        swal("Complaint Submitted!", "", "success");
+                        $('#raisemodal').modal('hide');
+                        $('#addnewuser')[0].reset(); // Reset the form
+                        $('#navref1').load(location.href + " #navref1");
+                        $('#navref2').load(location.href + " #navref2");
+                        $('#navref3').load(location.href + " #navref3");
+                        $('#dashref').load(location.href + " #dashref");
+
+                        $('#user').DataTable().destroy();
+                        $("#user").load(location.href + " #  > *", function() {
+                            $('#user').DataTable();
+                        });
+                    } else {
+                        console.error("Error:", res.message);
+                        alert("Something went wrong! Try again.");
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error("AJAX Error:", textStatus, errorThrown);
+                    alert("Failed to process response. Please try again.");
+                }
+            });
+        });
+        // problem description
+        $(document).on('click', '#seeproblem', function(e) {
+            e.preventDefault();
+            var user_id = $(this).val();
+            console.log(user_id)
+            $.ajax({
+                type: "POST",
+                url: "cms_backend.php?action=seeproblem",
+                data: {
+                    'seedetails': true,
+                    'user_id': user_id
+                },
+                success: function(response) {
+                    var res = jQuery.parseJSON(response);
+                    console.log(res)
+                    if (res.status == 500) {
+                        alert(res.message);
+                    } else {
+                        $("#id").text(res.data.id);
+                        $("#type_of_problem").text(res.data.type_of_problem);
+                        $("#block_venue").text(res.data.block_venue);
+                        $("#venue_name").text(res.data.venue_name);
+                        $('#pd').text(res.data.problem_description);
+                        $('#probdesc').modal('show');
+                    }
+                }
+            });
+        });
+
+        // faculty info
+        $(document).on('click', '#facultyinfo', function(e) {
+            e.preventDefault();
+            var user_id = $(this).val();
+            var faculty_id = $(this).data("value");
+
+            console.log(user_id);
+            console.log(faculty_id);
+            $.ajax({
+                type: "POST",
+                url: 'cms_backend.php?action=facinfohod',
+                data: {
+                    'facultydetails': true,
+                    'user_id': user_id,
+                    'fac_id': faculty_id
+                },
+                success: function(response) {
+                    var res = jQuery.parseJSON(response);
+                    console.log(res)
+                    if (res.status == 500) {
+                        alert(res.message);
+                    } else {
+                        $("#id").val(res.data.id);
+                        $("#faculty_name").text(res.data.fname);
+                        $("#faculty_email").text(res.data.email);
+                        $("#faculty_mobile").text(res.data.mobile);
+
+
+                        $('#facultymodal').modal('show');
+                    }
+                }
+            });
+        });
+
+        //Image Modal Ajax
+        $(document).on('click', '.showImage', function() {
+            var task_id = $(this).val();
+            console.log(task_id);
+
+            $.ajax({
+                type: "POST",
+                url: 'cms_backend.php?action=bimgforhod',
+                data: {
+                    'get_image': true,
+                    'task_id': task_id
+                },
+                success: function(response) {
+                    console.log(response);
+                    var res = jQuery.parseJSON(response);
+                    if (res.status == 200) {
+                        $('#bimg').attr('src', "uploads/" + res.data);
+                        $('#bmodalImage').modal('show');
+                    } else {
+                        $('#modalImage').hide();
+                        alert(response.message);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    alert('An error occurred while retrieving the image.');
+                }
+            });
+        });
+
+        //After Image Modal
+        $(document).on('click', '.viewafterimgcomp', function() {
+            var task_id = $(this).val();
+            console.log(task_id);
+
+            // Fetch the image from the server
+            $.ajax({
+                type: "POST",
+                url: 'cms_backend.php?action=get_aimage',
+                data: {
+                    'after_image': true,
+                    'problem2_id': task_id
+                },
+                dataType: "json",
+                success: function(response) {
+                    console.log(response); // Log the parsed JSON response
+                    if (response.status == 200) { // Use 'response' instead of 'res'
+                        // Dynamically set the image source
+                        $("#modalImage2").attr("src", response.data.after_photo);
+                        // Show the modal
+                        $("#afterImageModal").modal("show");
+                    } else {
+                        // Handle case where no image is found
+                        alert(response.message ||
+                            "An error occurred while retrieving the image.");
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error("AJAX Error: ", status, error);
+                }
+            });
+        });
+        $('#afterImageModal').on('hidden.bs.modal', function() {
+            // Reset the image source to a default or blank placeholder
+            $("#modalImage2").attr("src", "path/to/placeholder_image.jpg");
+        });
+
+        function checkIfOthers() {
+            const dropdown = document.getElementById('dropdown');
+            const othersInput = document.getElementById('othersInput');
+
+            // Show the input field if "Others" is selected
+            if (dropdown.value === 'Other') {
+                othersInput.style.display = 'block';
+            } else {
+                othersInput.style.display = 'none';
+            }
+        }
+
+        function handleSubmit(event) {
+            event.preventDefault(); // Prevent form submission for demo purposes
+            const dropdown = document.getElementById('dropdown');
+            const selectedValue = dropdown.value;
+            let finalValue;
+
+            // Get the appropriate value based on the dropdown selection
+            if (selectedValue === 'Other') {
+                finalValue = document.getElementById('otherValue').value;
+            } else {
+                finalValue = selectedValue;
+            }
+
+            console.log("Selected Category:", finalValue);
+            // You can then send this data to the backend or process it further
+            $("#oth").val(finalValue);
+        }
+
+        //Rejected Tab Feedback
+        $(document).on('click', '#rejectedfeedback', function(e) {
+            e.preventDefault();
+            var user_idrej = $(this).val();
+            console.log(user_idrej)
+            $.ajax({
+                type: "POST",
+                url: 'cms_backend.php?action=rejfeedback',
+                data: {
+                    'seefeedback': true,
+                    'user_idrej': user_idrej
+
+                },
+                success: function(response) {
+                    var res = jQuery.parseJSON(response);
+                    console.log(res);
+                    if (res.status == 500) {
+                        alert(res.message);
+                    } else {
+                        let rejectionReason = "";
+                        switch (res.data2.status) {
+                            case '19':
+                                rejectionReason = "Rejected by Manager";
+                                break;
+                            case '20':
+                                rejectionReason = "Rejected by Principal";
+                                break;
+                            case '23':
+                                rejectionReason = "Rejected by Estate Officer";
+                                break;
+                            default:
+                                rejectionReason = "Unknown rejection reason";
+                        }
+                        $('#pdrej2').text(rejectionReason);
+                        $('#rejby').text(res.data2.feedback);
+                        $('#problemrejected').modal('show');
+                    }
+                }
+
+            });
+        });
+
+        //Star Rating Coding
+        const stars = document.querySelectorAll("#star-rating span");
+        const ratingValue = document.getElementById("rating-value");
+        const ratevalue = document.getElementById("ratevalue");
+
+
+
+        stars.forEach((star, index) => {
+            star.addEventListener("click", () => {
+                // Remove the "highlighted" class from all stars hidhlited is used in Style
+                stars.forEach(s => s.classList.remove("highlighted"));
+
+                // Add the "highlighted" class to all stars up to the clicked one
+                for (let i = 0; i <= index; i++) {
+                    stars[i].classList.add("highlighted");
+                }
+
+                // Update the rating value
+                ratingValue.textContent = `Rating: ${index + 1}`;
+                ratevalue.textContent = `${index + 1}`;
+                var rating = ratevalue.textContent;
+                $(document).data("ratings", rating);
+            });
+        });
+        // Open feedback modal and set id
+        $(document).on('click', '.feedbackBtn', function() {
+            var id = $(this).data('problem-id');
+            // Clear the feedback field and dropdown before opening the modal
+            $('#feedback').val('');
+            $('#satisfaction').val('');
+            $('#feedback_id').val(id);
+            $('#feedback_modal').modal('show');
+        });
+
+
+        // Handle feedback form submission
+        $('#add_feedback').on('submit', function(e) {
+            e.preventDefault(); // Prevent default form submission
+            var formData = new FormData(this);
+            console.log(formData);
+
+            // Get the values of satisfaction and feedback
+            var satisfactionValue = $('#satisfaction').val();
+            var feedbackValue = $('#feedback').val();
+            console.log(satisfactionValue);
+            console.log(feedbackValue);
+
+            // Combine satisfaction and feedback into a single value
+            var combinedFeedback = satisfactionValue + ": " + feedbackValue;
+            formData.append("satisfaction_feedback", combinedFeedback);
+
+            var store_rating = $(document).data("ratings");
+            console.log(store_rating);
+
+            formData.append("ratings", store_rating);
+            $.ajax({
+                type: "POST",
+                url: 'cms_backend.php?action=facdetfeedback',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    console.log(response);
+                    var res = jQuery.parseJSON(response);
+                    if (res.status == 200) {
+                        swal("Done!", "Feedback Submitted!", "success");
+                        $("#add_feedback")[0].reset();
+                        $('#feedback_modal').modal('hide');
+                        $('.modal-backdrop').remove(); // Remove lingering backdrop
+
+
+                        $('#navref1').load(location.href + " #navref1");
+                        $('#navref3').load(location.href + " #navref3");
+                        $('#navref4').load(location.href + " #navref4");
+                        $('#navref33').load(location.href + " #navref33");
+
+                        $('#dashref').load(location.href + " #dashref");
+
+                        $('#myTable1').DataTable().destroy();
+                        $("#myTable1").load(location.href + " #myTable1 > *", function() {
+                            $('#myTable1').DataTable();
+                        });
+
+                        $('#myTable2').DataTable().destroy();
+                        $("#myTable2").load(location.href + " #myTable2 > *", function() {
+                            $('#myTable2').DataTable();
+                        });
+
+                        $('#feedbackTable').DataTable().destroy();
+                        $("#feedbackTable").load(location.href + " #feedbackTable > *", function() {
+                            $('#feedbackTable').DataTable();
+                        });
+
+                        $('#myTable3').DataTable().destroy();
+                        $("#myTable3").load(location.href + " #myTable3 > *", function() {
+                            $('#myTable3').DataTable();
+                        });
+                        $('#myTable4').DataTable().destroy();
+                        $("#myTable4").load(location.href + " #myTable4 > *", function() {
+                            $('#myTable4').DataTable();
+                        });
+                    } else {
+                        alert(response.message || 'An error occurred while submitting feedback.');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error("AJAX Error: ", xhr.responseText);
+                    alert('An error occurred while submitting feedback: ' + error);
+                }
+            });
+        });
+        // Display worker details in work in progress
+        $(document).on('click', '.showWorkerDetails', function() {
+            var id = $(this).val(); // Get the id from the button value
+            console.log("Fetching worker details for id: " + id); // Debug log
+            $.ajax({
+                type: "POST",
+                url: 'cms_backend.php?action=facworkerdet',
+                data: {
+                    'id': id
+                },
+                dataType: "json",
+                success: function(response) {
+                    if (response.status == 200) {
+                        $('#workerName').text(response.worker_first_name);
+                        $('#workerContact').text(response.worker_mobile);
+                        $('#callWorkerBtn').attr('href', 'tel:' + response.worker_mobile);
+                        $('#workerModal').modal('show');
+                    } else {
+                        alert(response.message || 'No worker details found.');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error("AJAX Error: ", xhr.responseText);
+                    alert('An error occurred while fetching the worker details: ' + error);
+                }
+            });
+        });
+    </script>
+    <script>
+        const loaderContainer = document.getElementById('loaderContainer');
+
+        function showLoader() {
+            loaderContainer.classList.add('show');
+        }
+
+        function hideLoader() {
+            loaderContainer.classList.remove('show');
+        }
+
+        //    automatic loader
+        document.addEventListener('DOMContentLoaded', function() {
+            const loaderContainer = document.getElementById('loaderContainer');
+            const contentWrapper = document.getElementById('contentWrapper');
+            let loadingTimeout;
 
             function hideLoader() {
-                loaderContainer.classList.remove('show');
+                loaderContainer.classList.add('hide');
+                contentWrapper.classList.add('show');
             }
 
-            //    automatic loader
-            document.addEventListener('DOMContentLoaded', function() {
-                const loaderContainer = document.getElementById('loaderContainer');
-                const contentWrapper = document.getElementById('contentWrapper');
-                let loadingTimeout;
-
-                function hideLoader() {
-                    loaderContainer.classList.add('hide');
-                    contentWrapper.classList.add('show');
-                }
-
-                function showError() {
-                    console.error('Page load took too long or encountered an error');
-                    // You can add custom error handling here
-                }
-
-                // Set a maximum loading time (10 seconds)
-                loadingTimeout = setTimeout(showError, 10000);
-
-                // Hide loader when everything is loaded
-                window.onload = function() {
-                    clearTimeout(loadingTimeout);
-
-                    // Add a small delay to ensure smooth transition
-                    setTimeout(hideLoader, 500);
-                };
-
-                // Error handling
-                window.onerror = function(msg, url, lineNo, columnNo, error) {
-                    clearTimeout(loadingTimeout);
-                    showError();
-                    return false;
-                };
-            });
-
-            // Toggle Sidebar
-            const hamburger = document.getElementById('hamburger');
-            const sidebar = document.getElementById('sidebar');
-            const body = document.body;
-            const mobileOverlay = document.getElementById('mobileOverlay');
-
-            function toggleSidebar() {
-                if (window.innerWidth <= 768) {
-                    sidebar.classList.toggle('mobile-show');
-                    mobileOverlay.classList.toggle('show');
-                    body.classList.toggle('sidebar-open');
-                } else {
-                    sidebar.classList.toggle('collapsed');
-                }
+            function showError() {
+                console.error('Page load took too long or encountered an error');
+                // You can add custom error handling here
             }
-            hamburger.addEventListener('click', toggleSidebar);
-            mobileOverlay.addEventListener('click', toggleSidebar);
-            // Toggle User Menu
-            const userMenu = document.getElementById('userMenu');
-            const dropdownMenu = userMenu.querySelector('.dropdown-menu');
 
-            userMenu.addEventListener('click', (e) => {
-                e.stopPropagation();
-                dropdownMenu.classList.toggle('show');
-            });
+            // Set a maximum loading time (10 seconds)
+            loadingTimeout = setTimeout(showError, 10000);
 
-            // Close dropdown when clicking outside
-            document.addEventListener('click', () => {
-                dropdownMenu.classList.remove('show');
-            });
+            // Hide loader when everything is loaded
+            window.onload = function() {
+                clearTimeout(loadingTimeout);
 
-            // Toggle Submenu
-            const menuItems = document.querySelectorAll('.has-submenu');
-            menuItems.forEach(item => {
-                item.addEventListener('click', () => {
-                    const submenu = item.nextElementSibling;
-                    item.classList.toggle('active');
-                    submenu.classList.toggle('active');
-                });
-            });
+                // Add a small delay to ensure smooth transition
+                setTimeout(hideLoader, 500);
+            };
 
-            // Handle responsive behavior
-            window.addEventListener('resize', () => {
-                if (window.innerWidth <= 768) {
-                    sidebar.classList.remove('collapsed');
-                    sidebar.classList.remove('mobile-show');
-                    mobileOverlay.classList.remove('show');
-                    body.classList.remove('sidebar-open');
-                } else {
-                    sidebar.style.transform = '';
-                    mobileOverlay.classList.remove('show');
-                    body.classList.remove('sidebar-open');
-                }
+            // Error handling
+            window.onerror = function(msg, url, lineNo, columnNo, error) {
+                clearTimeout(loadingTimeout);
+                showError();
+                return false;
+            };
+        });
+
+        // Toggle Sidebar
+        const hamburger = document.getElementById('hamburger');
+        const sidebar = document.getElementById('sidebar');
+        const body = document.body;
+        const mobileOverlay = document.getElementById('mobileOverlay');
+
+        function toggleSidebar() {
+            if (window.innerWidth <= 768) {
+                sidebar.classList.toggle('mobile-show');
+                mobileOverlay.classList.toggle('show');
+                body.classList.toggle('sidebar-open');
+            } else {
+                sidebar.classList.toggle('collapsed');
+            }
+        }
+        hamburger.addEventListener('click', toggleSidebar);
+        mobileOverlay.addEventListener('click', toggleSidebar);
+        // Toggle User Menu
+        const userMenu = document.getElementById('userMenu');
+        const dropdownMenu = userMenu.querySelector('.dropdown-menu');
+
+        userMenu.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdownMenu.classList.toggle('show');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', () => {
+            dropdownMenu.classList.remove('show');
+        });
+
+        // Toggle Submenu
+        const menuItems = document.querySelectorAll('.has-submenu');
+        menuItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const submenu = item.nextElementSibling;
+                item.classList.toggle('active');
+                submenu.classList.toggle('active');
             });
-        </script>
+        });
+
+        // Handle responsive behavior
+        window.addEventListener('resize', () => {
+            if (window.innerWidth <= 768) {
+                sidebar.classList.remove('collapsed');
+                sidebar.classList.remove('mobile-show');
+                mobileOverlay.classList.remove('show');
+                body.classList.remove('sidebar-open');
+            } else {
+                sidebar.style.transform = '';
+                mobileOverlay.classList.remove('show');
+                body.classList.remove('sidebar-open');
+            }
+        });
+    </script>
 
 </body>
 
