@@ -151,6 +151,25 @@ $row_count11 = mysqli_num_rows($result11);
             --border-color: #e2e8f0;
         }
 
+        /* Table Styles */
+        .gradient-header {
+            --bs-table-bg: transparent;
+            --bs-table-color: white;
+            background: linear-gradient(135deg, #4CAF50, #2196F3) !important;
+
+            text-align: center;
+            font-size: 0.9em;
+
+
+        }
+
+        td {
+            text-align: left;
+            font-size: 0.9em;
+            vertical-align: middle;
+            /* For vertical alignment */
+        }
+
         .container {
             max-width: 1400px;
             margin: 0 auto;
