@@ -1620,6 +1620,9 @@ $row_count11 = mysqli_num_rows($result11);
     <!-- All Jquery -->
     <!-- ============================================================== -->
 
+    <!-- DataTables -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
     <!-- Set Today date in Raise Complaint-->
     <script>
         var today = new Date().toISOString().split('T')[0];
