@@ -693,6 +693,7 @@ $result11 = mysqli_query($db, $sql11);
                                             <thead class="gradient-header">
                                                 <tr>
                                                     <th>S.No</th>
+                                                    <th>Complaint ID</th>
                                                     <th>Block/Venue</th>
                                                     <th>Complaint Details</th>
                                                     <th>Date of Completion</th>
