@@ -89,9 +89,6 @@ $row_count11 = mysqli_num_rows($result11);
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* General Styles with Enhanced Typography */
-
-        /* Content Area Styles */
         .content {
             margin-left: var(--sidebar-width);
             padding-top: var(--topbar-height);
@@ -126,6 +123,29 @@ $row_count11 = mysqli_num_rows($result11);
             white-space: nowrap;
         }
 
+        .table-container {
+            -ms-overflow-style: none;
+        }
+
+        .table-container {
+            overflow: auto;
+            width: 100%;
+            height: 100%;
+
+        }
+
+        .fixed-size-table {
+            width: 100%;
+            table-layout: fixed;
+        }
+
+        .fixed-size-table th,
+        .fixed-size-table td {
+            width: 120px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
         .content-nav li a:hover {
             background: rgba(255, 255, 255, 0.2);
         }
@@ -152,7 +172,6 @@ $row_count11 = mysqli_num_rows($result11);
             color: #224abe;
         }
 
-        /* Table Styles */
         .gradient-header {
             --bs-table-bg: transparent;
             --bs-table-color: white;
