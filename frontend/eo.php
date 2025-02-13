@@ -1181,7 +1181,7 @@ $row_count11 = mysqli_num_rows($result11);
                                                                             <td class="text-center"><button type="button"
                                                                                     value="<?php echo $row['id']; ?>"
                                                                                     class="btn viewcomplaint"
-                                                                                    data-bs-value="<?php echo $row['fac_id']; ?>"
+                                                                                    data-value="<?php echo $row['fac_id']; ?>"
                                                                                     data-bs-toggle="modal"
                                                                                     data-bs-target="#complaintDetailsModal"><i
                                                                                         class="fas fa-eye"
@@ -1281,7 +1281,7 @@ $row_count11 = mysqli_num_rows($result11);
                                                                             <td class="text-center"><button type="button"
                                                                                     value="<?php echo $row['id']; ?>"
                                                                                     class="btn viewcomplaint"
-                                                                                    data-bs-value="<?php echo $row['fac_id']; ?>"
+                                                                                    data-value="<?php echo $row['fac_id']; ?>"
                                                                                     data-bs-toggle="modal"
                                                                                     data-bs-target="#complaintDetailsModal"><i
                                                                                         class="fas fa-eye"
@@ -1560,7 +1560,7 @@ $row_count11 = mysqli_num_rows($result11);
                                                                             <td class="text-center"><button type="button"
                                                                                     value="<?php echo $row['id']; ?>"
                                                                                     class="btn viewcomplaint"
-                                                                                    data-bs-value="<?php echo $row['fac_id']; ?>"
+                                                                                    data-value="<?php echo $row['fac_id']; ?>"
                                                                                     data-bs-toggle="modal"
                                                                                     data-bs-target="#complaintDetailsModal"><i
                                                                                         class="fas fa-eye"
@@ -1655,7 +1655,7 @@ $row_count11 = mysqli_num_rows($result11);
                                                                             <td class="text-center"><button type="button"
                                                                                     value="<?php echo $row['id']; ?>"
                                                                                     class="btn viewcomplaint"
-                                                                                    data-bs-value="<?php echo $row['fac_id']; ?>"
+                                                                                    data-value="<?php echo $row['fac_id']; ?>"
                                                                                     data-bs-toggle="modal"
                                                                                     data-bs-target="#complaintDetailsModal"><i class="fas fa-eye" style="font-size: 25px;"></i></button>
                                                                             </td>
