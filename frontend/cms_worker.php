@@ -231,7 +231,7 @@ $notcount = mysqli_num_rows($result4);
         </div>
 
         <div class="menu">
-            <a href="index.php" class="menu-item active">
+            <a href="cms_worker.php" class="menu-item ">
                 <i class="fas fa-home text-primary"></i>
                 <span>Dashboard</span>
             </a>
@@ -239,13 +239,13 @@ $notcount = mysqli_num_rows($result4);
                 <i class="fa-solid fa-user-secret text-white"></i>
                 <span>Admin</span>
             </a> -->
-            <a href="new_work.php" class="menu-item">
+            <a href="cms_worknew.php" class="menu-item active">
                 <i class="fa-solid fa-users text-info"></i>
                 <span>Work</span>
             </a>
-            <a href="workall.php" class="menu-item">
-            <i class="fa-solid fa-address-book text-success"></i>
-                <span><?php echo $row['worker_dept'] ?></span>
+            <a href="cms_workall.php" class="menu-item">
+                <i class="fa-solid fa-address-book text-success"></i>
+                <span><?php echo $worker_id?></span>
             </a>
         </div>
     </div>
