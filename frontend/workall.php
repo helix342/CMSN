@@ -1,13 +1,9 @@
 <?php
 require "config.php";
-include("session.php");
 
 
-$worker_id = $s;
-if(!($worker_id)){
-    header("Location:index.php");
+$worker_id = "civil";
 
-}
 
 //fetching worker head details using session v ar
 $qry = "SELECT * FROM worker_details WHERE worker_id='$worker_id'";
@@ -175,297 +171,499 @@ $notcount = mysqli_num_rows($result4);
 
 
 ?>
-
 <!DOCTYPE html>
-<html dir="ltr" lang="en">
+<html lang="en">
 
 <head>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-
-    <title>MIC</title>
-    <!-- Custom CSS -->
-    <link href="dist/css/style.min.css" rel="stylesheet">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
-    <style>
-        .nav-tabs .nav-item.show .nav-link,
-        .nav-tabs .nav-link.active {
-            color: white;
-            background: linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%);
-            padding: 11px 15px;
-        }
-
-        .nav-tabs .nav-item.show .nav-link,
-        .nav-tabs .nav-link.active:hover {
-            border: none;
-        }
-
-        a {
-            color: linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%);
-            padding: 11px 15px;
-        }
-
-        .nav-tabs .nav-item.show .nav-link,
-        .nav-tabs a:hover {
-            color: linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%);
-            border: 4px solid gray;
-            /* Include the border within the button size */
-            padding: 8px 15px;
-            /* Adjust padding to maintain the button's size */
-        }
-
-        th {
-            /* background-color: #7460ee; */
-            background: linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%);
-            color: white;
-        }
-
-        @media (min-width:1300px) and (max-width:1800px) {
-            /* For mobile phones: */
-
-        }
-    </style>
-    <link href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaints Management System</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="image/icons/mkce_s.png">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/tabs.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="assets/css/datatable.css">
+    <link rel="stylesheet" href="assets/css/font.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
 </head>
 
 <body>
-    <!-- ============================================================== -->
-    <!-- Preloader - style you can find in spinners.css -->
-    <!-- ============================================================== -->
-    <div class="preloader">
-        <div class="lds-ripple">
-            <div class="lds-pos"></div>
-            <div class="lds-pos"></div>
+    <!-- Sidebar -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <div class="sidebar" id="sidebar">
+        <div class="logo">
+            <img src="image/mkce.png" alt="College Logo">
+            <img class='s_logo' src="image/mkce_s.png" alt="College Logo">
+        </div>
+
+        <div class="menu">
+            <a href="windex.php" class="menu-item ">
+                <i class="fas fa-home text-primary"></i>
+                <span>Dashboard</span>
+            </a>
+            <!-- <a href="" class="menu-item">
+                <i class="fa-solid fa-user-secret text-white"></i>
+                <span>Admin</span>
+            </a> -->
+            <a href="new_work.php" class="menu-item ">
+                <i class="fa-solid fa-users text-info"></i>
+                <span>Work Asign</span>
+            </a>
+            <a href="workall.php" class="menu-item active">
+            <i class="fa-solid fa-address-book text-success"></i>
+                <span><?php echo $worker_id; ?></span>
+            </a>
         </div>
     </div>
-    <!-- ============================================================== -->
-    <!-- Main wrapper - style you can find in pages.scss -->
-    <!-- ============================================================== -->
-    <div id="main-wrapper">
-        <!-- ============================================================== -->
-        <!-- Topbar header - style you can find in pages.scss -->
-        <!-- ============================================================== -->
-        <header class="topbar" data-navbarbg="skin5">
-            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
-                <div class="navbar-header" data-logobg="skin5">
-                    <!-- ============================================================== -->
-                    <!-- Logo -->
-                    <!-- ============================================================== -->
-                    <a class="navbar-brand" href="smain">
-                        <!-- Logo icon -->
 
-                        <!--End Logo icon -->
-                        <!-- Logo text -->
-                        <span class="logo-text">
-                            <!-- dark Logo text -->
-                            <img src="assets/images/srms33333.png" alt="homepage" class="light-logo" />
+    <!-- Main Content -->
+    <div class="content">
 
-                        </span>
-                        <!-- Logo icon -->
-                        <!-- <b class="logo-icon"> -->
-                        <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-                        <!-- Dark Logo icon -->
-                        <!-- <img src="assets/images/logo-text.png" alt="homepage" class="light-logo" /> -->
+        <div class="loader-container" id="loaderContainer">
+            <div class="loader"></div>
+        </div>
 
-                        <!-- </b> -->
-                        <!--End Logo icon -->
-                    </a>
-                    <!-- ============================================================== -->
-                    <!-- End Logo -->
-                    <!-- ============================================================== -->
-                    <!-- Toggle for mobile -->
-                    <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i class="ti-more"></i></a>
-                </div>
-
-                <!-- Navbar items -->
-                <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
-                    <ul class="navbar-nav float-left mr-auto">
-                        <li class="nav-item d-none d-md-block">
-                            <a class="nav-link sidebartoggler waves-effect waves-light" href="javascript:void(0)" data-sidebartype="mini-sidebar"><i class="mdi mdi-menu font-24"></i></a>
-                        </li>
-                        <!-- Additional items can be added here -->
-                    </ul>
-                    <ul class="navbar-nav float-right">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href=""
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-                                    src="assets/images/users/1.jpg" alt="user" class="rounded-circle" width="31"></a>
-                            <div class="dropdown-menu dropdown-menu-right user-dd animated">
-                            <a class="dropdown-item" href="#"><i class="fa fa-power-off m-r-5 m-l-5"></i>
-                            Download map</a>
-                                <a class="dropdown-item" href="Logout"><i class="fa fa-power-off m-r-5 m-l-5"></i>
-                                    Logout</a>
-                                <div class="dropdown-divider"></div>
-                            </div>
-                        </li>
-
-                    </ul>
-                </div>
-            </nav>
-        </header>
-        <!-- ============================================================== -->
-        <!-- End Topbar header -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-        <aside class="left-sidebar" data-sidebarbg="skin5">
-            <div class="scroll-sidebar"><br>
-                <nav class="sidebar-nav">
-                    <ul id="sidebarnav" class="p-t-30">
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="windex"
-                                aria-expanded="false"><img src="images/icon/dash.png" class="custom-svg-icon"
-                                    alt="Dashboard Icon"><span class="hide-menu">&nbsp;Dashboard</span></a></li>
-
-                        <li class="sidebar-item"> <a id="view-work-task-history"
-                                class="sidebar-link waves-effect waves-dark sidebar-link" href="new_work.php"
-                                aria-expanded="false"><img src="images/icon/construction-worker.png" class="custom-svg-icon"
-                                    alt="Dashboard Icon"><span class="hide-menu">&nbsp Work
-                                    Assign</span></a></li>
-
-                        <li class="sidebar-item"> <a id="view-work-task-history"
-                                class="sidebar-link waves-effect waves-dark sidebar-link" href="workall.php"
-                                aria-expanded="false"><img src="images/icon/wrench.png" class="custom-svg-icon"
-                                    alt="Dashboard Icon"><span class="hide-menu">&nbsp <?php echo $worker_id; ?></span></a></li>
-                    </ul>
-                </nav>
+        <!-- Topbar -->
+        <div class="topbar">
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
             </div>
-        </aside>
-
-        <!-- ============================================================== -->
-        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Page wrapper  -->
-        <!-- ============================================================== -->
-        <div class="page-wrapper">
-            <!-- ============================================================== -->
-            <!-- Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <div class="page-breadcrumb">
-                <div class="row">
-                    <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title"></h4>
-                        <div class="ml-auto text-right">
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="windex.php">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page"></li>
-                                </ol>
-                            </nav>
-                        </div>
+            <!-- <div class="brand-logo">
+                <i class="fas fa-chart-line"></i>
+                MIC
+            </div> -->
+            <div class="user-profile">
+                <div class="user-menu" id="userMenu">
+                    <div class="user-avatar">
+                        <img src="/api/placeholder/35/35" alt="User">
+                        <div class="online-indicator"></div>
+                    </div>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item">
+                            <i class="fas fa-key"></i>
+                            Change Password
+                        </a>
+                        <a class="dropdown-item">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Logout
+                        </a>
                     </div>
                 </div>
+                <span><?php echo $srow['worker_first_name'] ?></span>
             </div>
-            <!-- ============================================================== -->
-            <!-- End Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- Container fluid  -->
-            <!-- ============================================================== -->
-            <div class="container-fluid">
-                <!-- ============================================================== -->
-                <!-- Start Page Content -->
-                <!-- ============================================================== -->
-                <div class="row">
-                    <div class="col-md-12">
+        </div>
 
-                        <!-- Tabs -->
+        <!-- Breadcrumb -->
+        <div class="breadcrumb-area">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><?php echo $srow['worker_dept']; ?></li>
+                </ol>
+            </nav>
+        </div>
 
-                        <!-- Tabs -->
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="card">
-                                    <div id="navref">
-                                        <!-- Nav tabs -->
-                                        <ul class="nav nav-tabs mb-3" role="tablist">
+        <!-- Content Area -->
+        <div class="container-fluid">
+            <div class="container">
+                <div class="custom-tabs">
+                    <!-- Navigation Tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <!-- Tab 1: In Progress -->
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="add-bus-tab" data-bs-toggle="tab"
+                                data-bs-target="#inprogressdiv" type="button" role="tab">
+                                <i class="fas fa-spinner tab-icon"></i> In Progress(<?php echo $progcount ?>)
+                            </button>
+                        </li>
 
-                                            <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#inprogressdiv"
-                                                    role="tab"><span class="hidden-sm-up"></span>
-                                                    <div id="ref4"><span
-                                                            class="hidden-xs-down"><b>InProgress(<?php echo $progcount ?>)</b></span></div>
-                                                </a> </li>
-                                            <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#waitingforapproval"
-                                                    role="tab"><span class="hidden-sm-up"></span>
-                                                    <div id="ref5"><span
-                                                            class="hidden-xs-down"><b>WaitingForApproval(<?php echo $waitcount ?>)</b></span></div>
-                                                </a> </li>
-                                            <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#notapproved"
-                                                    role="tab"><span class="hidden-sm-up"></span>
-                                                    <div id="ref3"><span
-                                                            class="hidden-xs-down"><b>NotApproved(<?php echo $notcount ?>)</b></span></div>
-                                                </a> </li>
-                                            <li class="nav-item"> <a class="nav-link " data-toggle="tab" href="#completed"
-                                                    role="tab"><span class="hidden-sm-up"></span>
-                                                    <div id="ref1"> <span
-                                                            class="hidden-xs-down"><b>Completed(<?php echo $compcount ?>)</b></span></div>
-                                                </a> </li>
+                        <!-- Tab 2: Waiting For Approval -->
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="edit-bus-tab" data-bs-toggle="tab"
+                                data-bs-target="#waitingforapproval" type="button" role="tab">
+                                <i class="fas fa-hourglass-half tab-icon"></i> Waiting For Approval (<?php echo $waitcount ?>)
+                            </button>
+                        </li>
 
+                        <!-- Tab 3: Not Approved -->
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="delete-bus-tab" data-bs-toggle="tab"
+                                data-bs-target="#notapproved" type="button" role="tab">
+                                <i class="fas fa-times-circle tab-icon"></i> Not Approved (<?php echo $notcount ?>)
+                            </button>
+                        </li>
 
+                        <!-- Tab 4: Completed -->
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="view-bus-tab" data-bs-toggle="tab" data-bs-target="#completed"
+                                type="button" role="tab">
+                                <i class="fas fa-check-circle tab-icon"></i> Completed (<?php echo $compcount ?>)
+                            </button>
+                        </li>
+                    </ul>
+                    <!-- Tab Content -->
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="inprogressdiv" role="tabpanel">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header d-flex justify-content-between align-items-center">
+                                            <h4 class="mb-0">Complaint Management System</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table id="complaint_table"
+                                                    class="table table-striped table-bordered custom-table">
+                                                    <thead
+                                                        class="table-class">
+                                                        <tr class="gradient-header">
 
+                                                            <th class="text-center">
+                                                                S.No
+                                                            </th>
+                                                            <th class="col-md-2 text-center">
+                                                                Complaint Date
+                                                            </th>
+                                                            <th class="text-center">
+                                                                Task ID
+                                                            </th>
+                                                            <th class="text-center col-md-2">
+                                                                Dept
+                                                            </th>
+                                                            <th class="col-md-2 text-center">
+                                                                Complaint
+                                                            </th>
+                                                            <th class="text-center">
+                                                                Priority
+                                                            </th>
+                                                            <th class="text-center">
 
-                                        </ul>
+                                                                Photos
+
+                                                            </th>
+                                                            <th class="text-center">
+                                                                Deadline
+                                                            </th>
+                                                            <th class="text-center">
+                                                                Status
+                                                            </th>
+                                                            <th class="text-center">
+                                                                Action
+                                                            </th>
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="progbody">
+                                                                        <?php
+                                                                        $count = 1;
+                                                                        while ($row = $result1->fetch_assoc()) {
+                                                                            if($row['extend_date']==1){
+                                                                                echo "<tr style='background-color:      #c2f0c2
+'>";
+
+                                                                            }
+                                                                            else{
+                                                                            echo "<tr>";
+                                                                            }
+                                                                            
+                                                                            echo "<td class='text-center'>" . $count++ . "</td>";
+                                                                            echo "<td class='text-center'>" . htmlspecialchars($row['date_of_reg']) . "</td>";
+                                                                            echo "<td class='text-center'>" . htmlspecialchars($row['task_id']) . "</td>";
+                                                                            echo "<td class='text-center'>" . htmlspecialchars($row['dept']) . "</td>";
+                                                                        ?>
+                                                                            <td class='text-center'>
+                                                                                <button type='button' class='btn btn margin-5 view-complaint
+                                                            '
+                                                                                    data-task-id='<?php echo htmlspecialchars($row['task_id']); ?>'>
+                                                                                    <i class="fas fa-eye" style="font-size: 25px;"></i>
+
+                                                                                </button>
+                                                                            </td>
+                                                                            <?php
+                                                                            echo "<td class='text-center'>" . htmlspecialchars($row['priority']) . "</td>";
+                                                                            ?>
+                                                                            <td class='text-center'>
+                                                                                <button type='button' class='btn margin-5 showbeforeimg'
+                                                                                    data-task-id='<?php echo htmlspecialchars($row['task_id']); ?>'>
+                                                                                    <i class="fas fa-image" style="font-size: 25px;"></i>
+                                                                                </button>
+                                                                            </td>
+                                                                            <?php
+                                                                            echo "<td class='text-center'>" . htmlspecialchars($row['days_to_complete']) . "</td>";
+                                                                            echo "<td class='text-center'>In Progress</td>";
+                                                                            ?>
+                                                                            <td class='text-center'>
+                                                                                <button type='button' class='work-comp btn btn-primary margin-5' data-value="<?php echo $srow['worker_dept'] ?>"
+                                                                                    data-task-id='<?php echo htmlspecialchars($row['task_id']); ?>'>
+                                                                                    Work Completion
+                                                                                </button>
+                                                                            </td>
+                                                                        <?php echo "</tr>";
+                                                                        }
+                                                                        ?>
+                                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                        </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
 
+                        <div class="tab-pane fade" id="waitingforapproval" role="tabpanel">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header d-flex justify-content-between align-items-center">
+                                            <h4 class="mb-0">Complaint Management System</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table id="waitingapproval_table"
+                                                    class="table table-striped table-bordered custom-table">
+                                                    <thead
+                                                        class="table-class">
+                                                        <tr class="gradient-header">
 
+                                                            <th class="text-center">
+                                                                S.No
+                                                            </th>
+                                                            <th class="col-md-2 text-center">
+                                                                Complaint Date
+                                                            </th>
+                                                            <th class="text-center">
+                                                                Task ID
+                                                            </th>
+                                                            <th class="text-center">
+                                                                Dept
+                                                            </th>
+                                                            <th class="col-md-2 text-center">
+                                                                Complaint
+                                                            </th>
+                                                            <th class="text-center">
+                                                                Priority
+                                                            </th>
+                                                            <th class="text-center col-md-2">
 
-                                    <!-- Tab panes -->
-                                    <div class="tab-content tabcontent-border">
-                                        <!--completed start-->
-                                        <div class="tab-pane p-20" id="completed" role="tabpanel">
-                                            <div class="p-20">
-                                                <div class="table-responsive">
-                                                    <h5 class="card-title">Completed Tasks</h5>
-                                                    <table id="addnewtaskcompleted" class="table table-striped table-bordered">
-                                                        <thead style="background-color: rgb(220, 20, 70); color: white; ">
-                                                            <tr>
+                                                                Photos
 
-                                                                <th class="text-center"><b>
-                                                                        <h5>S.No</h5>
-                                                                    </b></th>
-                                                                <th class="col-md-2 text-center"><b>
-                                                                        <h5>Complaint Date</h5>
-                                                                    </b></th>
-                                                                <th class="text-center"><b>
-                                                                        <h5>Task ID</h5>
-                                                                    </b></th>
-                                                                <th class="text-center"><b>
-                                                                        <h5>Dept</h5>
-                                                                    </b></th>
-                                                                <th class="col-md-2 text-center"><b>
-                                                                        <h5>Complaint</h5>
-                                                                    </b></th>
-                                                                <th class="text-center">
-                                                                    <b>
-                                                                        <h5>Photos</h5>
-                                                                    </b>
-                                                                </th>
-                                                                <th class=" col-md-2 text-center"><b>
-                                                                        <h5>Deadline</h5>
-                                                                    </b></th>
-                                                                <th class=" col-md-2 text-center"><b>
-                                                                        <h5>Date of completion</h5>
-                                                                    </b></th>
-                                                                <th class="text-center"><b>
-                                                                        <h5>Status</h5>
-                                                                    </b></th>
+                                                            </th>
+                                                            <th class=" col-md-2 text-center">
+                                                                Deadline
+                                                            </th>
+                                                            <th class=" col-md-2 text-center">
+                                                                Reason
+                                                            </th>
+                                                            <th class="text-center">
+                                                                Task Completion
+                                                            </th>
 
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                            <?php
+                                                            $count = 1;
+                                                            while ($row = $result2->fetch_assoc()) {
+                                                                echo "<tr>";
+                                                                echo "<td class='text-center'>" . $count++ . "</td>";
+                                                                echo "<td class='text-center'>" . htmlspecialchars($row['date_of_reg']) . "</td>";
+                                                                echo "<td class='text-center'>" . htmlspecialchars($row['task_id']) . "</td>";
+                                                                echo "<td class='text-center'>" . htmlspecialchars($row['dept']) . "</td>";
+                                                            ?>
+                                                                <td class='text-center'>
+                                                                    <button type='button' class='btn btn margin-5 view-complaint
+                                                            '
+                                                                        data-task-id='<?php echo htmlspecialchars($row['task_id']); ?>'>
+                                                                        <i class="fas fa-eye" style="font-size: 25px;"></i>
+
+                                                                    </button>
+                                                                </td>
+                                                                <?php
+                                                                echo "<td class='text-center'>" . htmlspecialchars($row['priority']) . "</td>";
+                                                                ?>
+                                                                <td>
+                                                                    <div class="d-flex justify-content-between">
+                                                                        <!-- Align the first button to the left -->
+
+                                                                        <button type='button' class='btn margin-5 showbeforeimg'
+                                                                            data-task-id='<?php echo htmlspecialchars($row['task_id']); ?>'>
+                                                                            <i class="fas fa-image" style="font-size: 25px;"></i>
+                                                                        </button>
+
+                                                                        <!-- Align the second button to the right -->
+                                                                        <button type="button" class="btn I"
+                                                                            style="margin-left:-12px;" data-toggle="modal"
+                                                                            data-target="#Modal4" data-task-id='<?php echo htmlspecialchars($row['task_id']); ?>'>
+                                                                            <i class="fas fa-image" style="font-size: 25px;"></i>
+                                                                        </button>
+                                                                    </div>
+                                                                </td>
+                                                            <?php
+                                                                echo "<td class='text-center'>" . htmlspecialchars($row['days_to_complete']) . "</td>";
+                                                                echo "<td class='text-center'>" . htmlspecialchars($row['reason']) . "</td>";
+                                                                echo "<td class='text-center'>" . htmlspecialchars($row['task_completion']) . "</td>";
+                                                                echo "</tr>";
+                                                            }
+                                                            ?>
+                                                        </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="notapproved" role="tabpanel">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header d-flex justify-content-between align-items-center">
+                                            <h4 class="mb-0">Complaint Management System</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table id="notapproved_table"
+                                                    class="table table-striped table-bordered custom-table">
+                                                    <thead
+                                                        class="table-class">
+                                                        <tr class="gradient-header">
+
+                                                            <th class="text-center">
+                                                                S.No
+                                                            </th>
+                                                            <th class="col-md-2 text-center">
+                                                                Complaint Date
+                                                            </th>
+                                                            <th class="text-center">
+                                                                Task ID
+                                                            </th>
+                                                            <th class="text-center col-md-2">
+                                                                Dept
+                                                            </th>
+                                                            <th class="col-md-2 text-center">
+                                                                Complaint
+                                                            </th>
+                                                            <th class="text-center">
+                                                                Priority
+                                                            </th>
+                                                            <th class="text-center">
+
+                                                                Photos
+
+                                                            </th>
+                                                            <th class="text-center">
+                                                                Deadline
+                                                            </th>
+                                                            <th class="text-center">
+                                                                Comments
+                                                            </th>
+                                                            <th class="text-center">
+                                                                Status
+                                                            </th>
+                                                            <th class="text-center">
+                                                                Action
+                                                            </th>
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                                        <?php
+                                                                        $count = 1;
+                                                                        while ($row = $result4->fetch_assoc()) {
+                                                                            echo "<tr>";
+                                                                            echo "<td class='text-center'>" . $count++ . "</td>";
+                                                                            echo "<td class='text-center'>" . htmlspecialchars($row['date_of_reg']) . "</td>";
+                                                                            echo "<td class='text-center'>" . htmlspecialchars($row['task_id']) . "</td>";
+                                                                            echo "<td class='text-center'>" . htmlspecialchars($row['dept']) . "</td>";
+                                                                        ?>
+                                                                            <td class='text-center'>
+                                                                                <button type='button' class='btn btn margin-5 view-complaint
+                                                            '
+                                                                                    data-task-id='<?php echo htmlspecialchars($row['task_id']); ?>'>
+                                                                                    <i class="fas fa-eye" style="font-size: 25px;"></i>
+                                                                                </button>
+                                                                            </td>
+                                                                            <?php
+                                                                            echo "<td class='text-center'>" . htmlspecialchars($row['priority']) . "</td>";
+                                                                            ?>
+                                                                            <td class='text-center'>
+                                                                                <button type='button' class='btn  margin-5 showbeforeimg'
+                                                                                    data-task-id='<?php echo htmlspecialchars($row['task_id']); ?>'>
+                                                                                    <i class="fas fa-image" style="font-size: 25px;"></i>
+                                                                                </button>
+                                                                            </td>
+                                                                            <?php
+                                                                            echo "<td class='text-center'>" . htmlspecialchars($row['days_to_complete']) . "</td>";
+                                                                            echo "<td class='text-center'>" . htmlspecialchars($row['feedback']) . "</td>";
+                                                                            echo "<td class='text-center'>Pending</td>";
+                                                                            ?>
+                                                                            <td class='text-center'>
+                                                                                <button type='button' class='btn btn-primary margin-5 start-work-btn '
+                                                                                    data-task-id='<?php echo htmlspecialchars($row['task_id']); ?>'>
+                                                                                    Start to work
+                                                                                </button>
+                                                                            </td>
+                                                                        <?php echo "</tr>";
+                                                                        }
+                                                                        ?>
+                                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="completed" role="tabpanel">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header d-flex justify-content-between align-items-center">
+                                            <h4 class="mb-0">Complaint Management System</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table id="completed_table"
+                                                    class="table table-striped table-bordered custom-table">
+                                                    <thead
+                                                        class="table-class">
+                                                        <tr class="gradient-header">
+                                                            <th class="text-center">
+                                                                S.No
+                                                            </th>
+                                                            <th class="col-md-2 text-center">
+                                                                Complaint Date
+                                                            </th>
+                                                            <th class="text-center">
+                                                                Task ID
+                                                            </th>
+                                                            <th class="text-center">
+                                                                Dept
+                                                            </th>
+                                                            <th class="col-md-2 text-center">
+                                                                Complaint
+                                                            </th>
+                                                            <th class="text-center">
+
+                                                                Photos
+
+                                                            </th>
+                                                            <th class=" col-md-2 text-center">
+                                                                Deadline</h5>
+                                                            </th>
+                                                            <th class=" col-md-2 text-center">
+                                                                Date of completion
+                                                            </th>
+                                                            <th class="text-center">
+                                                                Status
+                                                            </th>
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
                                                             <?php
                                                             $count = 1;
                                                             while ($row = $result3->fetch_assoc()) {
@@ -517,393 +715,271 @@ $notcount = mysqli_num_rows($result4);
                                                             }
                                                             ?>
                                                         </tbody>
-
-                                                    </table>
-                                                </div>
-
+                                              </table>
                                             </div>
                                         </div>
-                                        <!--completed end-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                                        <!-- Not approved task table-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-copyright" style="text-align: center; position: relative;">
+            <p>
+                Copyright © 2024 Designed by
+                <span
+                    style="background: linear-gradient(to right, #cb2d3e, #ef473a); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                    Technology Innovation Hub - MKCE.
+                </span>
+                All rights reserved.
+            </p>
+        </div>
+    </footer>
 
-                                        <div class="tab-pane p-10" id="notapproved" role="tabpanel">
-                                            <div class="p-10">
-                                                <div class="p-10">
-                                                    <div class="card">
-                                                        <div class="card-body" style="padding: 10px;">
-                                                            <h5 class="card-title">Work not Approved</h5>
-                                                            <div class="table-responsive">
-                                                                <table id="statusnotapproved"
-                                                                    class="table table-striped table-bordered">
-                                                                    <thead
-                                                                        style="background-color: rgb(220, 20, 70); color: white; ">
-                                                                        <tr>
+    <!-- View Complaint Modal Starts -->
+    <div class="modal fade" id="complaint" tabindex="-1" role="dialog"
+        aria-labelledby="complaintDetailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
 
-                                                                            <th class="text-center"><b>
-                                                                                    <h5>S.No</h5>
-                                                                                </b></th>
-                                                                            <th class="col-md-2 text-center"><b>
-                                                                                    <h5>Complaint Date</h5>
-                                                                                </b></th>
-                                                                            <th class="text-center"><b>
-                                                                                    <h5>Task ID</h5>
-                                                                                </b></th>
-                                                                            <th class="text-center col-md-2"><b>
-                                                                                    <h5>Dept</h5>
-                                                                                </b></th>
-                                                                            <th class="col-md-2 text-center"><b>
-                                                                                    <h5>Complaint</h5>
-                                                                                </b></th>
-                                                                            <th class="text-center"><b>
-                                                                                    <h5>Priority</h5>
-                                                                                </b></th>
-                                                                            <th class="text-center">
-                                                                                <b>
-                                                                                    <h5>Photos</h5>
-                                                                                </b>
-                                                                            </th>
-                                                                            <th class="text-center"><b>
-                                                                                    <h5>Deadline</h5>
-                                                                                </b></th>
-                                                                            <th class="text-center"><b>
-                                                                                    <h5>Comments</h5>
-                                                                                </b></th>
-                                                                            <th class="text-center"><b>
-                                                                                    <h5>Status</h5>
-                                                                                </b></th>
-                                                                            <th class="text-center"><b>
-                                                                                    <h5>Action</h5>
-                                                                                </b></th>
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h5 class="modal-title" id="complaintDetailsModalLabel">
+                        📋 Complaint Details
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
 
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <?php
-                                                                        $count = 1;
-                                                                        while ($row = $result4->fetch_assoc()) {
-                                                                            echo "<tr>";
-                                                                            echo "<td class='text-center'>" . $count++ . "</td>";
-                                                                            echo "<td class='text-center'>" . htmlspecialchars($row['date_of_reg']) . "</td>";
-                                                                            echo "<td class='text-center'>" . htmlspecialchars($row['task_id']) . "</td>";
-                                                                            echo "<td class='text-center'>" . htmlspecialchars($row['dept']) . "</td>";
-                                                                        ?>
-                                                                            <td class='text-center'>
-                                                                                <button type='button' class='btn btn margin-5 view-complaint
-                                                            '
-                                                                                    data-task-id='<?php echo htmlspecialchars($row['task_id']); ?>'>
-                                                                                    <i class="fas fa-eye" style="font-size: 25px;"></i>
-                                                                                </button>
-                                                                            </td>
-                                                                            <?php
-                                                                            echo "<td class='text-center'>" . htmlspecialchars($row['priority']) . "</td>";
-                                                                            ?>
-                                                                            <td class='text-center'>
-                                                                                <button type='button' class='btn  margin-5 showbeforeimg'
-                                                                                    data-task-id='<?php echo htmlspecialchars($row['task_id']); ?>'>
-                                                                                    <i class="fas fa-image" style="font-size: 25px;"></i>
-                                                                                </button>
-                                                                            </td>
-                                                                            <?php
-                                                                            echo "<td class='text-center'>" . htmlspecialchars($row['days_to_complete']) . "</td>";
-                                                                            echo "<td class='text-center'>" . htmlspecialchars($row['feedback']) . "</td>";
-                                                                            echo "<td class='text-center'>Pending</td>";
-                                                                            ?>
-                                                                            <td class='text-center'>
-                                                                                <button type='button' class='btn btn-primary margin-5 start-work-btn '
-                                                                                    data-task-id='<?php echo htmlspecialchars($row['task_id']); ?>'>
-                                                                                    Start to work
-                                                                                </button>
-                                                                            </td>
-                                                                        <?php echo "</tr>";
-                                                                        }
-                                                                        ?>
-                                                                    </tbody>
+                <!-- Modal Body -->
+                <div class="modal-body">
 
-                                                                </table>
-                                                            </div>
+                    <!-- Complaint Info Section arranged in two-column layout -->
+                    <div class="row">
+                        <!-- Left Column -->
+                        <div class="col-md-6 mb-3">
+                            <div class="form-group">
+                                <label class="fw-bold">Faculty ID</label>
+                                <div class="text-muted"><b id="id"></b></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="form-group">
+                                <label class="fw-bold">Faculty Name</label>
+                                <div class="text-muted"><b id="faculty_name"></b></div>
+                            </div>
+                        </div>
 
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--Inprogress-->
-                                        <div class="tab-pane active p-10" id="inprogressdiv" role="tabpanel">
-                                            <div class="p-10">
-                                                <div class="p-10">
-                                                    <div class="card">
-                                                        <div class="card-body" style="padding: 10px;">
-                                                            <h5 class="card-title">InProgress</h5>
-                                                            <div class="table-responsive">
-                                                                <table id="statusinprogress"
-                                                                    class="table table-striped table-bordered">
-                                                                    <thead
-                                                                        style="background-color: rgb(220, 20, 70); color: white; ">
-                                                                        <tr>
+                        <!-- Right Column -->
+                        <div class="col-md-6 mb-3">
+                            <div class="form-group">
+                                <label class="fw-bold">Mobile Number
 
-                                                                            <th class="text-center"><b>
-                                                                                    <h5>S.No</h5>
-                                                                                </b></th>
-                                                                            <th class="col-md-2 text-center"><b>
-                                                                                    <h5>Complaint Date</h5>
-                                                                                </b></th>
-                                                                            <th class="text-center"><b>
-                                                                                    <h5>Task ID</h5>
-                                                                                </b></th>
-                                                                            <th class="text-center col-md-2"><b>
-                                                                                    <h5>Dept</h5>
-                                                                                </b></th>
-                                                                            <th class="col-md-2 text-center"><b>
-                                                                                    <h5>Complaint</h5>
-                                                                                </b></th>
-                                                                            <th class="text-center"><b>
-                                                                                    <h5>Priority</h5>
-                                                                                </b></th>
-                                                                            <th class="text-center">
-                                                                                <b>
-                                                                                    <h5>Photos</h5>
-                                                                                </b>
-                                                                            </th>
-                                                                            <th class="text-center"><b>
-                                                                                    <h5>Deadline</h5>
-                                                                                </b></th>
-                                                                            <th class="text-center"><b>
-                                                                                    <h5>Status</h5>
-                                                                                </b></th>
-                                                                            <th class="text-center"><b>
-                                                                                    <h5>Action</h5>
-                                                                                </b></th>
+                                </label>
+                                <div class="text-muted"><b id="faculty_contact"></b></div>
+                            </div>
+                        </div>
 
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody id="progbody">
-                                                                        <?php
-                                                                        $count = 1;
-                                                                        while ($row = $result1->fetch_assoc()) {
-                                                                            if($row['extend_date']==1){
-                                                                                echo "<tr style='background-color:      #c2f0c2
-'>";
+                        <div class="col-md-6 mb-3">
+                            <div class="form-group">
+                                <label class="fw-bold">E-mail</label>
+                                <div class="text-muted"><b id="faculty_mail"></b></div>
+                            </div>
+                        </div>
 
-                                                                            }
-                                                                            else{
-                                                                            echo "<tr>";
-                                                                            }
-                                                                            
-                                                                            echo "<td class='text-center'>" . $count++ . "</td>";
-                                                                            echo "<td class='text-center'>" . htmlspecialchars($row['date_of_reg']) . "</td>";
-                                                                            echo "<td class='text-center'>" . htmlspecialchars($row['task_id']) . "</td>";
-                                                                            echo "<td class='text-center'>" . htmlspecialchars($row['dept']) . "</td>";
-                                                                        ?>
-                                                                            <td class='text-center'>
-                                                                                <button type='button' class='btn btn margin-5 view-complaint
-                                                            '
-                                                                                    data-task-id='<?php echo htmlspecialchars($row['task_id']); ?>'>
-                                                                                    <i class="fas fa-eye" style="font-size: 25px;"></i>
+                        <div class="col-md-6 mb-3">
+                            <div class="form-group">
+                                <label class="fw-bold">Type of Problem</label>
+                                <div class="text-muted"><b id="fac_name"></b></div>
+                            </div>
+                        </div>
 
-                                                                                </button>
-                                                                            </td>
-                                                                            <?php
-                                                                            echo "<td class='text-center'>" . htmlspecialchars($row['priority']) . "</td>";
-                                                                            ?>
-                                                                            <td class='text-center'>
-                                                                                <button type='button' class='btn margin-5 showbeforeimg'
-                                                                                    data-task-id='<?php echo htmlspecialchars($row['task_id']); ?>'>
-                                                                                    <i class="fas fa-image" style="font-size: 25px;"></i>
-                                                                                </button>
-                                                                            </td>
-                                                                            <?php
-                                                                            echo "<td class='text-center'>" . htmlspecialchars($row['days_to_complete']) . "</td>";
-                                                                            echo "<td class='text-center'>In Progress</td>";
-                                                                            ?>
-                                                                            <td class='text-center'>
-                                                                                <button type='button' class='work-comp btn btn-primary margin-5' data-value="<?php echo $srow['worker_dept'] ?>"
-                                                                                    data-task-id='<?php echo htmlspecialchars($row['task_id']); ?>'>
-                                                                                    Work Completion
-                                                                                </button>
-                                                                            </td>
-                                                                        <?php echo "</tr>";
-                                                                        }
-                                                                        ?>
-                                                                    </tbody>
+                        <div class="col-md-6 mb-3">
+                            <div class="form-group">
+                                <label class="fw-bold">Problem Description</label>
+                                <div class="text-muted"><b id="fac_id"></b></div>
+                            </div>
+                        </div>
 
-                                                                </table>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--end of inprogress-->
-                                        <!--inprogress task submission modal-->
-                                        <!--Task Completion--><!--Id:Modal2-->
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="Modal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Task Completion</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <!--form-->
-                                                        <form id="taskCompletionForm">
-
-                                                            <div class="mb-3">
-                                                                <label class="form-label">Task ID</label>
-                                                                <input type="text" class="form-control" id="taskid" disabled readonly>
-                                                            </div>
-                                                            <div class="form-group" style="margin-bottom: 15px;">
-                                                                <label for="worker" class="font-weight-bold" style="display: block; margin-bottom: 5px;">Assign Worker:</label>
-                                                                <select class="form-control" name="worker" id="worker" style="width: 100%; height: 40px; border-radius: 4px; border: 1px solid #ccc;">
-                                                                </select>
-                                                            </div>
-                                                            <input type="checkbox" id="oth" name="oth" onclick="checkIfOthers()">Others
-                                                            <div id="othersInput" style="display: none;">
-                                                                <label class="form-label" for="otherValue">Please specify:</label>
-                                                                <input placeholder="Enter worker details" type="text" id="otherValue" name="otherworkername"> <br>
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label class="form-label">Add Image-Proof</label>
-                                                                <input onchange="validateSize(this)" class="form-control" type="file" id="imgafter">
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label class="form-label">Amount Spent(if Applicable)</label>
-                                                                <input class="form-control" type="text" id="amtspent">
-                                                            </div>
-                                                            <label class="form-label">Task Completion</label><br>
-                                                            <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="radio" name="completionStatus" id="inlineRadio1" value="Fully Completed">
-                                                                <label class="form-check-label" for="inlineRadio1">Fully Completed</label>
-                                                            </div>
-                                                            <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="radio" name="completionStatus" id="inlineRadio2" value="Partially Completed">
-                                                                <label class="form-check-label" for="inlineRadio2">Partially Completed</label>
-                                                            </div>
-                                                            <!-- Hidden input field for reason -->
-                                                            <div class="mb-3 mt-3" id="reason-container" style="display: none;">
-                                                                <label class="form-label">Reason</label>
-                                                                <input type="text" class="form-control" id="reason" name="reason" placeholder="Enter reason for partial completion">
-                                                            </div>
-
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                        <button id="save-btn" type="button" class="btn btn-primary">Save</button>
-                                                    </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- JavaScript -->
+                        <!-- New row for Venue and Type of Problem -->
 
 
-                                        <!--inprogress task submission modal end-->
-                                        <!--start of waiting approval-->
-                                        <div class="tab-pane p-20" id="waitingforapproval" role="tabpanel">
-                                            <div class="p-20">
-                                                <div class="table-responsive"><!--id:addnewtask-->
-                                                    <table id="approval" class="table table-striped table-bordered">
-                                                        <h5 class="card-title">Waiting for Approval</h5>
-                                                        <thead style="background-color: rgb(220, 20, 70); color: white; ">
-                                                            <tr>
+                        <!-- Full width for Problem Description -->
 
-                                                                <th class="text-center"><b>
-                                                                        <h5>S.No</h5>
-                                                                    </b></th>
-                                                                <th class="col-md-2 text-center"><b>
-                                                                        <h5>Complaint Date</h5>
-                                                                    </b></th>
-                                                                <th class="text-center"><b>
-                                                                        <h5>Task ID</h5>
-                                                                    </b></th>
-                                                                <th class="text-center"><b>
-                                                                        <h5>Dept</h5>
-                                                                    </b></th>
-                                                                <th class="col-md-2 text-center"><b>
-                                                                        <h5>Complaint</h5>
-                                                                    </b></th>
-                                                                <th class="text-center"><b>
-                                                                        <h5>Priority</h5>
-                                                                    </b></th>
-                                                                <th class="text-center col-md-2">
-                                                                    <b>
-                                                                        <h5>Photos</h5>
-                                                                    </b>
-                                                                </th>
-                                                                <th class=" col-md-2 text-center"><b>
-                                                                        <h5>Deadline</h5>
-                                                                    </b></th>
-                                                                <th class=" col-md-2 text-center"><b>
-                                                                        <h5>Reason</h5>
-                                                                    </b></th>
-                                                                <th class="text-center"><b>
-                                                                        <h5>Task Completion</h5>
-                                                                    </b></th>
+                    </div>
 
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <?php
-                                                            $count = 1;
-                                                            while ($row = $result2->fetch_assoc()) {
-                                                                echo "<tr>";
-                                                                echo "<td class='text-center'>" . $count++ . "</td>";
-                                                                echo "<td class='text-center'>" . htmlspecialchars($row['date_of_reg']) . "</td>";
-                                                                echo "<td class='text-center'>" . htmlspecialchars($row['task_id']) . "</td>";
-                                                                echo "<td class='text-center'>" . htmlspecialchars($row['dept']) . "</td>";
-                                                            ?>
-                                                                <td class='text-center'>
-                                                                    <button type='button' class='btn btn margin-5 view-complaint
-                                                            '
-                                                                        data-task-id='<?php echo htmlspecialchars($row['task_id']); ?>'>
-                                                                        <i class="fas fa-eye" style="font-size: 25px;"></i>
+                </div>
 
-                                                                    </button>
-                                                                </td>
-                                                                <?php
-                                                                echo "<td class='text-center'>" . htmlspecialchars($row['priority']) . "</td>";
-                                                                ?>
-                                                                <td>
-                                                                    <div class="d-flex justify-content-between">
-                                                                        <!-- Align the first button to the left -->
+                <!-- Modal Footer with Save Button -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- View Complaint Modal Ends -->
+    <!-- Before Image Modal Starts -->
+    <div class="modal fade" id="Modal4" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header" style="background: linear-gradient(to bottom right, #cc66ff, #0033cc); color: white;">
+                    <h5 class="modal-title" id="imageModalLabel">Problem Image</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
 
-                                                                        <button type='button' class='btn margin-5 showbeforeimg'
-                                                                            data-task-id='<?php echo htmlspecialchars($row['task_id']); ?>'>
-                                                                            <i class="fas fa-image" style="font-size: 25px;"></i>
-                                                                        </button>
+                <!-- Modal Body -->
+                <form id="rejectreason">
+                    <div class="modal-body text-center">
+                        <img id="modalImage" src="" alt="Image" class="img-fluid rounded shadow" style="max-height: 400px; width: auto;">
+                        <!-- src will be set dynamically -->
+                    </div>
 
-                                                                        <!-- Align the second button to the right -->
-                                                                        <button type="button" class="btn I"
-                                                                            style="margin-left:-12px;" data-toggle="modal"
-                                                                            data-target="#Modal4" data-task-id='<?php echo htmlspecialchars($row['task_id']); ?>'>
-                                                                            <i class="fas fa-image" style="font-size: 25px;"></i>
-                                                                        </button>
-                                                                    </div>
-                                                                </td>
-                                                            <?php
-                                                                echo "<td class='text-center'>" . htmlspecialchars($row['days_to_complete']) . "</td>";
-                                                                echo "<td class='text-center'>" . htmlspecialchars($row['reason']) . "</td>";
-                                                                echo "<td class='text-center'>" . htmlspecialchars($row['task_completion']) . "</td>";
-                                                                echo "</tr>";
-                                                            }
-                                                            ?>
-                                                        </tbody>
+                    <!-- Modal Footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Before Image Model Ends -->
 
-                                                    </table>
-                                                </div>
+    <!-- Problem Description Modal -->
 
-                                            </div>
-                                        </div>
+    <div class="modal fade" id="Modal1" tabindex="-1" role="dialog"
+        aria-labelledby="complaintDetailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h5 class="modal-title" id="complaintDetailsModalLabel">
+                        📋 Complaint Details
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold text-primary">Faculty ID</div>
+                                <b><span id="faculty_id" class="text-secondary"></span></b>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold text-primary">Faculty Name</div>
+                                <b><span id="faculty_name" class="text-secondary"></span></b>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold text-primary">Mobile Number</div>
+                                <b><span id="faculty_contact" class="text-secondary"></span></b>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold text-primary">E-mail</div>
+                                <b><span id="faculty_mail" class="text-secondary"></span></b>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold text-primary">Type of Problem</div>
+                                <b><span id="type_of_problem" class="text-secondary"></span></b>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold text-primary">Problem Description</div>
+                                <div class="alert alert-light border rounded">
+                                    <b><span id="problem_description" class="text-secondary"></span></b>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Modal Footer -->
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-primary btn-lg rounded-pill" data-bs-dismiss="modal">
+                        Close
+                    </button>
+                </div>
+              
 
 
+            </div>
+        </div>
+    </div>
 
-                                        <!--image before and complaint start-->
-                                        <div class="modal fade" id="Modal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    <div class="modal fade" id="Modal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Task Completion</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- form -->
+                                <form id="taskCompletionForm">
+                                    <div class="mb-3">
+                                        <label class="form-label">Task ID</label>
+                                        <input type="text" class="form-control" id="taskid" value="{{ $d1->task_id ?? ''}}" disabled readonly>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="worker" class="font-weight-bold">Assign Worker:</label>
+                                        <select class="form-control" name="worker" id="worker">
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="checkbox" id="oth" name="oth" onclick="checkIfOthers()">
+                                        Others
+                                    </div>
+                                    <div id="othersInput" class="hidden-input">
+                                        <label class="form-label" for="otherValue">Please specify:</label>
+                                        <input placeholder="Enter worker details" type="text" id="otherValue" name="otherworkername">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Add Image-Proof</label>
+                                        <input onchange="validateSize(this)" class="form-control" type="file" id="imgafter" name="after_photo">
+                                    </div>
+                                    <label class="form-label">Task Completion</label><br>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="completionStatus" id="inlineRadio1" value="Fully Completed">
+                                        <label class="form-check-label" for="inlineRadio1">Fully Completed</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="completionStatus" id="inlineRadio2" value="Partially Completed">
+                                        <label class="form-check-label" for="inlineRadio2">Partially Completed</label>
+                                    </div>
+                                    <!-- Hidden input field for reason -->
+                                    <div class="mb-3 mt-3" id="reason-container" class="hidden-input">
+                                        <label class="form-label">Reason</label>
+                                        <input type="text" class="form-control" id="reason" name="reason" placeholder="Enter reason for partial completion">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" id="save-btn" class="btn btn-primary">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--image before and complaint start-->
+                <div class="modal fade" id="Modal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -922,10 +998,7 @@ $notcount = mysqli_num_rows($result4);
                                             </div>
                                         </div>
 
-
-                                        <!--modal for image(After) viewing in model -->
-                                        <!-- Modal image view-->
-                                        <div class="modal fade" id="Modal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="Modal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -943,136 +1016,12 @@ $notcount = mysqli_num_rows($result4);
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="modal fade" id="Modal1" tabindex="-1" role="dialog" aria-labelledby="complaintDetailsModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered modal-md" role="document">
-                                                <div class="modal-content" style="border-radius: 8px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15); background-color: #f9f9f9;">
 
-                                                    <!-- Modal Header with bold title and cleaner button -->
-                                                    <div class="modal-header" style="background-color: #007bff; color: white; border-top-left-radius: 8px; border-top-right-radius: 8px; padding: 15px;">
-                                                        <h5 class="modal-title" id="complaintDetailsModalLabel" style="font-weight: 700; font-size: 1.4em; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-                                                            📋 Complaint Details
-                                                        </h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white; font-size: 1.2em;">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
+    <script src="assets/script/script.js"></script>
+    <script src="assets/script/bootstrap.js"></script>
 
-                                                    <!-- Modal Body with reduced padding -->
-                                                    <div class="modal-body" style="padding: 15px; font-size: 1.1em; color: #333; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-
-                                                        <!-- Complaint Info Section with minimized spacing -->
-                                                        <ol class="list-group list-group-numbered" style="margin-bottom: 0;">
-                                                            <li class="list-group-item d-flex justify-content-between align-items-start" style="padding: 10px; background-color: #fff;">
-                                                                <div class="ms-2 me-auto">
-                                                                    <div class="fw-bold" style="font-size: 1.2em; font-weight: 600; color: #007bff;">Faculty Name</div>
-                                                                    <b><span id="faculty_name" style="color: #555;"></span></b>
-                                                                </div>
-                                                            </li>
-                                                            <li class="list-group-item d-flex justify-content-between align-items-start" style="padding: 10px; background-color: #fff;">
-                                                                <div class="ms-2 me-auto">
-                                                                    <div class="fw-bold" style="font-size: 1.2em; font-weight: 600; color: #007bff;">Mobile Number</div>
-                                                                    <b><span id="contact" style="color: #555;"></span></b>
-                                                                </div>
-                                                            </li>
-                                                            <li class="list-group-item d-flex justify-content-between align-items-start" style="padding: 10px; background-color: #fff;">
-                                                                <div class="ms-2 me-auto">
-                                                                    <div class="fw-bold" style="font-size: 1.2em; font-weight: 600; color: #007bff;">Block</div>
-                                                                    <b><span id="block-content" style="color: #555;"></span></b>
-                                                                </div>
-                                                            </li>
-                                                            <li class="list-group-item d-flex justify-content-between align-items-start" style="padding: 10px; background-color: #fff;">
-                                                                <div class="ms-2 me-auto">
-                                                                    <div class="fw-bold" style="font-size: 1.2em; font-weight: 600; color: #007bff;">Venue Name</div>
-                                                                    <b><span id="venue-content" style="color: #555;"></span></b>
-                                                                </div>
-                                                            </li>
-
-                                                            <li class="list-group-item d-flex justify-content-between align-items-start" style="padding: 10px; background-color: #fff;">
-                                                                <div class="ms-2 me-auto">
-                                                                    <div class="fw-bold" style="font-size: 1.2em; font-weight: 600; color: #007bff;">Problem Description</div>
-                                                                    <b><span id="problem-description-content" style="color: #555;"></span></b>
-                                                                </div>
-                                                            </li>
-                                                            <li class="list-group-item d-flex justify-content-between align-items-start" style="padding: 10px; background-color: #fff;">
-                                                                <div class="ms-2 me-auto">
-                                                                    <div class="fw-bold" style="font-size: 1.2em; font-weight: 600; color: #007bff;">Deadline</div>
-                                                                    <div class="alert alert-light" role="alert" style="border-radius: 6px; background-color: #f1f1f1; padding: 15px; color: #333;">
-                                                                        <span id="days-remaining-content"></span>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                        </ol>
-                                                    </div>
-
-                                                    <!-- Modal Footer with reduced padding -->
-                                                    <div class="modal-footer" style="border-top: none; justify-content: center; padding: 10px;">
-                                                        <button type="button" class="btn btn-primary btn-lg" data-dismiss="modal" style="border-radius: 25px; padding: 10px 30px; font-size: 1.1em; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-                                                            Close
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
-                <!--image before and complaint end-->
-                <!-- ============================================================== -->
-                <!-- End PAge Content -->
-                <!-- ============================================================== -->
-                <!-- ============================================================== -->
-                <!-- Right sidebar -->
-                <!-- ============================================================== -->
-                <!-- .right-sidebar -->
-                <!-- ============================================================== -->
-                <!-- End Right sidebar -->
-                <!-- ============================================================== -->
-            </div>
-            <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- footer -->
-            <!-- ============================================================== -->
-            <footer class="footer text-center">
-                <b>2024 © M.Kumarasamy College of Engineering All Rights Reserved.<br>
-                    Developed and Maintained by Technology Innovation Hub.</b>
-            </footer>
-            <!-- ============================================================== -->
-            <!-- End footer -->
-            <!-- ============================================================== -->
-        </div>
-        <!-- ============================================================== -->
-        <!-- End Page wrapper  -->
-        <!-- ============================================================== -->
-
-        <!-- ============================================================== -->
-        <!-- End Wrapper -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- All Jquery -->
-        <!-- ============================================================== -->
-        <script src="assets/libs/jquery/dist/jquery.min.js"></script>
-        <!-- Bootstrap tether Core JavaScript -->
-        <script src="assets/libs/popper.js/dist/umd/popper.min.js"></script>
-        <script src="assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-        <!-- slimscrollbar scrollbar JavaScript -->
-        <script src="assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
-        <script src="assets/extra-libs/sparkline/sparkline.js"></script>
-        <!--Wave Effects -->
-        <script src="dist/js/waves.js"></script>
-        <!--Menu sidebar -->
-        <script src="dist/js/sidebarmenu.js"></script>
-        <!--Custom JavaScript -->
-        <script src="dist/js/custom.min.js"></script>
-        <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-        <script>
+    <!-- DataTables Initialization -->
+    <script>
             $(function() {
                 // Initialize the tooltip
                 $('[data-toggle="tooltip"]').tooltip();
@@ -1184,7 +1133,7 @@ $notcount = mysqli_num_rows($result4);
             });
         </script>
         <script>
-            $('input[id="inlineRadio1"]').on('change', function() {
+           $('input[id="inlineRadio1"]').on('change', function() {
                 if ($(this).val() === 'Fully Completed') {
                     $('#reason-container').hide();
                 }
@@ -1247,11 +1196,7 @@ $notcount = mysqli_num_rows($result4);
                     contentType: false,
                     processData: false,
                     success: function(response) {
-                        Swal.fire({
-                            title: "Updated!",
-                            text: "Work is Completed",
-                            icon: "success"
-                        });
+                        alert("done");
                         $('#Modal2').modal('hide');
 
                         // Refresh specific sections dynamically
@@ -1345,7 +1290,6 @@ $notcount = mysqli_num_rows($result4);
 
                 }
             }
-
 
             // Show the reason input field only when 'Partially Completed' is selected
         </script>
@@ -1552,8 +1496,6 @@ $notcount = mysqli_num_rows($result4);
                 });
             });
         </script>
-
-
 
 
 </body>
