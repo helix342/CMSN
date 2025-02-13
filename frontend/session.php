@@ -1,8 +1,7 @@
 <?php
 session_start();
 
-
-$s = $_SESSION['login_user'];
+$s = '1112001';
 
 $query = "SELECT sid,sname, dept,ayear FROM student WHERE sid='$s'";
 $query_run = mysqli_query($db, $query);

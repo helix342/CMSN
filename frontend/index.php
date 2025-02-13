@@ -2005,6 +2005,7 @@ $result11 = mysqli_query($db, $sql11);
             });
         });
     </script>
+    <script src="script.js"></script>
 
 </body>
 
