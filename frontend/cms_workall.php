@@ -868,41 +868,36 @@ $notcount = mysqli_num_rows($result4);
                 <!-- Modal Body -->
                 <div class="modal-body">
                     <ul class="list-group">
-                        <li class="list-group-item">
-                            <div class="ms-2 me-auto">
-                                <div class="fw-bold text-primary">Faculty ID</div>
-                                <b><span id="faculty_id" class="text-secondary"></span></b>
-                            </div>
-                        </li>
+                        
                         <li class="list-group-item">
                             <div class="ms-2 me-auto">
                                 <div class="fw-bold text-primary">Faculty Name</div>
-                                <b><span id="faculty_name" class="text-secondary"></span></b>
+                                <b><span id="vfaculty_name" class="text-secondary"></span></b>
                             </div>
                         </li>
                         <li class="list-group-item">
                             <div class="ms-2 me-auto">
                                 <div class="fw-bold text-primary">Mobile Number</div>
-                                <b><span id="faculty_contact" class="text-secondary"></span></b>
+                                <b><span id="vfaculty_contact" class="text-secondary"></span></b>
                             </div>
                         </li>
                         <li class="list-group-item">
                             <div class="ms-2 me-auto">
-                                <div class="fw-bold text-primary">E-mail</div>
-                                <b><span id="faculty_mail" class="text-secondary"></span></b>
+                                <div class="fw-bold text-primary">Block name</div>
+                                <b><span id="vblock-content" class="text-secondary"></span></b>
                             </div>
                         </li>
                         <li class="list-group-item">
                             <div class="ms-2 me-auto">
-                                <div class="fw-bold text-primary">Type of Problem</div>
-                                <b><span id="type_of_problem" class="text-secondary"></span></b>
+                                <div class="fw-bold text-primary">Venue name</div>
+                                <b><span id="vvenue-content" class="text-secondary"></span></b>
                             </div>
                         </li>
                         <li class="list-group-item">
                             <div class="ms-2 me-auto">
                                 <div class="fw-bold text-primary">Problem Description</div>
                                 <div class="alert alert-light border rounded">
-                                    <b><span id="problem_description" class="text-secondary"></span></b>
+                                    <b><span id="vproblem-description-content" class="text-secondary"></span></b>
                                 </div>
                             </div>
                         </li>
@@ -1059,20 +1054,18 @@ $notcount = mysqli_num_rows($result4);
             });
             $(document).ready(function() {
                 // Initialize DataTables
-                var addTable = $('#addnewtask').DataTable({
-                    ordering: false
+              
+                var inProgTable = $('#complaint_table').DataTable({
+                
                 });
-                var inProgTable = $('#statusinprogress').DataTable({
-                    ordering: false
+                var apprTable = $('#waitingapproval_table').DataTable({
+                    
                 });
-                var apprTable = $('#approval').DataTable({
-                    ordering: false
+                var compTable = $('#newtask_table').DataTable({
+                    
                 });
-                var compTable = $('#addnewtaskcompleted').DataTable({
-                    ordering: false
-                });
-                var notApprTable = $('#statusnotapproved').DataTable({
-                    ordering: false
+                var notApprTable = $('#notapproved_table').DataTable({
+                    
                 });
 
 
@@ -1102,12 +1095,11 @@ $notcount = mysqli_num_rows($result4);
 
 
                             // Update modal content with data
-                            $('#faculty_name').text(data.faculty_name);
-                            $('#contact').text(data.faculty_contact);
-                            $('#block-content').text(data.block_venue);
-                            $('#venue-content').text(data.venue_name);
-                            $('#problem-description-content').text(data.problem_description);
-                            $('#days-remaining-content').text(data.days_to_complete);
+                            $('#vfaculty_name').text(data.faculty_name);
+                            $('#vfaculty_contact').text(data.faculty_contact);
+                            $('#vblock-content').text(data.block_venue);
+                            $('#vvenue-content').text(data.venue_name);
+                            $('#vproblem-description-content').text(data.problem_description);
 
                             // Show modal
                             $('#Modal1').modal('show');
@@ -1209,27 +1201,22 @@ $notcount = mysqli_num_rows($result4);
                             $('#ref4').load(location.href + " #ref4");
 
                             $('#ref5').load(location.href + " #ref5");
-                            $('#addnewtask').DataTable().destroy();
+                            
+                            $('#complaint_table').DataTable().destroy();
 
-                            $("#addnewtask").load(location.href + " #addnewtask > *", function() {
+                            $("#complaint_table").load(location.href + " #complaint_table > *", function() {
                                 // Reinitialize the DataTable after the content is loaded
-                                $('#addnewtask').DataTable();
-                            });
-                            $('#statusinprogress').DataTable().destroy();
-
-                            $("#statusinprogress").load(location.href + " #statusinprogress > *", function() {
-                                // Reinitialize the DataTable after the content is loaded
-                                $('#statusinprogress').DataTable();
+                                $('#complaint_table').DataTable();
                             });
 
-                            $('#approval').DataTable().destroy();
+                            $('#waitingapproval_table').DataTable().destroy();
 
-                            $("#approval").load(location.href + " #approval > *", function() {
+                            $("#waitingapproval_table").load(location.href + " #waitingapproval_table > *", function() {
                                 // Reinitialize the DataTable after the content is loaded
-                                $('#approval').DataTable();
+                                $('#waitingapproval_table').DataTable();
                             });
 
-                            $('#addnewtaskcompleted').DataTable().destroy();
+                            $('#completed_table').DataTable().destroy();
 
                             $("#addnewtaskcompleted").load(location.href + " #addnewtaskcompleted > *", function() {
                                 // Reinitialize the DataTable after the content is loaded
@@ -1464,16 +1451,16 @@ $notcount = mysqli_num_rows($result4);
 
                                 $('#addnewtaskcompleted').DataTable().destroy();
 
-                                $("#addnewtaskcompleted").load(location.href + " #addnewtaskcompleted > *", function() {
+                                $("#completed_table").load(location.href + " #completed_table > *", function() {
                                     // Reinitialize the DataTable after the content is loaded
-                                    $('#addnewtaskcompleted').DataTable();
+                                    $('#completed_table').DataTable();
                                 });
 
-                                $('#statusnotapproved').DataTable().destroy();
+                                $('#notapproved_table').DataTable().destroy();
 
-                                $("#statusnotapproved").load(location.href + " #statusnotapproved > *", function() {
+                                $("#notapproved_table").load(location.href + " #notapproved_table > *", function() {
                                     // Reinitialize the DataTable after the content is loaded
-                                    $('#statusnotapproved').DataTable();
+                                    $('#notapproved_table').DataTable();
                                 });
 
                                 $('#ref1').load(location.href + " #ref1");
