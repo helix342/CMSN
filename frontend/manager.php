@@ -84,6 +84,7 @@ if (isset($_POST['fdept'])) {
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
     <title>MIC - MKCE</title>
     <link rel="stylesheet" href="style.css">
+    <link href="../css/dboardstyles.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
@@ -465,38 +466,88 @@ if (isset($_POST['fdept'])) {
             <div class="tab-content">
 
                 <!--Dashboard-->
-                <div class="tab-pane p-3 active show" id="dashboard" role="tabpanel">
-                    <div class="row">
-                        <div class="col-12 col-md-3 mb-3">
-                            <div class="stats-box text-center p-3 text-white rounded" style="background-color:rgb(252, 119, 71);">
-                                <i class="fas fa-bell mb-2 fs-3"></i>
-                                <h1 class="mb-2"><?php echo $row_count1; ?></h1>
-                                <small>New issues</small>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-3 mb-3">
-                            <div class="stats-box text-center p-3 text-white rounded" style="background-color:rgb(241, 74, 74);">
-                                <i class="fas fa-exclamation mb-2 fs-3"></i>
-                                <h1 class="mb-2"><?php echo $row_count3; ?></h1>
-                                <small>Pending</small>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-3 mb-3">
-                            <div class="stats-box text-center p-3 text-white rounded" style="background-color:rgb(70, 160, 70);">
-                                <i class="fas fa-check mb-2 fs-3"></i>
-                                <h1 class="mb-2"><?php echo $row_count2; ?></h1>
-                                <small>Completed</small>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-3 mb-3">
-                            <div class="stats-box text-center p-3 text-white rounded" style="background-color: rgb(187, 187, 35);">
-                                <i class="fas fa-redo mb-2 fs-3"></i>
-                                <h1 class="mb-2"><?php echo $row_count7; ?></h1>
-                                <small>Reassigned</small>
+                <div class="tab-pane p-20 active show" id="dashboard" role="tabpanel">
+                    <div class="card">
+                        <div class="card-body">
+                            <!-- <div class="card-header"> -->
+                            <h4 class="card-title m-b-0"><b></b></h4><br>
+
+                            <br>
+                            <div class="row">
+                                <!-- Pending -->
+                                <div class="col-12 col-md-3" style="margin-bottom: 40px">
+                                    <div class="cir">
+                                        <div class="bo">
+                                            <div class="content1">
+                                                <div class="stats-box text-center p-3" style="background-color:orange;">
+                                                    <i class="fas fa-clock"></i>
+                                                    <h1 class="font-light text-white">
+                                                        <?php echo $row_count1;
+                                                        ?>
+                                                    </h1>
+                                                    <small class="font-light">New Issues</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Approved -->
+                                <div class="col-12 col-md-3">
+                                    <div class="cir">
+                                        <div class="bo">
+                                            <div class="content1">
+                                                <div class="stats-box text-center p-3" style="background-color:rgb(14, 86, 239);">
+                                                    <i class="fas fa-check"></i>
+                                                    <h1 class="font-light text-white">
+                                                        <?php echo $row_count3;
+                                                        ?>
+                                                    </h1>
+                                                    <small class="font-light">Pending</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Completed -->
+                                <div class="col-12 col-md-3">
+                                    <div class="cir">
+                                        <div class="bo">
+                                            <div class="content1">
+                                                <div class="stats-box text-center p-3" style="background-color:rgb(70, 160, 70);">
+                                                    <i class="fa-solid fa-check-double"></i>
+                                                    <h1 class="font-light text-white">
+                                                        <?php echo $row_count2;
+                                                        ?>
+                                                    </h1>
+                                                    <small class="font-light">Completed</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Rejected -->
+                                <div class="col-12 col-md-3">
+                                    <div class="cir">
+                                        <div class="bo">
+                                            <div class="content1">
+                                                <div class="stats-box text-center p-3" style="background-color:red;">
+                                                    <i class="fa-solid fa-xmark"></i>
+                                                    <h1 class="font-light text-white">
+                                                        <?php echo $row_count7;
+                                                        ?>
+                                                    </h1>
+                                                    <small class="font-light">Reassigned</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
 
 
@@ -504,7 +555,8 @@ if (isset($_POST['fdept'])) {
                 <div class="tab-pane p-20" id="complain" role="tabpanel">
                     <div class="row">
                         <div class="col-md-12">
-                            <h5 class="card-title">Complaint Raised</h5>
+                        <div class="card">
+                            <h5 class="card-title">Complaint Raised</h5><br>
                             <div class="table-responsive">
                                 <table id="complain_table" class="table table-striped table-bordered">
                                     <thead class="gradient-header">
@@ -634,6 +686,7 @@ if (isset($_POST['fdept'])) {
                                 </table>
                             </div>
                         </div>
+                        </div>
                     </div>
                 </div>
 
@@ -641,7 +694,7 @@ if (isset($_POST['fdept'])) {
                 <div class="tab-pane p-20" id="principal" role="tabpanel">
                     <div class="row">
                         <div class="col-md-12">
-                            <h5 class="card-title">Principal Approval</h5>
+                            <h5 class="card-title">Principal Approval</h5><br>
                             <table id="principal_table" class="table table-striped table-bordered">
                                 <thead class="gradient-header">
                                     <tr>
@@ -756,7 +809,7 @@ if (isset($_POST['fdept'])) {
                 <div class="tab-pane p-20" id="worker" role="tabpanel">
                     <div class="row">
                         <div class="col-md-12">
-                            <h5 class="card-title">Ongoing Work's</h5>
+                            <h5 class="card-title">Ongoing Works</h5><br>
                             <div class="table-responsive">
                                 <table id="worker_table" class="table table-striped table-bordered">
                                     <thead class="gradient-header">
@@ -874,7 +927,7 @@ if (isset($_POST['fdept'])) {
                 <div class="tab-pane p-20" id="finished" role="tabpanel">
                     <div class="row">
                         <div class="col-md-12">
-                            <h5 class="card-title">Work's for Response</h5>
+                            <h5 class="card-title">Works for Response</h5><br>
                             <table id="finished_table" class="table table-striped table-bordered">
                                 <thead class="gradient-header">
                                     <tr>
@@ -981,7 +1034,7 @@ if (isset($_POST['fdept'])) {
                 <div class="tab-pane p-20" id="reassigned" role="tabpanel">
                     <div class="row">
                         <div class="col-md-12">
-                            <h5 class="card-title">Reassigned Work's</h5>
+                            <h5 class="card-title">Reassigned Works</h5><br>
                             <table id="reassigned_table" class="table table-striped table-bordered">
                                 <thead class="gradient-header">
                                     <tr>
@@ -1162,7 +1215,7 @@ if (isset($_POST['fdept'])) {
 
                         <!--Work Record-->
                         <div class="tab-pane p-20 active" id="record" role="tabpanel">
-                            <h5 class="card-title">Work's Completed</h5>
+                            <h5 class="card-title">Work's Completed</h5><br>
 
                             <!-- Date Range Filter Form -->
                             <form class="data_filter_form" id="date-filter-form">
@@ -1181,7 +1234,7 @@ if (isset($_POST['fdept'])) {
                             <button id="download" class="btn btn-success float-end">Download as Excel</button>
                             <br><br>
 
-                            <h5 class="card-title">Work Completed Records</h5>
+                            <h5 class="card-title">Work Completed Records</h5><br>
                             <div class="table-responsive">
                                 <table id="record_table" class="table table-striped table-bordered">
                                     <thead class="gradient-header">
@@ -1208,7 +1261,7 @@ if (isset($_POST['fdept'])) {
 
                         <!--workers record-->
                         <div class="tab-pane p-20" id="workersr" role="tabpanel">
-                            <h5 class="card-title">Worker's Record</h5>
+                            <h5 class="card-title">Worker's Record</h5><br>
 
                             <form id="date-form" class="data_filter_form">
                                 <div class="mb-3">
