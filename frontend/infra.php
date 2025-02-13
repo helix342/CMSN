@@ -1604,7 +1604,7 @@ $row_count11 = mysqli_num_rows($result11);
             </div>
         </div>
     </div>
-
+-=  
     <!------------Rejected Reason modal-------------->
     <div class="modal fade" id="problemrejected" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">

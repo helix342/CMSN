@@ -1,7 +1,7 @@
 <?php
 require "config.php";
 include("session.php");
-$role = 'Manager';
+$role = $frole;
 if ($role !== "Manager") {
     header("Location:index.php");
 }

@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$s = '1112001';
+	$s = 1112001;
 
 $query = "SELECT sid,sname, dept,ayear FROM student WHERE sid='$s'";
 $query_run = mysqli_query($db, $query);
