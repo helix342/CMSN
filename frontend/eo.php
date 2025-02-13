@@ -981,7 +981,7 @@ $row_count11 = mysqli_num_rows($result11);
 
 <body>
     <!-- Sidebar -->
-    <?php include 'sidebar.php'; ?>
+    <?php include 'side.php'; ?>
 
     <!-- Main Content -->
     <div class="content">
