@@ -61,13 +61,13 @@ $row_count11 = mysqli_num_rows($result11);
     <link rel="icon" type="image/png" sizes="32x32" href="../image/icons/mkce_s.png">
     <link rel="stylesheet" href="../css/stylescms.css">
     <link href="../css/dboardstyles.css" rel="stylesheet">
+    <link href="../css/tabs.css" rel="stylesheet">
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bootstrap-5/bootstrap-5.css" rel="stylesheet">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Rubik:wght@300;400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Rubik:wght@300;400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
@@ -555,7 +555,7 @@ $row_count11 = mysqli_num_rows($result11);
                             <div class="card">
                                 <div class="custom-tabs">
                                     <ul class="nav nav-tabs" role="tablist">
-                                        <li class="nav-item" role="presentation">
+                                        <li class="add-bus-tab" role="presentation">
                                             <a class="nav-link active" data-bs-toggle="tab" id="edit-bus-tab"
                                                 href="#dashboard" role="tab" aria-selected="true">
                                                 <span class="hidden-xs-down" style="font-size: 0.9em;"><i

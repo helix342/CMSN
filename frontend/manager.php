@@ -81,9 +81,10 @@ if (isset($_POST['fdept'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../image/icons/mkce_s.png">
     <title>MIC - MKCE</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/tabs.css">
     <link href="../css/dboardstyles.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
 
@@ -394,69 +395,64 @@ if (isset($_POST['fdept'])) {
                 <div id="navref">
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist" id="navli">
+    <li class="nav-item" role="presentation">
+        <a class="nav-link active" data-bs-toggle="tab" id="add-bus-tab" href="#dashboard" role="tab" aria-selected="true">
+            <span class="hidden-xs-down" style="font-size: 0.9em;">
+                <i class="fas fa-tachometer-alt tab-icon"></i> Dashboard
+            </span>
+        </a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link" data-bs-toggle="tab" id="edit-bus-tab" href="#complain" role="tab" aria-selected="true">
+            <span class="hidden-xs-down" style="font-size: 0.9em;">
+                <i class="fas fa-exclamation-triangle tab-icon"></i> Complaint Raised (<?php echo $row_count1; ?>)
+            </span>
+        </a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link" data-bs-toggle="tab" id="delete-bus-tab" href="#principal" role="tab" aria-selected="true">
+            <span class="hidden-xs-down" style="font-size: 0.9em;">
+                <i class="fas fa-user-check tab-icon"></i> Principal Approval (<?php echo $row_count4; ?>)
+            </span>
+        </a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link" data-bs-toggle="tab" id="route-bus-tab" href="#worker" role="tab" aria-selected="true">
+            <span class="hidden-xs-down" style="font-size: 0.9em;">
+                <i class="fas fa-user-cog tab-icon"></i> Assigned (<?php echo $row_count3; ?>)
+            </span>
+        </a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link" data-bs-toggle="tab" id="fleet-management-bus-tab" href="#finished" role="tab" aria-selected="true">
+            <span class="hidden-xs-down" style="font-size: 0.9em;">
+                <i class="fas fa-comment-dots tab-icon"></i> Response (<?php echo $row_count5; ?>)
+            </span>
+        </a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link" data-bs-toggle="tab" id="settings-bus-tab" href="#reassigned" role="tab" aria-selected="true">
+            <span class="hidden-xs-down" style="font-size: 0.9em;">
+                <i class="fas fa-redo tab-icon"></i> Reassigned (<?php echo $row_count7; ?>)
+            </span>
+        </a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link" data-bs-toggle="tab" id="view-bus-tab" href="#completed" role="tab" aria-selected="true">
+            <span class="hidden-xs-down" style="font-size: 0.9em;">
+                <i class="fas fa-check-circle tab-icon"></i> Completed Works
+            </span>
+        </a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link" data-bs-toggle="tab" id="balance-bus-tab" href="#allrecords" role="tab" aria-selected="true">
+            <span class="hidden-xs-down" style="font-size: 0.9em;">
+                <i class="fas fa-folder-open tab-icon"></i> Records
+            </span>
+        </a>
+    </li>
+</ul>
 
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link active" data-bs-toggle="tab" id="edit-bus-tab" href="#dashboard"
-                                role="tab" aria-selected="true">
-                                <span class="hidden-xs-down" style="font-size: 0.9em;"><i
-                                        class="fas fa-book tab-icon"></i> Dashboard</span>
-                            </a>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link" data-bs-toggle="tab" id="edit-bus-tab" href="#complain" role="tab"
-                                aria-selected="true">
-                                <span class="hidden-xs-down" style="font-size: 0.9em;"><i
-                                        class="fas fa-book tab-icon"></i> Complaint Raised
-                                    (<?php echo $row_count1; ?>)</span>
-                            </a>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link" data-bs-toggle="tab" id="edit-bus-tab" href="#principal" role="tab"
-                                aria-selected="true">
-                                <span class="hidden-xs-down" style="font-size: 0.9em;"><i
-                                        class="fas fa-book tab-icon"></i> Principal Approval
-                                    (<?php echo $row_count4; ?>)</span>
-                            </a>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link" data-bs-toggle="tab" id="edit-bus-tab" href="#worker" role="tab"
-                                aria-selected="true">
-                                <span class="hidden-xs-down" style="font-size: 0.9em;"><i
-                                        class="fas fa-book tab-icon"></i> Assigned
-                                    (<?php echo $row_count3; ?>)</span>
-                            </a>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link" data-bs-toggle="tab" id="edit-bus-tab" href="#finished" role="tab"
-                                aria-selected="true">
-                                <span class="hidden-xs-down" style="font-size: 0.9em;"><i
-                                        class="fas fa-book tab-icon"></i> Response
-                                    (<?php echo $row_count5; ?>)</span>
-                            </a>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link" data-bs-toggle="tab" id="edit-bus-tab" href="#reassigned" role="tab"
-                                aria-selected="true">
-                                <span class="hidden-xs-down" style="font-size: 0.9em;"><i
-                                        class="fas fa-book tab-icon"></i>Reassigned
-                                    (<?php echo $row_count7; ?>)</span>
-                            </a>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link" data-bs-toggle="tab" id="edit-bus-tab" href="#completed" role="tab"
-                                aria-selected="true">
-                                <span class="hidden-xs-down" style="font-size: 0.9em;"><i
-                                        class="fas fa-book tab-icon"></i>Completed works</span>
-                            </a>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link" data-bs-toggle="tab" id="edit-bus-tab" href="#allrecords" role="tab"
-                                aria-selected="true">
-                                <span class="hidden-xs-down" style="font-size: 0.9em;"><i
-                                        class="fas fa-eye tab-icon"></i> Records</span>
-                            </a>
-                        </li>
-                    </ul>
                 </div>
 
             </div>
