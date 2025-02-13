@@ -146,13 +146,7 @@ $result4 = mysqli_query($db, $sql4);
                             </button>
                         </li>
 
-                        <!-- Tab 2: Work Record -->
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="edit-bus-tab" data-bs-toggle="tab" data-bs-target="#workrecord"
-                                type="button" role="tab">
-                                <i class="fas fa-file-alt tab-icon"></i> Work Record
-                            </button>
-                        </li>
+                        
                     </ul>
 
 
@@ -234,101 +228,7 @@ $result4 = mysqli_query($db, $sql4);
                             </div>
                         </div>
 
-                        <!-- Record table start-->
-                        <?php
-                                    // Set default month as the current month if no input is provided
-                                    $selectedMonth = isset($_POST['selectmonth']) ? $_POST['selectmonth'] : date('m');
-                                    
-
-
-
-                                    // Fetch data based on the selected month
-                                    $sql8 = "SELECT * FROM complaints_detail WHERE status='16'AND type_of_problem='$dept' AND MONTH(date_of_completion) = $selectedMonth AND YEAR(date_of_completion) = YEAR(CURDATE())";
-                                    $result8 = mysqli_query($db, $sql8);
-
-                                    ?>
-                        <div class="tab-pane fade" id="workrecord" role="tabpanel">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="card">
-                                        <div class="card-header d-flex justify-content-between align-items-center">
-                                            <!-- Date Pickers -->
-                                            <div class="d-flex align-items-center">
-                                                <!-- From Date -->
-                                                <input type="date" class="form-control me-2" id="fromDate"
-                                                    style="width: 200px;" placeholder="From Date">
-                                                <!-- To Date -->
-                                                <input type="date" class="form-control me-2" id="toDate"
-                                                    style="width: 200px;" placeholder="To Date">
-                                            </div>
-
-                                            <!-- Download Button -->
-                                            <button type="button" class="btn btn-success" id="downloadWorkersRecord">
-                                                <i class="fas fa-file-excel"></i>&nbsp;&nbsp;Download Work Record
-                                            </button>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="table-responsive">
-                                                <table id="work_completed_table"
-                                                    class="table table-striped table-bordered custom-table">
-                                                    <thead class="table-class text-center">
-                                                        <tr>
-                                                            <th><b>S.No</b></th>
-                                                            <th><b>Work ID</b></th>
-                                                            <th><b>Venue Details</b></th>
-                                                            <th><b>Completed Details</b></th>
-                                                            <th><b>Completed On</b></th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                                        <?php
-                                                        $s = 1;
-                                                        while ($row = mysqli_fetch_assoc($result8)) {
-                                                            $pid = $row['id'];
-                                                        ?>
-                                                                        <tr>
-                                                                            <td class="text-center"><?php echo $s ?>
-                                                                            </td>
-                                                                            <td class="text-center">
-                                                                                <?php echo $row['id'] ?></td>
-                                                                            <td class="text-center">Venue:
-                                                                                <?php echo $row['block_venue'] ?> |
-                                                                                <br>Problem:
-                                                                                <?php echo $row['problem_description'] ?>
-                                                                            </td>
-                                                                            <td class="text-center">
-                                                                                <?php
-                                                                    $id = "SELECT * FROM manager WHERE problem_id=$pid";
-                                                                    $query_run1 = mysqli_query($db, $id);
-                                                                    $roww = mysqli_fetch_array($query_run1);
-                                                                    $worker_id = $roww['worker_id'];
-
-                                                                    // Fetch worker details
-                                                                    $query = "SELECT * FROM worker_details WHERE worker_id='$worker_id'";
-                                                                    $query_run = mysqli_query($db, $query);
-                                                                    $User_data = mysqli_fetch_array($query_run); ?>
-                                                                                Completed by:
-                                                                                <?php echo $User_data['worker_first_name'] ?>
-                                                                                | <br>
-                                                                                Department:
-                                                                                <?php echo $User_data['worker_dept'] ?>
-                                                                            </td>
-                                                                            <td class="text-center">
-                                                                                <?php echo $row['date_of_completion'] ?>
-                                                                            </td>
-                                                                        </tr>
-                                                                        <?php
-                                                            $s++;
-                                                        }
-                                                        ?>
-                                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                       
                     </div>
                 </div>
             </div>
@@ -443,6 +343,7 @@ $result4 = mysqli_query($db, $sql4);
 
 
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
 
 
     <script src="assets/script/script.js"></script>

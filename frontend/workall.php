@@ -942,7 +942,7 @@ $notcount = mysqli_num_rows($result4);
                                         <input type="checkbox" id="oth" name="oth" onclick="checkIfOthers()">
                                         Others
                                     </div>
-                                    <div id="othersInput" class="hidden-input">
+                                    <div id="othersInput"style="display: none;">
                                         <label class="form-label" for="otherValue">Please specify:</label>
                                         <input placeholder="Enter worker details" type="text" id="otherValue" name="otherworkername">
                                     </div>
@@ -960,7 +960,7 @@ $notcount = mysqli_num_rows($result4);
                                         <label class="form-check-label" for="inlineRadio2">Partially Completed</label>
                                     </div>
                                     <!-- Hidden input field for reason -->
-                                    <div class="mb-3 mt-3" id="reason-container" class="hidden-input">
+                                    <div class="mb-3 mt-3" id="reason-container" style="display: none">
                                         <label class="form-label">Reason</label>
                                         <input type="text" class="form-control" id="reason" name="reason" placeholder="Enter reason for partial completion">
                                     </div>
