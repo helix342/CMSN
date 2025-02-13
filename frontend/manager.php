@@ -200,11 +200,6 @@ if (isset($_POST['fdept'])) {
             /* For vertical alignment */
         }
 
-
-
-
-
-
         /* Responsive Styles */
         @media (max-width: 768px) {
             .sidebar {
@@ -395,63 +390,63 @@ if (isset($_POST['fdept'])) {
                 <div id="navref">
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist" id="navli">
-    <li class="nav-item" role="presentation">
-        <a class="nav-link active" data-bs-toggle="tab" id="add-bus-tab" href="#dashboard" role="tab" aria-selected="true">
-            <span class="hidden-xs-down" style="font-size: 0.9em;">
-                <i class="fas fa-tachometer-alt tab-icon"></i> Dashboard
-            </span>
-        </a>
-    </li>
-    <li class="nav-item" role="presentation">
-        <a class="nav-link" data-bs-toggle="tab" id="edit-bus-tab" href="#complain" role="tab" aria-selected="true">
-            <span class="hidden-xs-down" style="font-size: 0.9em;">
-                <i class="fas fa-exclamation-triangle tab-icon"></i> Complaint Raised (<?php echo $row_count1; ?>)
-            </span>
-        </a>
-    </li>
-    <li class="nav-item" role="presentation">
-        <a class="nav-link" data-bs-toggle="tab" id="delete-bus-tab" href="#principal" role="tab" aria-selected="true">
-            <span class="hidden-xs-down" style="font-size: 0.9em;">
-                <i class="fas fa-user-check tab-icon"></i> Principal Approval (<?php echo $row_count4; ?>)
-            </span>
-        </a>
-    </li>
-    <li class="nav-item" role="presentation">
-        <a class="nav-link" data-bs-toggle="tab" id="route-bus-tab" href="#worker" role="tab" aria-selected="true">
-            <span class="hidden-xs-down" style="font-size: 0.9em;">
-                <i class="fas fa-user-cog tab-icon"></i> Assigned (<?php echo $row_count3; ?>)
-            </span>
-        </a>
-    </li>
-    <li class="nav-item" role="presentation">
-        <a class="nav-link" data-bs-toggle="tab" id="fleet-management-bus-tab" href="#finished" role="tab" aria-selected="true">
-            <span class="hidden-xs-down" style="font-size: 0.9em;">
-                <i class="fas fa-comment-dots tab-icon"></i> Response (<?php echo $row_count5; ?>)
-            </span>
-        </a>
-    </li>
-    <li class="nav-item" role="presentation">
-        <a class="nav-link" data-bs-toggle="tab" id="settings-bus-tab" href="#reassigned" role="tab" aria-selected="true">
-            <span class="hidden-xs-down" style="font-size: 0.9em;">
-                <i class="fas fa-redo tab-icon"></i> Reassigned (<?php echo $row_count7; ?>)
-            </span>
-        </a>
-    </li>
-    <li class="nav-item" role="presentation">
-        <a class="nav-link" data-bs-toggle="tab" id="view-bus-tab" href="#completed" role="tab" aria-selected="true">
-            <span class="hidden-xs-down" style="font-size: 0.9em;">
-                <i class="fas fa-check-circle tab-icon"></i> Completed Works
-            </span>
-        </a>
-    </li>
-    <li class="nav-item" role="presentation">
-        <a class="nav-link" data-bs-toggle="tab" id="balance-bus-tab" href="#allrecords" role="tab" aria-selected="true">
-            <span class="hidden-xs-down" style="font-size: 0.9em;">
-                <i class="fas fa-folder-open tab-icon"></i> Records
-            </span>
-        </a>
-    </li>
-</ul>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link active" data-bs-toggle="tab" id="add-bus-tab" href="#dashboard" role="tab" aria-selected="true">
+                                <span class="hidden-xs-down" style="font-size: 0.9em;">
+                                    <i class="fas fa-tachometer-alt tab-icon"></i> Dashboard
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" data-bs-toggle="tab" id="edit-bus-tab" href="#complain" role="tab" aria-selected="true">
+                                <span class="hidden-xs-down" style="font-size: 0.9em;">
+                                    <i class="fas fa-exclamation-triangle tab-icon"></i> Complaint Raised (<?php echo $row_count1; ?>)
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" data-bs-toggle="tab" id="delete-bus-tab" href="#principal" role="tab" aria-selected="true">
+                                <span class="hidden-xs-down" style="font-size: 0.9em;">
+                                    <i class="fas fa-user-check tab-icon"></i> Principal Approval (<?php echo $row_count4; ?>)
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" data-bs-toggle="tab" id="route-bus-tab" href="#worker" role="tab" aria-selected="true">
+                                <span class="hidden-xs-down" style="font-size: 0.9em;">
+                                    <i class="fas fa-user-cog tab-icon"></i> Assigned (<?php echo $row_count3; ?>)
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" data-bs-toggle="tab" id="fleet-management-bus-tab" href="#finished" role="tab" aria-selected="true">
+                                <span class="hidden-xs-down" style="font-size: 0.9em;">
+                                    <i class="fas fa-comment-dots tab-icon"></i> Response (<?php echo $row_count5; ?>)
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" data-bs-toggle="tab" id="settings-bus-tab" href="#reassigned" role="tab" aria-selected="true">
+                                <span class="hidden-xs-down" style="font-size: 0.9em;">
+                                    <i class="fas fa-redo tab-icon"></i> Reassigned (<?php echo $row_count7; ?>)
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" data-bs-toggle="tab" id="view-bus-tab" href="#completed" role="tab" aria-selected="true">
+                                <span class="hidden-xs-down" style="font-size: 0.9em;">
+                                    <i class="fas fa-check-circle tab-icon"></i> Completed Works
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" data-bs-toggle="tab" id="balance-bus-tab" href="#allrecords" role="tab" aria-selected="true">
+                                <span class="hidden-xs-down" style="font-size: 0.9em;">
+                                    <i class="fas fa-folder-open tab-icon"></i> Records
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
 
                 </div>
 
@@ -551,137 +546,137 @@ if (isset($_POST['fdept'])) {
                 <div class="tab-pane p-20" id="complain" role="tabpanel">
                     <div class="row">
                         <div class="col-md-12">
-                        <div class="card">
-                            <h5 class="card-title">Complaint Raised</h5><br>
-                            <div class="table-responsive">
-                                <table id="complain_table" class="table table-striped table-bordered">
-                                    <thead class="gradient-header">
-                                        <tr>
-                                            <th class="text-center">
-                                                <h5>S.No</h5>
-                                            </th>
-                                            <th class="text-center">
-                                                <h5>Raised Date</h5>
-                                            </th>
-                                            <th class="text-center">
-                                                <h5>Department / Venue</h5>
-                                            </th>
-                                            <th class="text-center">
-                                                <h5>Complaint</h5>
-                                            </th>
-                                            <th class="text-center">
-                                                <h5>Picture</h5>
-                                            </th>
-                                            <th class="text-center">
-                                                <h5>Action</h5>
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                        $s = 1;
-                                        while ($row = mysqli_fetch_assoc($result1)) {
-                                        ?>
-                                            <tr <?php if ($row['faculty_id'] == "principal")
-                                                    echo 'style="background-color:#f3f57a"'; ?>>
-                                                <td class="text-center"><?php echo $s ?></td>
-                                                <td class="text-center"><?php echo $row['date_of_reg'] ?></td>
-                                                <td class="text-center"><?php echo $row['dept'] ?> /
-                                                    <?php echo $row['block_venue'] ?>
-                                                </td>
-                                                <td class="text-center">
-                                                    <button type="button" value="<?php echo $row['id']; ?>"
-                                                        class="btn btn-sm viewcomplaint"
-                                                        data-value="<?php echo $row['fac_id']; ?>"
-                                                        data-bs-toggle="modal" data-bs-target="#complaintDetailsModal">
-                                                        <i class="fas fa-eye" style="font-size: 25px;"></i>
-                                                    </button>
-                                                </td>
-                                                <td class="text-center">
-                                                    <button type="button" class="btn btn-light btn-sm showImage"
-                                                        value="<?php echo $row['id']; ?>" data-bs-toggle="modal"
-                                                        data-bs-target="#imageModal">
-                                                        <i class="fas fa-image" style="font-size: 25px;"></i>
-                                                    </button>
-                                                </td>
-                                                <td class="text-center">
-                                                    <?php if ($row['status'] == 9) { ?>
-                                                        <div class="dropdown">
-                                                            <button type="button"
-                                                                class="btn btn-warning dropdown-toggle reassign"
-                                                                id="reassignbutton" value="<?php echo $row['id']; ?>"
-                                                                data-bs-toggle="dropdown">
-                                                                Reassign
-                                                            </button>
-                                                            <ul class="dropdown-menu text-center">
-                                                                <li><a class="dropdown-item reass1" href="#"
-                                                                        data-value="electrical">ELECTRICAL</a></li>
-                                                                <li><a class="dropdown-item reass1" href="#"
-                                                                        data-value="civil">CIVIL</a></li>
-                                                                <li><a class="dropdown-item reass1" href="#"
-                                                                        data-value="itkm">ITKM</a></li>
-                                                                <li><a class="dropdown-item reass1" href="#"
-                                                                        data-value="transport">TRANSPORT</a></li>
-                                                                <li><a class="dropdown-item reass1" href="#"
-                                                                        data-value="house">HOUSE KEEPING</a></li>
-                                                            </ul>
-                                                        </div>
-                                                    <?php } else { ?>
-                                                        <div class="d-flex justify-content-center">
-                                                            <button type="button"
-                                                                class="btn btn-success managerapprove me-1"
-                                                                value="<?php echo $row['id']; ?>" data-bs-toggle="dropdown">
-                                                                <i class="fas fa-check"></i>
-                                                            </button>
-                                                            <ul class="dropdown-menu text-center">
-                                                                <li><a class="dropdown-item worker" href="#"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#managerapproveModal"
-                                                                        data-value="electrical">ELECTRICAL</a></li>
-                                                                <li><a class="dropdown-item worker" href="#"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#managerapproveModal"
-                                                                        data-value="civil">CIVIL</a></li>
-                                                                <li><a class="dropdown-item worker" href="#"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#managerapproveModal"
-                                                                        data-value="itkm">ITKM</a></li>
-                                                                <li><a class="dropdown-item worker" href="#"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#managerapproveModal"
-                                                                        data-value="transport">TRANSPORT</a></li>
-                                                                <li><a class="dropdown-item worker" href="#"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#managerapproveModal"
-                                                                        data-value="house">HOUSE KEEPING</a></li>
-                                                            </ul>
-
-                                                            <button type="button"
-                                                                class="btn btn-danger rejectcomplaint me-1"
-                                                                id="rejectbutton" value="<?php echo $row['id']; ?>"
-                                                                data-bs-toggle="modal" data-bs-target="#rejectModal">
-                                                                <i class="fas fa-times"></i>
-                                                            </button>
-
-                                                            <?php if ($row['faculty_id'] != "principal") { ?>
-                                                                <button type="button" class="btn btn-primary principalcomplaint"
-                                                                    id="principalbutton" value="<?php echo $row['id']; ?>"
-                                                                    data-bs-toggle="modal" data-bs-target="#principalModal">
-                                                                    <i class="fas fa-paper-plane"></i>
-                                                                </button>
-                                                            <?php } ?>
-                                                        </div>
-                                                    <?php } ?>
-                                                </td>
+                            <div class="card">
+                                <h5 class="card-title">Complaint Raised</h5><br>
+                                <div class="table-responsive">
+                                    <table id="complain_table" class="table table-striped table-bordered">
+                                        <thead class="gradient-header">
+                                            <tr>
+                                                <th class="text-center">
+                                                    <h5>S.No</h5>
+                                                </th>
+                                                <th class="text-center">
+                                                    <h5>Raised Date</h5>
+                                                </th>
+                                                <th class="text-center">
+                                                    <h5>Department / Venue</h5>
+                                                </th>
+                                                <th class="text-center">
+                                                    <h5>Complaint</h5>
+                                                </th>
+                                                <th class="text-center">
+                                                    <h5>Picture</h5>
+                                                </th>
+                                                <th class="text-center">
+                                                    <h5>Action</h5>
+                                                </th>
                                             </tr>
-                                        <?php
-                                            $s++;
-                                        }
-                                        ?>
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            $s = 1;
+                                            while ($row = mysqli_fetch_assoc($result1)) {
+                                            ?>
+                                                <tr <?php if ($row['faculty_id'] == "principal")
+                                                        echo 'style="background-color:#f3f57a"'; ?>>
+                                                    <td class="text-center"><?php echo $s ?></td>
+                                                    <td class="text-center"><?php echo $row['date_of_reg'] ?></td>
+                                                    <td class="text-center"><?php echo $row['dept'] ?> /
+                                                        <?php echo $row['block_venue'] ?>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <button type="button" value="<?php echo $row['id']; ?>"
+                                                            class="btn btn-sm viewcomplaint"
+                                                            data-value="<?php echo $row['fac_id']; ?>"
+                                                            data-bs-toggle="modal" data-bs-target="#complaintDetailsModal">
+                                                            <i class="fas fa-eye" style="font-size: 25px;"></i>
+                                                        </button>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <button type="button" class="btn btn-light btn-sm showImage"
+                                                            value="<?php echo $row['id']; ?>" data-bs-toggle="modal"
+                                                            data-bs-target="#imageModal">
+                                                            <i class="fas fa-image" style="font-size: 25px;"></i>
+                                                        </button>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <?php if ($row['status'] == 9) { ?>
+                                                            <div class="dropdown">
+                                                                <button type="button"
+                                                                    class="btn btn-warning dropdown-toggle reassign"
+                                                                    id="reassignbutton" value="<?php echo $row['id']; ?>"
+                                                                    data-bs-toggle="dropdown">
+                                                                    Reassign
+                                                                </button>
+                                                                <ul class="dropdown-menu text-center">
+                                                                    <li><a class="dropdown-item reass1" href="#"
+                                                                            data-value="electrical">ELECTRICAL</a></li>
+                                                                    <li><a class="dropdown-item reass1" href="#"
+                                                                            data-value="civil">CIVIL</a></li>
+                                                                    <li><a class="dropdown-item reass1" href="#"
+                                                                            data-value="itkm">ITKM</a></li>
+                                                                    <li><a class="dropdown-item reass1" href="#"
+                                                                            data-value="transport">TRANSPORT</a></li>
+                                                                    <li><a class="dropdown-item reass1" href="#"
+                                                                            data-value="house">HOUSE KEEPING</a></li>
+                                                                </ul>
+                                                            </div>
+                                                        <?php } else { ?>
+                                                            <div class="d-flex justify-content-center">
+                                                                <button type="button"
+                                                                    class="btn btn-success managerapprove me-1"
+                                                                    value="<?php echo $row['id']; ?>" data-bs-toggle="dropdown">
+                                                                    <i class="fas fa-check"></i>
+                                                                </button>
+                                                                <ul class="dropdown-menu text-center">
+                                                                    <li><a class="dropdown-item worker" href="#"
+                                                                            data-bs-toggle="modal"
+                                                                            data-bs-target="#managerapproveModal"
+                                                                            data-value="electrical">ELECTRICAL</a></li>
+                                                                    <li><a class="dropdown-item worker" href="#"
+                                                                            data-bs-toggle="modal"
+                                                                            data-bs-target="#managerapproveModal"
+                                                                            data-value="civil">CIVIL</a></li>
+                                                                    <li><a class="dropdown-item worker" href="#"
+                                                                            data-bs-toggle="modal"
+                                                                            data-bs-target="#managerapproveModal"
+                                                                            data-value="itkm">ITKM</a></li>
+                                                                    <li><a class="dropdown-item worker" href="#"
+                                                                            data-bs-toggle="modal"
+                                                                            data-bs-target="#managerapproveModal"
+                                                                            data-value="transport">TRANSPORT</a></li>
+                                                                    <li><a class="dropdown-item worker" href="#"
+                                                                            data-bs-toggle="modal"
+                                                                            data-bs-target="#managerapproveModal"
+                                                                            data-value="house">HOUSE KEEPING</a></li>
+                                                                </ul>
+
+                                                                <button type="button"
+                                                                    class="btn btn-danger rejectcomplaint me-1"
+                                                                    id="rejectbutton" value="<?php echo $row['id']; ?>"
+                                                                    data-bs-toggle="modal" data-bs-target="#rejectModal">
+                                                                    <i class="fas fa-times"></i>
+                                                                </button>
+
+                                                                <?php if ($row['faculty_id'] != "principal") { ?>
+                                                                    <button type="button" class="btn btn-primary principalcomplaint"
+                                                                        id="principalbutton" value="<?php echo $row['id']; ?>"
+                                                                        data-bs-toggle="modal" data-bs-target="#principalModal">
+                                                                        <i class="fas fa-paper-plane"></i>
+                                                                    </button>
+                                                                <?php } ?>
+                                                            </div>
+                                                        <?php } ?>
+                                                    </td>
+                                                </tr>
+                                            <?php
+                                                $s++;
+                                            }
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                        </div>
                         </div>
                     </div>
                 </div>
@@ -1664,7 +1659,7 @@ if (isset($_POST['fdept'])) {
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="afterImageModalLabel">After Picture</h5>
+                                <h5 class="modal-title" id="afterImageModalLabel">After Image</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body text-center">
