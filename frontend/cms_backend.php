@@ -1,6 +1,5 @@
 <?php
 require 'config.php';
-include("session.php");
 
 // Define the counter file path
 $counterFilePath = './uploads/counter.txt';

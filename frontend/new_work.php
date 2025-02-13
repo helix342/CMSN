@@ -1,11 +1,7 @@
 <?php
 require "config.php";
-include ("session.php");
-$worker_id = $s;
-if(!($worker_id)){
-    header("Location:index.php");
+$worker_id = "civil";
 
-}
 //fetching worker details using department in session
 $qry = "SELECT * FROM worker_details WHERE worker_id='$worker_id'";
 $qry_run = mysqli_query($db,$qry);
@@ -43,270 +39,148 @@ cd.status = '9'
 ";
 $result4 = mysqli_query($db, $sql4);
 ?>
-
 <!DOCTYPE html>
-<html dir="ltr" lang="en">
+<html lang="en">
 
 <head>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-
-    <title>MIC</title>
-    <!-- Custom CSS -->
-    <link href="dist/css/style.min.css" rel="stylesheet">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
-    <style>
-    .nav-tabs .nav-item.show .nav-link,
-    .nav-tabs .nav-link.active {
-        color: white;
-        background: linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%);
-        padding: 11px 15px;
-    }
-
-    .nav-tabs .nav-item.show .nav-link,
-    .nav-tabs .nav-link.active:hover {
-        border: none;
-    }
-
-    a {
-        color: linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%);
-        padding: 11px 15px;
-    }
-
-    .nav-tabs .nav-item.show .nav-link,
-    .nav-tabs a:hover {
-        color: linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%);
-        border: 4px solid gray;
-        /* Include the border within the button size */
-        padding: 8px 15px;
-        /* Adjust padding to maintain the button's size */
-    }
-
-    th {
-        /* background-color: #7460ee; */
-        background: linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%);
-        color: white;
-    }
-
-    @media (min-width:1300px) and (max-width:1800px) {
-        /* For mobile phones: */
-
-    }
-    </style>
-    <link href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaints Management System</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="image/icons/mkce_s.png">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/tabs.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="assets/css/datatable.css">
+    <link rel="stylesheet" href="assets/css/font.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body>
-    <!-- ============================================================== -->
-    <!-- Preloader - style you can find in spinners.css -->
-    <!-- ============================================================== -->
-    <div class="preloader">
-        <div class="lds-ripple">
-            <div class="lds-pos"></div>
-            <div class="lds-pos"></div>
+    <!-- Sidebar -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <div class="sidebar" id="sidebar">
+        <div class="logo">
+            <img src="image/mkce.png" alt="College Logo">
+            <img class='s_logo' src="image/mkce_s.png" alt="College Logo">
+        </div>
+
+        <div class="menu">
+            <a href="windex.php" class="menu-item ">
+                <i class="fas fa-home text-primary"></i>
+                <span>Dashboard</span>
+            </a>
+            <!-- <a href="" class="menu-item">
+                <i class="fa-solid fa-user-secret text-white"></i>
+                <span>Admin</span>
+            </a> -->
+            <a href="new_work.php" class="menu-item active">
+                <i class="fa-solid fa-users text-info"></i>
+                <span>Work</span>
+            </a>
+            <a href="workall.php" class="menu-item">
+                <i class="fa-solid fa-address-book text-success"></i>
+                <span><?php echo $worker_id?></span>
+            </a>
         </div>
     </div>
-    <!-- ============================================================== -->
-    <!-- Main wrapper - style you can find in pages.scss -->
-    <!-- ============================================================== -->
-    <div id="main-wrapper">
-        <!-- ============================================================== -->
-        <!-- Topbar header - style you can find in pages.scss -->
-        <!-- ============================================================== -->
-        <header class="topbar" data-navbarbg="skin5">
-            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
-                <div class="navbar-header" data-logobg="skin5">
-                    <!-- Sidebar toggle for mobile -->
-                    <!-- ============================================================== -->
-                    <!-- Logo -->
-                    <!-- ============================================================== -->
-                    <a class="navbar-brand" href="smain">
-                        <!-- Logo icon -->
 
-                        <!--End Logo icon -->
-                        <!-- Logo text -->
-                        <span class="logo-text">
-                            <!-- dark Logo text -->
-                            <img src="assets/images/srms33333.png" alt="homepage" class="light-logo" />
+    <!-- Main Content -->
+    <div class="content">
 
-                        </span>
-                        <!-- Logo icon -->
-                        <!-- <b class="logo-icon"> -->
-                        <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-                        <!-- Dark Logo icon -->
-                        <!-- <img src="assets/images/logo-text.png" alt="homepage" class="light-logo" /> -->
+        <div class="loader-container" id="loaderContainer">
+            <div class="loader"></div>
+        </div>
 
-                        <!-- </b> -->
-                        <!--End Logo icon -->
-                    </a>
-                    <!-- ============================================================== -->
-                    <!-- End Logo -->
-                    <!-- ============================================================== -->
-
-                    <!-- Toggle for mobile -->
-                    <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)"
-                        data-toggle="collapse" data-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i
-                            class="ti-more"></i></a>
-                </div>
-
-                <!-- Navbar items -->
-                <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
-                    <ul class="navbar-nav float-left mr-auto">
-                        <li class="nav-item d-none d-md-block">
-                            <a class="nav-link sidebartoggler waves-effect waves-light" href="javascript:void(0)"
-                                data-sidebartype="mini-sidebar"><i class="mdi mdi-menu font-24"></i></a>
-                        </li>
-                        <!-- Additional items can be added here -->
-                    </ul>
-
-                    <ul class="navbar-nav float-right">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href=""
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-                                    src="assets/images/users/1.jpg" alt="user" class="rounded-circle" width="31"></a>
-                            <div class="dropdown-menu dropdown-menu-right user-dd animated">
-                            <a class="dropdown-item" href="#"><i class="fa fa-power-off m-r-5 m-l-5"></i>
-                            Download map</a>
-                            <a class="dropdown-item" href="Logout"><i class="fa fa-power-off m-r-5 m-l-5"></i>
-                            Logout</a>
-                                <div class="dropdown-divider"></div>
-                            </div>
-                        </li>
-                        
-
-                    </ul>
-                </div>
-            </nav>
-        </header>
-        <!-- ============================================================== -->
-        <!-- End Topbar header -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-        <aside class="left-sidebar" data-sidebarbg="skin5">
-            <div class="scroll-sidebar"><br>
-                <nav class="sidebar-nav">
-                    <ul id="sidebarnav" class="p-t-30">
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="windex"
-                                aria-expanded="false"><img src="images/icon/dash.png" class="custom-svg-icon"
-                                    alt="Dashboard Icon"><span class="hide-menu">&nbsp;Dashboard</span></a></li>
-
-                        <li class="sidebar-item"> <a id="view-work-task-history"
-                                class="sidebar-link waves-effect waves-dark sidebar-link" href="new_work.php"
-                                aria-expanded="false"><img src="images/icon/construction-worker.png" class="custom-svg-icon"
-                                alt="Dashboard Icon"><span class="hide-menu">&nbsp Work
-                                    Assign</span></a></li>
-
-                        <li class="sidebar-item"> <a id="view-work-task-history"
-                                class="sidebar-link waves-effect waves-dark sidebar-link" href="workall.php"
-                                aria-expanded="false"><img src="images/icon/wrench.png" class="custom-svg-icon"
-                                alt="Dashboard Icon"><span class="hide-menu">&nbsp <?php echo $worker_id?></span></a></li>
-                    </ul>
-                </nav>
+        <!-- Topbar -->
+        <div class="topbar">
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
             </div>
-        </aside>
-
-        <!-- ============================================================== -->
-        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Page wrapper  -->
-        <!-- ============================================================== -->
-        <div class="page-wrapper">
-            <div class="page-breadcrumb">
-                <div class="row">
-                    <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">Complaints</h4>
-                        <div class="ml-auto text-right">
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Library</li>
-                                </ol>
-                            </nav>
-                        </div>
+            <!-- <div class="brand-logo">
+                <i class="fas fa-chart-line"></i>
+                MIC
+            </div> -->
+            <div class="user-profile">
+                <div class="user-menu" id="userMenu">
+                    <div class="user-avatar">
+                        <img src="/api/placeholder/35/35" alt="User">
+                        <div class="online-indicator"></div>
+                    </div>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item">
+                            <i class="fas fa-key"></i>
+                            Change Password
+                        </a>
+                        <a class="dropdown-item">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Logout
+                        </a>
                     </div>
                 </div>
+                <span><?php echo $srow['worker_first_name'] ?></span>
             </div>
-            <!-- ============================================================== -->
-            <!-- End Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- Container fluid  -->
-            <!-- ============================================================== -->
-            <div class="container-fluid">
-                <!-- ============================================================== -->
-                <!-- Start Page Content -->
-                <!-- ============================================================== -->
-                <div class="row">
-                    <div class="col-md-12">
+        </div>
 
-                        <!-- Tabs -->
+        <!-- Breadcrumb -->
+        <div class="breadcrumb-area">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Worker</li>
+                </ol>
+            </nav>
+        </div>
 
-                        <!-- Tabs -->
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="card">
-                                    <div id="navref">
-                                        <!-- Nav tabs -->
-                                        <ul class="nav nav-tabs mb-3" role="tablist">
+        <!-- Content Area -->
+        <div class="container-fluid">
+            <div class="container">
+                <div class="custom-tabs">
+                    <!-- Navigation Tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <!-- Tab 1: Work Assign -->
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="add-bus-tab" data-bs-toggle="tab"
+                                data-bs-target="#workassign" type="button" role="tab">
+                                <i class="fas fa-tasks tab-icon"></i> Work Assign
+                            </button>
+                        </li>
 
-                                            <li class="nav-item"> <a class="nav-link active" data-toggle="tab"
-                                                    href="#principal" role="tab"><span class="hidden-sm-up"></span>
-                                                    <div id="ref4"><span class="hidden-xs-down"><b>Work
-                                                                Assign</b></span></div>
-                                                </a> </li>
-                                            <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#record"
-                                                    role="tab"><span class="hidden-sm-up"></span>
-                                                    <div id="ref5"><span class="hidden-xs-down"><b>Work
-                                                                Record</b></span></div>
-                                                </a> </li>
-
-
-
+                        <!-- Tab 2: Work Record -->
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="edit-bus-tab" data-bs-toggle="tab" data-bs-target="#workrecord"
+                                type="button" role="tab">
+                                <i class="fas fa-file-alt tab-icon"></i> Work Record
+                            </button>
+                        </li>
+                    </ul>
 
 
-                                        </ul>
-                                    </div>
-
-
-                                    <!-- Tab panes -->
-                                    <div class="tab-content tabcontent-border">
-                                        <!--completed start-->
-                                        <div class="tab-pane active p-20" id="principal" role="tabpanel">
-                                            <div class="p-20">
-                                                <div class="table-responsive">
-                                                    <h5 class="card-title">Work Assign</h5>
-                                                    <table id="principal_table"
-                                                        class="table table-striped table-bordered">
-                                                        <thead
-                                                            style="background: linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); color: white;">
-                                                            <tr>
-                                                                <th><b>S.No</b></th>
-                                                                <th><b>Raised Date</b></th>
-                                                                <th><b>Department/Venue</b></th>
-                                                                <th><b>Complaint</b></th>
-                                                                <th><b>Picture</b></th>
-                                                                <th><b>Action</b></th>
-                                                                <th><b>Status</b></th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
+                    <!-- Tab Content -->
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="workassign" role="tabpanel">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header d-flex justify-content-between align-items-center">
+                                            <h4 class="mb-0">Complaint Management System</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table id="pending_table"
+                                                    class="table table-striped table-bordered custom-table">
+                                                    <thead class="table-class">
+                                                        <tr>
+                                                            <th><b>S.No</b></th>
+                                                            <th><b>Raised</b></th>
+                                                            <th><b>Venue</b></th>
+                                                            <th><b>Complaint</b></th>
+                                                            <th><b>Image</b></th>
+                                                            <th><b>Action</b></th>
+                                                            <th><b>Status</b></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
                                                             <?php
                                                     $s = 1;
                                                     while ($row4 = mysqli_fetch_assoc($result4)) {
@@ -352,17 +226,16 @@ $result4 = mysqli_query($db, $sql4);
                                                     }
                                                     ?>
                                                         </tbody>
-
-                                                    </table>
-                                                </div>
-
+                                                </table>
                                             </div>
                                         </div>
-                                        <!-- WOrk Assign end-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-
-                                        <!-- Record table start-->
-                                        <?php
+                        <!-- Record table start-->
+                        <?php
                                     // Set default month as the current month if no input is provided
                                     $selectedMonth = isset($_POST['selectmonth']) ? $_POST['selectmonth'] : date('m');
                                     
@@ -374,48 +247,40 @@ $result4 = mysqli_query($db, $sql4);
                                     $result8 = mysqli_query($db, $sql8);
 
                                     ?>
+                        <div class="tab-pane fade" id="workrecord" role="tabpanel">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header d-flex justify-content-between align-items-center">
+                                            <!-- Date Pickers -->
+                                            <div class="d-flex align-items-center">
+                                                <!-- From Date -->
+                                                <input type="date" class="form-control me-2" id="fromDate"
+                                                    style="width: 200px;" placeholder="From Date">
+                                                <!-- To Date -->
+                                                <input type="date" class="form-control me-2" id="toDate"
+                                                    style="width: 200px;" placeholder="To Date">
+                                            </div>
 
-                                        <div class="tab-pane p-10" id="record" role="tabpanel">
-                                            <div class="p-10">
-                                                <div class="p-10">
-                                                    <div class="card">
-                                                        <div class="card-body" style="padding: 10px;">
-                                                            <h5 class="card-title">Work Completed records</h5>
-                                                            <form method="POST" action="">
-                                                                <label for="selectmonth">Select Month (1-12): </label>
-                                                                <input type="number" name="selectmonth" min="1" max="12"
-                                                                    value="<?php echo $selectedMonth; ?>" required>
-                                                                <button type="submit"
-                                                                    class="btn btn-primary">Enter</button>
-                                                            </form><span style="float:right">
-                                                                <button id="download" class="btn btn-success">Download
-                                                                    as Excel</button></span><br><br>
-                                                            <div class="table-responsive">
-                                                                <table id="record_table"
-                                                                    class="table table-striped table-bordered">
-                                                                    <thead
-                                                                        style="background: linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); color: white;">
-                                                                        <tr>
-                                                                            <th class="text-center"><b>
-                                                                                    <h5>S.No</h5>
-                                                                                </b></th>
-                                                                            <th class="col-md-2 text-center"><b>
-                                                                                    <h5>Work ID</h5>
-                                                                                </b></th>
-                                                                            <th class="text-center"><b>
-                                                                                    <h5>Venue Details</h5>
-                                                                                </b></th>
-                                                                            <th class="text-center"><b>
-                                                                                    <h5>Completed Details</h5>
-                                                                                </b></th>
-                                                                            <th class="text-center">
-                                                                                <b>
-                                                                                    <h5>Completed On</h5>
-                                                                                </b>
-                                                                            </th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
+                                            <!-- Download Button -->
+                                            <button type="button" class="btn btn-success" id="downloadWorkersRecord">
+                                                <i class="fas fa-file-excel"></i>&nbsp;&nbsp;Download Work Record
+                                            </button>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table id="work_completed_table"
+                                                    class="table table-striped table-bordered custom-table">
+                                                    <thead class="table-class text-center">
+                                                        <tr>
+                                                            <th><b>S.No</b></th>
+                                                            <th><b>Work ID</b></th>
+                                                            <th><b>Venue Details</b></th>
+                                                            <th><b>Completed Details</b></th>
+                                                            <th><b>Completed On</b></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
                                                                         <?php
                                                         $s = 1;
                                                         while ($row = mysqli_fetch_assoc($result8)) {
@@ -457,379 +322,285 @@ $result4 = mysqli_query($db, $sql4);
                                                         }
                                                         ?>
                                                                     </tbody>
-                                                                </table>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                </table>
                                             </div>
                                         </div>
-
-
-
-
-
-
-
-
-
-
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-
-
-                <!-- Complaint Details Modal -->
-                <div class="modal fade" id="complaintDetailsModal" tabindex="-1" role="dialog"
-                    aria-labelledby="complaintDetailsModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
-                        <div class="modal-content"
-                            style="border-radius: 8px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15); background-color: #f9f9f9;">
-
-                            <!-- Modal Header with bold title and cleaner button -->
-                            <div class="modal-header"
-                                style="background-color: #007bff; color: white; border-top-left-radius: 8px; border-top-right-radius: 8px; padding: 15px;">
-                                <h5 class="modal-title" id="complaintDetailsModalLabel"
-                                    style="font-weight: 700; font-size: 1.4em; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-                                    📋 Complaint Details
-                                </h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
-                                    style="color: white; font-size: 1.2em;">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-
-                            <!-- Modal Body with reduced padding -->
-                            <div class="modal-body"
-                                style="padding: 15px; font-size: 1.1em; color: #333; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-
-                                <!-- Complaint Info Section with minimized spacing -->
-                                <ol class="list-group list-group-numbered" style="margin-bottom: 0;">
-                                    <li class="list-group-item d-flex justify-content-between align-items-start"
-                                        style="padding: 10px; background-color: #fff;">
-                                        <div class="ms-2 me-auto">
-                                            <div class="fw-bold"
-                                                style="font-size: 1.2em; font-weight: 600; color: #007bff;">Faculty Name
-                                            </div>
-                                            <b><span id="faculty_name" style="color: #555;"></span></b>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-start"
-                                        style="padding: 10px; background-color: #fff;">
-                                        <div class="ms-2 me-auto">
-                                            <div class="fw-bold"
-                                                style="font-size: 1.2em; font-weight: 600; color: #007bff;">Mobile
-                                                Number</div>
-                                            <b><span id="faculty_contact" style="color: #555;"></span></b>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-start"
-                                        style="padding: 10px; background-color: #fff;">
-                                        <div class="ms-2 me-auto">
-                                            <div class="fw-bold"
-                                                style="font-size: 1.2em; font-weight: 600; color: #007bff;">E-mail</div>
-                                            <b><span id="faculty_mail" style="color: #555;"></span></b>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-start"
-                                        style="padding: 10px; background-color: #fff;">
-                                        <div class="ms-2 me-auto">
-                                            <div class="fw-bold"
-                                                style="font-size: 1.2em; font-weight: 600; color: #007bff;">Venue Name
-                                            </div>
-                                            <b><span id="venue_name" style="color: #555;"></span></b>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-start"
-                                        style="padding: 10px; background-color: #fff;">
-                                        <div class="ms-2 me-auto">
-                                            <div class="fw-bold"
-                                                style="font-size: 1.2em; font-weight: 600; color: #007bff;">Type of
-                                                Problem</div>
-                                            <b><span id="type_of_problem" style="color: #555;"></span></b>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-start"
-                                        style="padding: 10px; background-color: #fff;">
-                                        <div class="ms-2 me-auto">
-                                            <div class="fw-bold"
-                                                style="font-size: 1.2em; font-weight: 600; color: #007bff;">Problem
-                                                Description</div>
-                                            <div class="alert alert-light" role="alert"
-                                                style="border-radius: 6px; background-color: #f1f1f1; padding: 15px; color: #333;">
-                                                <span id="problem_description"></span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ol>
-                            </div>
-
-                            <!-- Modal Footer with reduced padding -->
-                            <div class="modal-footer" style="border-top: none; justify-content: center; padding: 10px;">
-                                <button type="button" class="btn btn-primary btn-lg" data-dismiss="modal"
-                                    style="border-radius: 25px; padding: 10px 30px; font-size: 1.1em; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-                                    Close
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Priority Modal Box -->
-                <div class="modal fade" id="prioritymodal1" tabindex="-1" role="dialog"
-                    aria-labelledby="priorityModalLabel1" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content" style="border-radius: 8px; border: 1px solid #ccc;">
-                            <div class="modal-header"
-                                style="background-color: #f8f9fa; border-bottom: 2px solid #e9ecef;">
-                                <h5 class="modal-title" id="priorityModalLabel1">Set Priority</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body" style="padding: 20px; background-color: #f5f5f5;">
-                                <form id="form20">
-                                    <input type="hidden" name="problem_id" id="complaint_id77" value="">
-
-                                    <div class="form-group" style="margin-bottom: 15px;">
-                                        <label for="worker" class="font-weight-bold"
-                                            style="display: block; margin-bottom: 5px;">Assign Worker:</label>
-                                        <select class="form-control" name="worker" id="worker"
-                                            style="width: 100%; height: 40px; border-radius: 4px; border: 1px solid #ccc;">
-                                        </select>
-                                    </div>
-                                    <input type="checkbox" id="oth" name="oth" onclick="checkIfOthers()">Others
-                                    <div id="othersInput" style="display: none;">
-                                        <label class="form-label" for="otherValue">Worker name:</label>
-                                        <input type="text" id="otherValue" name="otherworkername"> <br>
-                                    </div>
-
-
-                            </div>
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary"
-                                    style="background-color: #007bff; border: none; padding: 12px 15px; font-size: 12px;">Submit</button>
-                                <button type="button" class="btn btn-secondary"
-                                    style="background-color: #6c757d; border: none; padding: 12px 15px; font-size: 12px;"
-                                    data-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                        </form>
-
-                    </div>
-                </div>
-
-
-                <!-- Worker Details Modal -->
-                <div class="modal fade" id="detailsModal" tabindex="-1" role="dialog"
-                    aria-labelledby="detailsModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header"
-                                style="background: linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); color: white;">
-                                <h5 class="modal-title" id="detailsModalLabel">Worker Details</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form id="viewcomplaint" style="font-size: 16px;">
-                                    <p><strong>Worker Name:</strong>
-                                        <span id="worker_first_name"></span>
-                                    </p>
-                                    <p><strong>Worker Contact:</strong>
-                                        <span id="worker_mobile"></span>
-                                    </p>
-                                    <p><strong>Worker Mail:</strong>
-                                        <span id="worker_mail"></span>
-                                    </p>
-                                    <p><strong>Worker Department:</strong>
-                                        <span id="worker_dept"></span>
-                                    </p>
-                                    <p><strong>Working Type:</strong>
-                                        <span id="worker_emp_type"></span>
-                                    </p>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-dismiss="modal">Close</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Before Image Modal -->
-                <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="imageModalLabel">Image</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <img id="modalImage" src="" alt="Image" class="img-fluid"
-                                    style="width: 100%; height: auto;">
-                                <!-- src will be set dynamically -->
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- After Image Modal -->
-                <div class="modal fade" id="afterImageModal" tabindex="-1" role="dialog"
-                    aria-labelledby="afterImageModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="afterImageModalLabel">After Picture</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body text-center">
-                                <img id="modalImage2" src="" alt="After" class="img-fluid">
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Feedback Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Faculty Feedback</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <textarea name="ffeed" id="ffeed" readonly></textarea>
-                                <!-- Change to complaintfeed_id -->
-                                <input type="hidden" id="complaintfeed_id" value="">
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-success done" data-dismiss="modal">Done</button>
-                                <button type="button" class="btn btn-danger reass">Reassign</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Date Picker Modal -->
-                <div class="modal fade" id="datePickerModal" tabindex="-1" role="dialog"
-                    aria-labelledby="datePickerModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="datePickerModalLabel">Set Reassign Deadline</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <label for="reassign_deadline">Reassign Deadline Date:</label>
-                                <input type="date" id="reassign_deadline" name="reassign_deadline" required>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-primary" id="saveDeadline">Set Deadline</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Completed Table Feedback Modal -->
-                <div class="modal fade" id="completedfeedbackModal" tabindex="-1" role="dialog"
-                    aria-labelledby="completedfeedbackModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="completedfeedbackModalLabel">Faculty
-                                    Feedback</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <!-- Content goes here -->
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
-                <!--image before and complaint end-->
-                <!-- ============================================================== -->
-                <!-- End PAge Content -->
-                <!-- ============================================================== -->
-                <!-- ============================================================== -->
-                <!-- Right sidebar -->
-                <!-- ============================================================== -->
-                <!-- .right-sidebar -->
-                <!-- ============================================================== -->
-                <!-- End Right sidebar -->
-                <!-- ============================================================== -->
             </div>
-            <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- footer -->
-            <!-- ============================================================== -->
-            <footer class="footer text-center">
-                <b>2024 © M.Kumarasamy College of Engineering All Rights Reserved.<br>
-                    Developed and Maintained by Technology Innovation Hub.</b>
-            </footer>
-            <!-- ============================================================== -->
-            <!-- End footer -->
-            <!-- ============================================================== -->
         </div>
-        <!-- ============================================================== -->
-        <!-- End Page wrapper  -->
-        <!-- ============================================================== -->
+    </div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-copyright" style="text-align: center; position: relative;">
+            <p>
+                Copyright © 2024 Designed by
+                <span
+                    style="background: linear-gradient(to right, #cb2d3e, #ef473a); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                    Technology Innovation Hub - MKCE.
+                </span>
+                All rights reserved.
+            </p>
+        </div>
+    </footer>
 
-        <!-- ============================================================== -->
-        <!-- End Wrapper -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- All Jquery -->
-        <!-- ============================================================== -->
-        <script src="assets/libs/jquery/dist/jquery.min.js"></script>
-        <!-- Bootstrap tether Core JavaScript -->
-        <script src="assets/libs/popper.js/dist/umd/popper.min.js"></script>
-        <script src="assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-        <!-- slimscrollbar scrollbar JavaScript -->
-        <script src="assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
-        <script src="assets/extra-libs/sparkline/sparkline.js"></script>
-        <!--Wave Effects -->
-        <script src="dist/js/waves.js"></script>
-        <!--Menu sidebar -->
-        <script src="dist/js/sidebarmenu.js"></script>
-        <!--Custom JavaScript -->
-        <script src="dist/js/custom.min.js"></script>
-        <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-        <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/alertify.min.js"></script>
+    <!-- Before Image Modal Starts -->
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabels" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="imageModalLabel">Complaint Image</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img id="modalImage" src="" alt="Image" class="img-fluid">
+                    <!-- src will be set dynamically -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Before Image Model Ends -->
 
-        <script>
+    <!-- View Complaint Modal Starts -->
+    <div class="modal fade" id="complaintDetailsModal" tabindex="-1" role="dialog"
+        aria-labelledby="complaintDetailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h5 class="modal-title" id="complaintDetailsModalLabels">
+                        📋 Complaint Details
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <!-- Modal Body -->
+                <!-- Modal Body with reduced padding -->
+                <div class="modal-body" style="padding: 15px; font-size: 1.1em; color: #333; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+
+                    <!-- Complaint Info Section with minimized spacing -->
+                    <ul class="list-group " style="margin-bottom: 0;">
+                                                <li class="list-group-item d-flex justify-content-between align-items-start" style="padding: 10px; background-color: #fff;">
+                                                    <div class="ms-2 me-auto">
+                                                        <div class="fw-bold" style="font-size: 1.2em; font-weight: 600; color: #007bff;">Faculty ID</div>
+                                                        <b><span id="faculty_id" style="color: #555;"></span></b>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item d-flex justify-content-between align-items-start" style="padding: 10px; background-color: #fff;">
+                                                    <div class="ms-2 me-auto">
+                                                        <div class="fw-bold" style="font-size: 1.2em; font-weight: 600; color: #007bff;">Faculty Name</div>
+                                                        <b><span id="faculty_name" style="color: #555;"></span></b>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item d-flex justify-content-between align-items-start" style="padding: 10px; background-color: #fff;">
+                                                    <div class="ms-2 me-auto">
+                                                        <div class="fw-bold" style="font-size: 1.2em; font-weight: 600; color: #007bff;">Mobile Number</div>
+                                                        <b><span id="faculty_contact" style="color: #555;"></span></b>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item d-flex justify-content-between align-items-start" style="padding: 10px; background-color: #fff;">
+                                                    <div class="ms-2 me-auto">
+                                                        <div class="fw-bold" style="font-size: 1.2em; font-weight: 600; color: #007bff;">E-mail</div>
+                                                        <b><span id="faculty_mail" style="color: #555;"></span></b>
+                                                    </div>
+                                                </li>
+
+                                                <li class="list-group-item d-flex justify-content-between align-items-start" style="padding: 10px; background-color: #fff;">
+                                                    <div class="ms-2 me-auto">
+                                                        <div class="fw-bold" style="font-size: 1.2em; font-weight: 600; color: #007bff;">Type of Problem</div>
+                                                        <b><span id="type_of_problem" style="color: #555;"></span></b>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item d-flex justify-content-between align-items-start" style="padding: 10px; background-color: #fff;">
+                                                    <div class="ms-2 me-auto">
+                                                        <div class="fw-bold" style="font-size: 1.2em; font-weight: 600; color: #007bff;">Problem Description</div>
+                                                        <div class="alert alert-light" role="alert" style="border-radius: 6px; background-color: #f1f1f1; padding: 15px; color: #333;">
+                                                            <b><span id="problem_description"></span></b>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                </div>
+
+                <!-- Modal Footer with Save Button -->
+                <div class="modal-footer" style="border-top: none; justify-content: center; padding: 10px;">
+                    <button type="button" class="btn btn-primary btn-lg" data-bs-dismiss="modal" style="border-radius: 25px; padding: 10px 30px; font-size: 1.1em; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- View Complaint Modal Ends -->
+
+
+
+
+
+    <script src="assets/script/script.js"></script>
+    <script src="assets/script/bootstrap.js"></script>
+
+    <!-- DataTables Initialization -->
+    <script>
+        $(document).ready(function() {
+            $('#pending_table, #approval_table, #work_completed_table,#completed_table, #rejected_table').each(function() {
+                $(this).DataTable({
+                    paging: true,
+                    searching: true,
+                    ordering: true,
+                    lengthChange: true,
+                    pageLength: 10,
+                });
+            });
+        });
+    </script>
+
+    <script>
+        // Get today's date
+        const today = new Date();
+
+        // Calculate last month for From Date
+        const lastMonth = new Date();
+        lastMonth.setMonth(lastMonth.getMonth() - 1);
+
+        // Format dates to YYYY-MM-DD
+        const formatDate = (date) => date.toISOString().split('T')[0];
+
+        // Set default values for From Date and To Date
+        document.getElementById('fromDate').value = formatDate(lastMonth);
+        document.getElementById('toDate').value = formatDate(today);
+
+        // Optional: Ensure From Date is not after To Date
+        document.getElementById('fromDate').addEventListener('change', function() {
+            const fromDate = new Date(this.value);
+            const toDate = new Date(document.getElementById('toDate').value);
+            if (fromDate > toDate) {
+                alert("From Date cannot be after To Date");
+                this.value = formatDate(lastMonth);
+            }
+        });
+
+        document.getElementById('toDate').addEventListener('change', function() {
+            const fromDate = new Date(document.getElementById('fromDate')
+                .value);
+            const toDate = new Date(this.value);
+            if (toDate < fromDate) {
+                alert("To Date cannot be before From Date");
+                this.value = formatDate(today);
+            }
+        });
+    </script>
+   
+    <script>
+        const loaderContainer = document.getElementById('loaderContainer');
+
+        function showLoader() {
+            loaderContainer.classList.add('show');
+        }
+
+        function hideLoader() {
+            loaderContainer.classList.remove('show');
+        }
+
+        //    automatic loader
+        document.addEventListener('DOMContentLoaded', function() {
+            const loaderContainer = document.getElementById('loaderContainer');
+            const contentWrapper = document.getElementById('contentWrapper');
+            let loadingTimeout;
+
+            function hideLoader() {
+                loaderContainer.classList.add('hide');
+                contentWrapper.classList.add('show');
+            }
+
+            function showError() {
+                console.error('Page load took too long or encountered an error');
+                // You can add custom error handling here
+            }
+
+            // Set a maximum loading time (10 seconds)
+            loadingTimeout = setTimeout(showError, 10000);
+
+            // Hide loader when everything is loaded
+            window.onload = function() {
+                clearTimeout(loadingTimeout);
+
+                // Add a small delay to ensure smooth transition
+                setTimeout(hideLoader, 500);
+            };
+
+            // Error handling
+            window.onerror = function(msg, url, lineNo, columnNo, error) {
+                clearTimeout(loadingTimeout);
+                showError();
+                return false;
+            };
+        });
+
+        // Toggle Sidebar
+        const hamburger = document.getElementById('hamburger');
+        const sidebar = document.getElementById('sidebar');
+        const body = document.body;
+        const mobileOverlay = document.getElementById('mobileOverlay');
+
+        function toggleSidebar() {
+            if (window.innerWidth <= 768) {
+                sidebar.classList.toggle('mobile-show');
+                mobileOverlay.classList.toggle('show');
+                body.classList.toggle('sidebar-open');
+            } else {
+                sidebar.classList.toggle('collapsed');
+            }
+        }
+        hamburger.addEventListener('click', toggleSidebar);
+        mobileOverlay.addEventListener('click', toggleSidebar);
+        // Toggle User Menu
+        const userMenu = document.getElementById('userMenu');
+        const dropdownMenu = userMenu.querySelector('.dropdown-menu');
+
+        userMenu.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdownMenu.classList.toggle('show');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', () => {
+            dropdownMenu.classList.remove('show');
+        });
+
+        // Toggle Submenu
+        const menuItems = document.querySelectorAll('.has-submenu');
+        menuItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const submenu = item.nextElementSibling;
+                item.classList.toggle('active');
+                submenu.classList.toggle('active');
+            });
+        });
+
+        // Handle responsive behavior
+        window.addEventListener('resize', () => {
+            if (window.innerWidth <= 768) {
+                sidebar.classList.remove('collapsed');
+                sidebar.classList.remove('mobile-show');
+                mobileOverlay.classList.remove('show');
+                body.classList.remove('sidebar-open');
+            } else {
+                sidebar.style.transform = '';
+                mobileOverlay.classList.remove('show');
+                body.classList.remove('sidebar-open');
+            }
+        });
+    </script>
+    <script>
         $(function() {
             $('[data-toggle="tooltip"]').tooltip();
 
@@ -850,7 +621,7 @@ $result4 = mysqli_query($db, $sql4);
         });
 
         $(document).ready(function() {
-            $("#principal_table").DataTable();
+            $("#pending_table").DataTable();
         });
 
         $(document).ready(function() {
@@ -880,14 +651,11 @@ $result4 = mysqli_query($db, $sql4);
                 },
                 success: function(response) {
                     if (response.includes("Success")) {
-                        Swal.fire({
-                    title: "Accepted!",
-                    text: "Work Started",
-                    icon: "success"
-                });                        $('#principal_table').DataTable().destroy();
-                        $("#principal_table").load(location.href + " #principal_table > *",
+                        alert("done");
+                        $('#pending_table').DataTable().destroy();
+                        $("#pending_table").load(location.href + " #pending_table > *",
                             function() {
-                                $('#principal_table').DataTable();
+                                $('#pending_table').DataTable();
                             });
 
 
@@ -1022,6 +790,7 @@ $result4 = mysqli_query($db, $sql4);
             XLSX.writeFile(wb, 'complaints_data.xlsx');
         });
         </script>
+
 
 
 
