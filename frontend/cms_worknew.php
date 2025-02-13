@@ -76,7 +76,7 @@ $result4 = mysqli_query($db, $sql4);
             </a> -->
             <a href="cms_worknew.php" class="menu-item active">
                 <i class="fa-solid fa-users text-info"></i>
-                <span>Work</span>
+                <span>Assign Work</span>
             </a>
             <a href="cms_workall.php" class="menu-item">
                 <i class="fa-solid fa-address-book text-success"></i>

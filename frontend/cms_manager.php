@@ -356,7 +356,7 @@ if (isset($_POST['fdept'])) {
 
 <body>
     <!-- Sidebar -->
-    <?php include 'sidebar.php'; ?>
+    <?php include 'side.php'; ?>
 
     <!-- Main Content -->
     <div class="content">

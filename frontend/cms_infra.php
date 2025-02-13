@@ -59,6 +59,8 @@ $row_count11 = mysqli_num_rows($result11);
     <link rel="icon" type="image/png" sizes="32x32" href="../image/icons/mkce_s.png">
     <link rel="stylesheet" href="../css/stylescms.css">
     <link href="../css/dboardstyles.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/tabs.css">
+    <link rel="stylesheet" href="assets/css/Modal.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet">
@@ -588,7 +590,7 @@ $row_count11 = mysqli_num_rows($result11);
 
 <body>
     <!-- Sidebar -->
-    <?php include 'sidebar.php'; ?>
+    <?php include 'side.php'; ?>
 
     <!-- Main Content -->
     <div class="content">
@@ -621,7 +623,7 @@ $row_count11 = mysqli_num_rows($result11);
                                 <div class="custom-tabs">
                                     <ul class="nav nav-tabs" role="tablist">
                                         <li class="nav-item" role="presentation">
-                                            <a class="nav-link active" data-bs-toggle="tab" id="edit-bus-tab" href="#dashboard" role="tab" aria-selected="true">
+                                            <a class="nav-link active" data-bs-toggle="tab" id="add-bus-tab" href="#dashboard" role="tab" aria-selected="true">
                                                 <span class="hidden-xs-down" style="font-size: 0.9em;"><i class="fas fa-book tab-icon"></i></span><b>&nbsp Dashboard</b>
                                             </a>
                                         </li>
@@ -637,7 +639,7 @@ $row_count11 = mysqli_num_rows($result11);
                                             </a>
                                         </li>
                                         <li class="nav-item" role="presentation">
-                                            <a class="nav-link" data-bs-toggle="tab" id="edit-bus-tab" href="#approved" role="tab" aria-selected="true">
+                                            <a class="nav-link" data-bs-toggle="tab" id="delete-bus-tab" href="#approved" role="tab" aria-selected="true">
                                                 <span class="hidden-xs-down" style="font-size: 0.9em;"></span>
                                                 <div id="navref2">
                                                     <span class="hidden-xs-down">
@@ -648,7 +650,7 @@ $row_count11 = mysqli_num_rows($result11);
                                             </a>
                                         </li>
                                         <li class="nav-item" role="presentation">
-                                            <a class="nav-link" data-bs-toggle="tab" id="edit-bus-tab" href="#completed" role="tab" aria-selected="true">
+                                            <a class="nav-link" data-bs-toggle="tab" id="route-bus-tab" href="#completed" role="tab" aria-selected="true">
                                                 <span class="hidden-xs-down" style="font-size: 0.9em;"></span>
                                                 <div id="navref3">
                                                     <span class="hidden-xs-down">
@@ -659,7 +661,7 @@ $row_count11 = mysqli_num_rows($result11);
                                             </a>
                                         </li>
                                         <li class="nav-item" role="presentation">
-                                            <a class="nav-link" data-bs-toggle="tab" id="edit-bus-tab" href="#rejected" role="tab" aria-selected="true">
+                                            <a class="nav-link" data-bs-toggle="tab" id="settings-bus-tab" href="#rejected" role="tab" aria-selected="true">
                                                 <span class="hidden-xs-down" style="font-size: 0.9em;"></span>
                                                 <div id="navref4">
                                                     <span class="hidden-xs-down">
@@ -670,7 +672,7 @@ $row_count11 = mysqli_num_rows($result11);
                                             </a>
                                         </li>
                                         <li class="nav-item" role="presentation">
-                                            <a class="nav-link" data-bs-toggle="tab" id="edit-bus-tab" href="#feedback" role="tab" aria-selected="true">
+                                            <a class="nav-link" data-bs-toggle="tab" id="fleet-management-bus-tab" href="#feedback" role="tab" aria-selected="true">
                                                 <span class="hidden-xs-down" style="font-size: 0.9em;"></span>
                                                 <div id="navref33">
                                                     <span class="hidden-xs-down">

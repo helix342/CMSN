@@ -63,6 +63,7 @@ $row_count11 = mysqli_num_rows($result11);
     <link rel="stylesheet" href="styles.css">
     <link href="../css/dboardstyles.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/tabs.css">
+    <link rel="stylesheet" href="assets/css/Modal.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet">
@@ -557,7 +558,7 @@ $row_count11 = mysqli_num_rows($result11);
                                 <div class="custom-tabs">
                                     <ul class="nav nav-tabs" role="tablist">
                                         <li class="add-bus-tab" role="presentation">
-                                            <a class="nav-link active" data-bs-toggle="tab" id="edit-bus-tab"
+                                            <a class="nav-link active" data-bs-toggle="tab" id="add-bus-tab"
                                                 href="#dashboard" role="tab" aria-selected="true">
                                                 <span class="hidden-xs-down" style="font-size: 0.9em;"><i
                                                         class="fas fa-book tab-icon"></i><b>&nbsp Dashboard</b></span>
@@ -576,7 +577,7 @@ $row_count11 = mysqli_num_rows($result11);
                                             </a>
                                         </li>
                                         <li class="nav-item" role="presentation">
-                                            <a class="nav-link" data-bs-toggle="tab" id="edit-bus-tab" href="#approved"
+                                            <a class="nav-link" data-bs-toggle="tab" id="delete-bus-tab" href="#approved"
                                                 role="tab" aria-selected="true">
                                                 <span class="hidden-xs-down" style="font-size: 0.9em;"></span>
                                                 <div id="navref2">
@@ -588,7 +589,7 @@ $row_count11 = mysqli_num_rows($result11);
                                             </a>
                                         </li>
                                         <li class="nav-item" role="presentation">
-                                            <a class="nav-link" data-bs-toggle="tab" id="edit-bus-tab" href="#completed"
+                                            <a class="nav-link" data-bs-toggle="tab" id="route-bus-tab" href="#completed"
                                                 role="tab" aria-selected="true">
                                                 <span class="hidden-xs-down" style="font-size: 0.9em;"></span>
                                                 <div id="navref3">
@@ -600,7 +601,7 @@ $row_count11 = mysqli_num_rows($result11);
                                             </a>
                                         </li>
                                         <li class="nav-item" role="presentation">
-                                            <a class="nav-link" data-bs-toggle="tab" id="edit-bus-tab" href="#rejected"
+                                            <a class="nav-link" data-bs-toggle="tab" id="settings-bus-tab" href="#rejected"
                                                 role="tab" aria-selected="true">
                                                 <span class="hidden-xs-down" style="font-size: 0.9em;"></span>
                                                 <div id="navref4">
@@ -612,7 +613,7 @@ $row_count11 = mysqli_num_rows($result11);
                                             </a>
                                         </li>
                                         <li class="nav-item" role="presentation">
-                                            <a class="nav-link" data-bs-toggle="tab" id="edit-bus-tab" href="#feedback"
+                                            <a class="nav-link" data-bs-toggle="tab" id="fleet-management-bus-tab" href="#feedback"
                                                 role="tab" aria-selected="true">
                                                 <span class="hidden-xs-down" style="font-size: 0.9em;"></span>
                                                 <div id="navref33">
@@ -779,7 +780,7 @@ $row_count11 = mysqli_num_rows($result11);
                                                                                     <button type="button"
                                                                                         class="btn btn-link faculty"
                                                                                         id="facultyinfo"
-                                                                                        data-bs-value="<?php echo $row['fac_id']; ?>"
+                                                                                        data-value="<?php echo $row['fac_id']; ?>"
                                                                                         data-bs-toggle="modal"
                                                                                         value="<?php echo $row['id']; ?>"
                                                                                         data-bs-target="#facultymodal"
@@ -903,7 +904,7 @@ $row_count11 = mysqli_num_rows($result11);
                                                                                     <button type="button"
                                                                                         class="btn btn-link faculty"
                                                                                         id="facultyinfo"
-                                                                                        data-bs-value="<?php echo $row['fac_id']; ?>"
+                                                                                        data-value="<?php echo $row['fac_id']; ?>"
                                                                                         data-bs-toggle="modal"
                                                                                         value="<?php echo $row['id']; ?>"
                                                                                         data-bs-target="#facultymodal"
@@ -1159,7 +1160,7 @@ $row_count11 = mysqli_num_rows($result11);
                                                                                     <button type="button"
                                                                                         class="btn btn-link faculty"
                                                                                         id="facultyinfo"
-                                                                                        data-bs-value="<?php echo $row['fac_id']; ?>"
+                                                                                        data-value="<?php echo $row['fac_id']; ?>"
                                                                                         data-bs-toggle="modal"
                                                                                         value="<?php echo $row['id']; ?>"
                                                                                         data-bs-target="#facultymodal"
@@ -1270,7 +1271,7 @@ $row_count11 = mysqli_num_rows($result11);
                                                                                     <button type="button"
                                                                                         class="btn btn-link faculty"
                                                                                         id="facultyinfo"
-                                                                                        data-bs-value="<?php echo $row['fac_id']; ?>"
+                                                                                        data-value="<?php echo $row['fac_id']; ?>"
                                                                                         data-bs-toggle="modal"
                                                                                         value="<?php echo $row['id']; ?>"
                                                                                         data-bs-target="#facultymodal"
@@ -1413,11 +1414,11 @@ $row_count11 = mysqli_num_rows($result11);
                         </div>
                         <div class="stars" id="star-rating">
                             <h5>Give Rating:</h5>
-                            <span data-bs-value="1">&#9733;</span>
-                            <span data-bs-value="2">&#9733;</span>
-                            <span data-bs-value="3">&#9733;</span>
-                            <span data-bs-value="4">&#9733;</span>
-                            <span data-bs-value="5">&#9733;</span>
+                            <span data-value="1">&#9733;</span>
+                            <span data-value="2">&#9733;</span>
+                            <span data-value="3">&#9733;</span>
+                            <span data-value="4">&#9733;</span>
+                            <span data-value="5">&#9733;</span>
                         </div>
                         <p id="rating-value">Rating: <span id="ratevalue">0</span></p>
 
@@ -1598,8 +1599,7 @@ $row_count11 = mysqli_num_rows($result11);
     <div class="modal fade" id="raisemodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header"
-                    style="background: linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); color: white;">
+                <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Raise Complaint</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
