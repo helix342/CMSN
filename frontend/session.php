@@ -1,7 +1,13 @@
 <?php
 session_start();
 
-$s = '1141014';
+$s = '1152061'; //faculty
+//$s = '1152062'; //infra
+//$s = '1152063'; //hod
+//$s = '1141014'; //eo
+//$s = '1112001'; //manager
+//$s = '1141014';
+//$s = '1141014';
 
 $query = "SELECT sid,sname, dept,ayear FROM student WHERE sid='$s'";
 $query_run = mysqli_query($db, $query);
