@@ -552,7 +552,13 @@ $result4 = mysqli_query($db, $sql4);
                 },
                 success: function(response) {
                     if (response.includes("Success")) {
-                        alert("done");
+                        swal({
+                        title: "success!",
+                        text: "Complaint Accepted",
+                        icon: "success",
+                        button: "Ok",
+                        timer: null
+                    });
                         $('#pending_table').DataTable().destroy();
                         $("#pending_table").load(location.href + " #pending_table > *",
                             function() {

@@ -1164,7 +1164,13 @@ $notcount = mysqli_num_rows($result4);
                     contentType: false,
                     processData: false,
                     success: function(response) {
-                        alert("done");
+                        swal({
+                        title: "success!",
+                        text: "Status Updated!",
+                        icon: "success",
+                        button: "Ok",
+                        timer: null
+                    });
                         $('#Modal2').modal('hide');
 
                         // Refresh specific sections dynamically
