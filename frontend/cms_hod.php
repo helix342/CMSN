@@ -725,7 +725,7 @@ $row_count11 = mysqli_num_rows($result11);
                                                             Raise Complaint
                                                             <button type="button" class="btn btn-info float-end fac"
                                                                 data-bs-toggle="modal"
-                                                                data-bs-target="#raisemodal">Raise Complant</button>
+                                                                data-bs-target="#raisemodal">Raise Complaint</button>
                                                             <br>
                                                         </h4>
                                                     </div>
@@ -1331,7 +1331,7 @@ $row_count11 = mysqli_num_rows($result11);
                                 </div>
                             </div>
                         </div>
-                </div>
+                    </div>
                 </form>
             </div>
         </div>
@@ -1344,12 +1344,10 @@ $row_count11 = mysqli_num_rows($result11);
     <div class="modal fade" id="rejectmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header"
-                    style="background: linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); color: white;">
+                <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">
                         Reason for rejection</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                     </button>
                 </div>
                 <form id="rejectdetails">
@@ -1370,8 +1368,7 @@ $row_count11 = mysqli_num_rows($result11);
     <div class="modal fade" id="workerModal" tabindex="-1" aria-labelledby="workerModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header"
-                    style="background:linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%);background-color:#7460ee;">
+                <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Worker Phone</h5>
                     <button class="spbutton" type="button" class="btn-close" data-bs-dismiss="modal"
                         aria-label="Close"></button>
@@ -1393,15 +1390,14 @@ $row_count11 = mysqli_num_rows($result11);
     <div class="modal fade" id="feedback_modal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header"
-                    style="background:linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%);background-color:#7460ee;">
+                <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Feedback Form</h5>
                     <button class="spbutton" type="button" class="btn-close" data-bs-dismiss="modal"
                         aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form id="add_feedback">
-                        <input type="hidden" name="id" id="feedback_id"> <!-- Hidden input for id -->
+                        <input type="hidden" name="id" id="feedback_id">
                         <div class="mb-3">
                             <label for="satisfaction" class="form-label">Satisfaction</label>
                             <select name="satisfaction" id="satisfaction" class="form-control" required>
@@ -1439,11 +1435,9 @@ $row_count11 = mysqli_num_rows($result11);
     <div class="modal fade" id="facultymodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header"
-                    style="background: linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); color: white;">
+                <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Faculty Information</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                     </button>
                 </div>
                 <div class="modal-body"
@@ -1487,17 +1481,14 @@ $row_count11 = mysqli_num_rows($result11);
     <div class="modal fade" id="probdesc" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header"
-                    style="background: linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); color: white;">
+                <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">
                         Problem Description</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                     </button>
                 </div>
                 <form id="addnewdetails">
-                    <div class="modal-body"
-                        style="padding: 15px; font-size: 1.1em; color: #333; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+                    <div class="modal-body">
                         <ol class="list-group list-group-numbered" style="margin-bottom: 0;">
                             <li class="list-group-item d-flex justify-content-between align-items-start"
                                 style="padding: 10px; background-color: #fff;">
@@ -1556,8 +1547,7 @@ $row_count11 = mysqli_num_rows($result11);
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="afterImageModalLabel">After Picture</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                     </button>
                 </div>
                 <div class="modal-body text-center">
@@ -1575,12 +1565,10 @@ $row_count11 = mysqli_num_rows($result11);
     <div class="modal fade" id="bmodalImage" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header"
-                    style="background: linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); color: white;">
+                <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">
                         Before Image</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                     </button>
                 </div>
                 <div class="modal-body">
@@ -1668,11 +1656,9 @@ $row_count11 = mysqli_num_rows($result11);
     <div class="modal fade" id="problemrejected" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header"
-                    style="background: linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); color: white;">
+                <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Reason for Rejection</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                     </button>
                 </div>
                 <form id="addnewdetails">

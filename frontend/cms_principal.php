@@ -19,20 +19,29 @@ $sql6 = "SELECT * FROM complaints_detail WHERE faculty_id='$faculty_id' AND stat
 $result6 = mysqli_query($db, $sql6);
 
 
-//pending count
-$sql3 = "SELECT complaints_detail.*,manager.* FROM complaints_detail LEFT JOIN manager on complaints_detail.id=manager.problem_id WHERE status = 7";
-$result3 = mysqli_query($db, $sql3);
-$compcount1 = mysqli_num_rows($result3);
+// Fetch completed complaints
+$query = "SELECT COUNT(*) as completed FROM complaints_detail WHERE status = '13'";
+$result = mysqli_query($db, $query);
+$row = mysqli_fetch_assoc($result);
+$completed = $row['completed'];
 
-//inprogress count
-$sql4 = "SELECT complaints_detail.*,manager.* FROM complaints_detail LEFT JOIN manager on complaints_detail.id=manager.problem_id WHERE status = 10";
-$result4 = mysqli_query($db, $sql4);
-$compcount2 = mysqli_num_rows($result4);
+// Fetch in-progress complaints
+$query1 = "SELECT COUNT(*) as inprogress FROM complaints_detail WHERE status = '10'";
+$result1 = mysqli_query($db, $query1);
+$row1 = mysqli_fetch_assoc($result1);
+$inprogress = $row1['inprogress'];
 
-//reassigned work
-$sql5 = "SELECT complaints_detail.*,manager.* FROM complaints_detail LEFT JOIN manager on complaints_detail.id=manager.problem_id WHERE status = 14";
-$result5 = mysqli_query($db, $sql5);
-$compcount3 = mysqli_num_rows($result5);
+// Fetch pending status
+$query2 = "SELECT COUNT(*) as pending FROM complaints_detail WHERE status = '7'";
+$result2 = mysqli_query($db, $query2);
+$row2 = mysqli_fetch_assoc($result2);
+$pending = $row2['pending'];
+
+// Fetch request count
+$query3 = "SELECT COUNT(*) as request FROM complaints_detail WHERE status = '6'";
+$result3 = mysqli_query($db, $query3);
+$row3 = mysqli_fetch_assoc($result3);
+$request = $row3['request'];
 
 $sql11 = "SELECT * FROM complaints_detail WHERE status='6'";
 $result11 = mysqli_query($db, $sql11);
@@ -713,15 +722,15 @@ $result11 = mysqli_query($db, $sql11);
                 <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item" role="presentation">
                         <a class="nav-link active" data-bs-toggle="tab" data-bs-target="#dashboard" role="tab"
-                            aria-selected="true" id="view-bus-tab">
+                            aria-selected="true" id="add-bus-tab">
                             <span class="hidden-xs-down" style="font-size: 0.9em;">
-                                <i class="fas fa-list-alt tab-icon"></i> Dashboard
+                                <i class="fas fa-tachometer-alt tab-icon"></i> Dashboard
                             </span>
                         </a>
                     </li>
                     <li class="nav-item" role="presentation">
                         <a class="nav-link" data-bs-toggle="tab" data-bs-target="#requirements" role="tab"
-                            aria-selected="true" id="add-bus-tab">
+                            aria-selected="true" id="view-bus-tab">
                             <span class="hidden-xs-down" style="font-size: 0.9em;">
                                 <i class="fas fa-list-alt tab-icon"></i> Requirements
                             </span>
@@ -781,7 +790,7 @@ $result11 = mysqli_query($db, $sql11);
                                                 <div class="stats-box text-center p-3" style="background-color:orange;">
                                                     <i class="fas fa-clock"></i>
                                                     <h1 class="font-light text-white">
-                                                        <?php echo $row_count1;
+                                                        <?php echo $pending;
                                                         ?>
                                                     </h1>
                                                     <small class="font-light">Pending</small>
@@ -799,7 +808,7 @@ $result11 = mysqli_query($db, $sql11);
                                                 <div class="stats-box text-center p-3" style="background-color:rgb(14, 86, 239);">
                                                     <i class="fas fa-check"></i>
                                                     <h1 class="font-light text-white">
-                                                        <?php echo $row_count3;
+                                                        <?php echo $request;
                                                         ?>
                                                     </h1>
                                                     <small class="font-light">Request</small>
@@ -817,7 +826,7 @@ $result11 = mysqli_query($db, $sql11);
                                                 <div class="stats-box text-center p-3" style="background-color:rgb(70, 160, 70);">
                                                     <i class="fa-solid fa-check-double"></i>
                                                     <h1 class="font-light text-white">
-                                                        <?php echo $row_count2;
+                                                        <?php echo $inprogress;
                                                         ?>
                                                     </h1>
                                                     <small class="font-light">In Progress</small>
@@ -835,7 +844,7 @@ $result11 = mysqli_query($db, $sql11);
                                                 <div class="stats-box text-center p-3" style="background-color:red;">
                                                     <i class="fa-solid fa-xmark"></i>
                                                     <h1 class="font-light text-white">
-                                                        <?php echo $row_count7;
+                                                        <?php echo $completed;
                                                         ?>
                                                     </h1>
                                                     <small class="font-light">Completed</small>

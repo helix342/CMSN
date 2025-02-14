@@ -28,7 +28,7 @@ if (mysqli_num_rows($query_run) > 0) {
         z-index: 1000;
         overflow-y: auto;
         box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-        background-image: url('../image/pattern_h.png');
+        background-image: url('image/pattern_h.png');
     }
 
     .sidebar::-webkit-scrollbar {
