@@ -558,6 +558,13 @@ $result11 = mysqli_query($db, $sql11);
         <div class="container-fluid">
             <div class="custom-tabs">
                 <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                        <a class="nav-link active" data-bs-toggle="tab" data-bs-target="#dashboard" role="tab" aria-selected="true" id="view-bus-tab">
+                            <span class="hidden-xs-down" style="font-size: 0.9em;">
+                                <i class="fas fa-list-alt tab-icon"></i> Dashboard
+                            </span>
+                        </a>
+                    </li>
                     <li class="nav-item" role="presentation">
                         <a class="nav-link active" data-bs-toggle="tab" data-bs-target="#requirements" role="tab" aria-selected="true" id="add-bus-tab">
                             <span class="hidden-xs-down" style="font-size: 0.9em;">
