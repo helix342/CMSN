@@ -55,7 +55,7 @@ $row_count11 = mysqli_num_rows($result11);
     <meta name="description" content="">
     <meta name="author" content="">
     <title>MIC</title>
-    <link rel="icon" type="image/png" sizes="32x32" href="../image/mkce_s.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="image/mkce_s.png">
     <link rel="stylesheet" href="../css/stylescms.css">
     <link rel="stylesheet" href="styles.css">
     <link href="../css/dboardstyles.css" rel="stylesheet">
@@ -1090,6 +1090,7 @@ $row_count11 = mysqli_num_rows($result11);
                                             </a>
                                         </li>
                                     </ul>
+                                </div>
                                     <!-------------------------dashboard------------------------------>
                                     <div class="tab-content tabcontent-border">
                                         <div class="tab-pane p-20 active show" id="dashboard" role="tabpanel">

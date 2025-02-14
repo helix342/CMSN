@@ -81,7 +81,7 @@ if (isset($_POST['fdept'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" type="image/png" sizes="16x16" href="../image/icons/mkce_s.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="image/icons/mkce_s.png">
     <title>MIC - MKCE</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="assets/css/tabs.css">

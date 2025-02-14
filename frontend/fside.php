@@ -201,8 +201,8 @@ if (mysqli_num_rows($query_run) > 0) {
 <div class="mobile-overlay" id="mobileOverlay"></div>
 <div class="sidebar" id="sidebar">
     <div class="logo">
-        <img src="../image/mkce.png" alt="College Logo">
-        <img class='s_logo' src="../image/mkce_s.png" alt="College Logo">
+        <img src="image/mkce.png" alt="College Logo">
+        <img class='s_logo' src="image/mkce_s.png" alt="College Logo">
     </div>
 
     <div class="menu">
