@@ -1556,14 +1556,14 @@ $row_count11 = mysqli_num_rows($result11);
     <div class="modal fade" id="feedback_modal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header" style="background:linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%);background-color:#7460ee;">
+                <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Feedback Form</h5>
                     <button class="spbutton" type="button" class="btn-close" data-bs-dismiss="modal"
                         aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form id="add_feedback">
-                        <input type="hidden" name="id" id="feedback_id"> <!-- Hidden input for id -->
+                        <input type="hidden" name="id" id="feedback_id">
                         <div class="mb-3">
                             <label for="satisfaction" class="form-label">Satisfaction</label>
                             <select name="satisfaction" id="satisfaction" class="form-control" required>
@@ -1600,10 +1600,10 @@ $row_count11 = mysqli_num_rows($result11);
     <div class="modal fade" id="problemrejected" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header" style="background: linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); color: white;">
+                <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Reason for Rejection</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        
                     </button>
                 </div>
                 <form id="addnewdetails">

@@ -1431,8 +1431,7 @@ $result11 = mysqli_query($db, $sql11);
     <div class="modal fade" id="rejectModal" tabindex="-1" aria-labelledby="rejectModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header"
-                    style="background: linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); color: white;">
+                <div class="modal-header">
                     <h5 class="modal-title" id="rejectModalLabel">Reject Problem</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -1455,10 +1454,9 @@ $result11 = mysqli_query($db, $sql11);
     <div class="modal fade" id="workerModal" tabindex="-1" aria-labelledby="workerModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header"
-                    style="background:linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%);">
+                <div class="modal-header">
                     <h5 class="modal-title" id="workerModalLabel">Worker Phone</h5>
-                    <button class="spbutton btn-close" type="button" data-bs-dismiss="modal"
+                    <button class="btn-close" type="button" data-bs-dismiss="modal"
                         aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -1571,8 +1569,7 @@ $result11 = mysqli_query($db, $sql11);
         <div class="modal fade" id="cmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header"
-                        style="background:linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%);background-color:#7460ee;">
+                    <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Raise Complaint</h5>
                         <button class="spbutton" type="button" class="btn-close" data-dismiss="modal"
                             aria-label="Close"></button>

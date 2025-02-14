@@ -963,7 +963,7 @@ if (isset($_POST['facdet'])) {
                 <div class="modal fade" id="cmodal" tabindex="-1" aria-labelledby="raiseComplaintLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            <div class="modal-header" style="background: linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%);">
+                            <div class="modal-header">
                                 <h5 class="modal-title" id="raiseComplaintLabel">Raise Complaint</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
@@ -1041,7 +1041,7 @@ if (isset($_POST['facdet'])) {
                 <div class="modal fade" id="extendModal" tabindex="-1" aria-labelledby="extendModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            <div class="modal-header" style="background: linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%);">
+                            <div class="modal-header">
                                 <h5 class="modal-title" id="extendModalLabel">Deadline Extended</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
@@ -1065,7 +1065,7 @@ if (isset($_POST['facdet'])) {
                 <div class="modal fade" id="workerModal" tabindex="-1" aria-labelledby="workerModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            <div class="modal-header" style="background: linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%);">
+                            <div class="modal-header">
                                 <h5 class="modal-title" id="workerModalLabel">Worker Phone</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
@@ -1085,7 +1085,7 @@ if (isset($_POST['facdet'])) {
                 <div class="modal fade" id="feedback_modal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            <div class="modal-header" style="background:linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); background-color:#7460ee;">
+                            <div class="modal-header">
                                 <h5 class="modal-title" id="feedbackModalLabel">Feedback Form</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
@@ -1128,7 +1128,7 @@ if (isset($_POST['facdet'])) {
                 <div class="modal fade" id="afterImageModal" tabindex="-1" aria-labelledby="afterImageModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            <div class="modal-header" style="background:linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); background-color:#7460ee;">
+                            <div class="modal-header">
                                 <h5 class="modal-title" id="afterImageModalLabel">After Image</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
@@ -1146,7 +1146,7 @@ if (isset($_POST['facdet'])) {
                 <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            <div class="modal-header" style="background:linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); background-color:#7460ee;">
+                            <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Before Image</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
