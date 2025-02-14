@@ -825,7 +825,7 @@ $row_count11 = mysqli_num_rows($result11);
                                                                                     <center>
                                                                                         <button type="button"
                                                                                             class="btn btn-link faculty" id="facultyinfo"
-                                                                                            data-bs-value="<?php echo $row['faculty_id']; ?>"
+                                                                                            data-value="<?php echo $row['faculty_id']; ?>"
                                                                                             data-bs-toggle="modal" value="<?php echo $row['id']; ?>"
                                                                                             data-bs-target="#facultymodal" style="text-decoration:none;"><?php echo $row['name']; ?>
                                                                                         </button>
@@ -938,7 +938,7 @@ $row_count11 = mysqli_num_rows($result11);
                                                                                     <center>
                                                                                         <button type="button"
                                                                                             class="btn btn-link faculty" id="facultyinfo"
-                                                                                            data-bs-value="<?php echo $row['faculty_id']; ?>"
+                                                                                            data-value="<?php echo $row['faculty_id']; ?>"
                                                                                             data-bs-toggle="modal" value="<?php echo $row['id']; ?>"
                                                                                             data-bs-target="#facultymodal" style="text-decoration:none;"><?php echo $row['name']; ?></button>
                                                                                     </center>
@@ -1164,7 +1164,7 @@ $row_count11 = mysqli_num_rows($result11);
                                                                                     <center>
                                                                                         <button type="button"
                                                                                             class="btn btn-link faculty" id="facultyinfo"
-                                                                                            data-bs-value="<?php echo $row['fac_id']; ?>"
+                                                                                            data-value="<?php echo $row['fac_id']; ?>"
                                                                                             data-bs-toggle="modal" value="<?php echo $row['id']; ?>"
                                                                                             data-bs-target="#facultymodal" style="text-decoration:none;"><?php echo $row['name']; ?></button>
                                                                                     </center>
@@ -1267,7 +1267,7 @@ $row_count11 = mysqli_num_rows($result11);
                                                                                     <center>
                                                                                         <button type="button"
                                                                                             class="btn btn-link faculty" id="facultyinfo"
-                                                                                            data-bs-value="<?php echo $row['fac_id']; ?>"
+                                                                                            data-value="<?php echo $row['fac_id']; ?>"
                                                                                             data-bs-toggle="modal" value="<?php echo $row['id']; ?>"
                                                                                             data-bs-target="#facultymodal" style="text-decoration:none;"><?php echo $row['name']; ?></button>
                                                                                     </center>
