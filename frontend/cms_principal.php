@@ -501,6 +501,137 @@ $result11 = mysqli_query($db, $sql11);
             -webkit-text-fill-color: transparent;
             display: inline-block;
         }
+        .welcome-card {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            border: none;
+            border-radius: 15px;
+            color: white;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            margin: 0 0 20px 0;
+            height: 150px; /* Increased from 120px */
+        }
+
+        .welcome-stats {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .stat-item {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            border-radius: 50%;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            animation: slideInUp 0.5s ease forwards;
+            animation-delay: calc(var(--animation-order) * 0.1s);
+            opacity: 0;
+            color: white;
+            z-index: 1;
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            width: 100%;
+            max-width: 200px;
+            margin: 0 auto;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .stat-item::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(255, 255, 255, 0.1),
+                transparent
+            );
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+            z-index: -1;
+        }
+
+        @keyframes shine {
+            0% { transform: rotate(45deg) translateX(-100%); }
+            100% { transform: rotate(45deg) translateX(100%); }
+        }
+
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .stat-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        @keyframes slideInUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .stats-row {
+            margin-top: 30px;  /* Increased from -10px */
+            margin-bottom: 30px;
+            padding-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .welcome-text {
+                font-size: 1.8rem;
+            }
+            .welcome-card {
+                height: 250px; /* Increased mobile height */
+            }
+        }
+
+        .stat-item .fas.fa-clock { animation: pulse 2s infinite; }
+        .stat-item .fas.fa-spinner { animation: spin 2s linear infinite; }
+        .stat-item .fas.fa-check-circle { animation: bounce 2s infinite; }
+
+       
     </style>
 </head>
 
@@ -566,7 +697,7 @@ $result11 = mysqli_query($db, $sql11);
                         </a>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link active" data-bs-toggle="tab" data-bs-target="#requirements" role="tab" aria-selected="true" id="add-bus-tab">
+                        <a class="nav-link" data-bs-toggle="tab" data-bs-target="#requirements" role="tab" aria-selected="true" id="add-bus-tab">
                             <span class="hidden-xs-down" style="font-size: 0.9em;">
                                 <i class="fas fa-list-alt tab-icon"></i> Requirements
                             </span>
@@ -606,7 +737,63 @@ $result11 = mysqli_query($db, $sql11);
 
 
                 <div class="tab-content">
-                    <div class="tab-pane fade show active p-20" id="requirements" role="tabpanel">
+                <div class="tab-pane fade show active p-20" id="dashboard" role="tabpanel">
+                <div class="row">
+                <div class="col-12">
+                    <div class="card welcome-card">
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <div class="col-md-8">
+                                    <h1 class="welcome-text">
+                                        <!-- <i class="fas fa-crown me-2"></i> -->
+                                        Welcome, B S Murugan
+                                    </h1>
+                                    <p class="welcome-subtitle">
+                                        M.Kumarasamy College of Engineering.
+                                    </p>
+                                </div>
+                                <div class="col-md-4 text-end d-none d-md-block">
+                                    <i class="fas fa-chart-line" style="font-size: 8rem; color: rgba(255,255,255,0.1);"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Stats Row -->
+            <div class="row stats-row">
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="stat-item" style="--animation-order: 1; background: linear-gradient(135deg, #ff9966, #ff5e62);">
+                        <i class="fas fa-clock stat-icon"></i>
+                        <div class="stat-number" data-value="45">0</div>
+                        <div class="stat-label">Pending</div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="stat-item" style="--animation-order: 2; background: linear-gradient(135deg, #4e54c8, #8f94fb);">
+                        <i class="fas fa-paper-plane stat-icon"></i>
+                        <div class="stat-number" data-value="28">0</div>
+                        <div class="stat-label">Requests</div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="stat-item" style="--animation-order: 3; background: linear-gradient(135deg, #f2994a, #f2c94c);">
+                        <i class="fas fa-spinner stat-icon"></i>
+                        <div class="stat-number" data-value="15">0</div>
+                        <div class="stat-label">In Progress</div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="stat-item" style="--animation-order: 4; background: linear-gradient(135deg, #11998e, #38ef7d);">
+                        <i class="fas fa-check-circle stat-icon"></i>
+                        <div class="stat-number" data-value="32">0</div>
+                        <div class="stat-label">Completed</div>
+                    </div>
+                </div>
+            </div>
+                    </div>
+                    <div class="tab-pane fade p-20" id="requirements" role="tabpanel">
                         <div class="row">
                             <div class="col-md-12">
 
