@@ -220,7 +220,7 @@ if (mysqli_num_rows($query_run) > 0) {
         if ($fac_id == 1112001) {
 
         ?>
-        <a href="cms_manager.php" class="menu-item">
+        <a href="cms_manager.php" class="menu-item active">
             <i class="fas fa-exclamation-triangle icon-feedback"></i>
             <span>Greivances</span>
         </a>
@@ -236,7 +236,7 @@ if (mysqli_num_rows($query_run) > 0) {
         if (mysqli_num_rows($infraqueryrun) > 0) {
 
         ?>
-        <a href="cms_infra.php" class="menu-item">
+        <a href="cms_infra.php" class="menu-item active">
             <i class="fas fa-exclamation-triangle icon-feedback"></i>
             <span>Greivances</span>
         </a>
@@ -247,7 +247,7 @@ if (mysqli_num_rows($query_run) > 0) {
         <?php
         if ($fac_id != 1141014 && $fac_id != 1112001 && mysqli_num_rows($infraqueryrun) == 0) {
         ?>
-        <a href="cms_faculty.php" class="menu-item">
+        <a href="cms_faculty.php" class="menu-item active">
             <i class="fas fa-exclamation-triangle icon-feedback"></i>
             <span>Greivances</span>
         </a>
